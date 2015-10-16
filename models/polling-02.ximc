@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<model type="ctmc">
+<variables>
+<var index="0" name="s0" type="ps" corr="1" />
+<var index="1" name="t0" type="ns" corr="0" />
+<var index="2" name="s1" type="ps" corr="3" />
+<var index="3" name="t1" type="ns" corr="2" />
+<var index="4" name="s2" type="ps" corr="5" />
+<var index="5" name="t2" type="ns" corr="4" />
+<var index="6" name="s3" type="ps" corr="7" />
+<var index="7" name="t3" type="ns" corr="6" />
+</variables>
+<dd type="initial_state">
+<dd_node index="0" id="136517808">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="2" id="136517792">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="4" id="136517776">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="6" id="136513680">
+<dd_then const_value="0.0" />
+<dd_else const_value="1.0" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd>
+<dd type="markov_trans">
+<dd_node index="0" id="136521680">
+<dd_then>
+<dd_node index="1" id="136521600">
+<dd_then>
+<dd_node index="2" id="136521584">
+<dd_then>
+<dd_node index="3" id="136521568">
+<dd_then>
+<dd_node index="4" id="136521552">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="5" id="136521536">
+<dd_then>
+<dd_node index="6" id="136521520">
+<dd_then>
+<dd_node index="7" id="136515856">
+<dd_then const_value="0.5" />
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="3" id="136517616">
+<dd_then>
+<dd_node index="4" id="136517024">
+<dd_then>
+<dd_node index="5" id="136516992">
+<dd_then>
+<dd_node index="6" id="136516976">
+<dd_then>
+<dd_node index="7" id="136516384">
+<dd_then const_value="200.0" />
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="5" id="136517008">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="6" id="136516976">
+<dd_then node_ref="136516384" />
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="4" id="136516272">
+<dd_then>
+<dd_node index="5" id="136516096">
+<dd_then>
+<dd_node index="6" id="136515872">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="7" id="136515856">
+<dd_then const_value="0.5" />
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="5" id="136516256">
+<dd_then>
+<dd_node index="6" id="136515952">
+<dd_then>
+<dd_node index="7" id="136515856">
+<dd_then const_value="0.5" />
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="7" id="136515936">
+<dd_then const_value="0.0" />
+<dd_else const_value="0.5" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="6" id="136515872">
+<dd_then const_value="0.0" />
+<dd_else node_ref="136515856" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="2" id="136517680">
+<dd_then>
+<dd_node index="3" id="136517216">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="4" id="136517200">
+<dd_then>
+<dd_node index="5" id="136517168">
+<dd_then>
+<dd_node index="6" id="136515920">
+<dd_then>
+<dd_node index="7" id="136513696">
+<dd_then const_value="0.0" />
+<dd_else const_value="1.0" />
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="5" id="136517184">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="6" id="136515920">
+<dd_then node_ref="136513696" />
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="3" id="136516848">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="4" id="136516832">
+<dd_then>
+<dd_node index="5" id="136516800">
+<dd_then>
+<dd_node index="6" id="136516784">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="7" id="136516400">
+<dd_then const_value="0.0" />
+<dd_else const_value="200.0" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="5" id="136516816">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="6" id="136516784">
+<dd_then const_value="0.0" />
+<dd_else node_ref="136516400" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="1" id="136521664">
+<dd_then>
+<dd_node index="2" id="136517536">
+<dd_then>
+<dd_node index="3" id="136516656">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="4" id="136516640">
+<dd_then>
+<dd_node index="5" id="136516624">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="6" id="136513744">
+<dd_then>
+<dd_node index="7" id="136513424">
+<dd_then const_value="1.0" />
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="7" id="136513696">
+<dd_then const_value="0.0" />
+<dd_else const_value="1.0" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="3" id="136516464">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="4" id="136516448">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="5" id="136516432">
+<dd_then const_value="0.0" />
+<dd_else>
+<dd_node index="6" id="136516416">
+<dd_then>
+<dd_node index="7" id="136516384">
+<dd_then const_value="200.0" />
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="7" id="136516400">
+<dd_then const_value="0.0" />
+<dd_else const_value="200.0" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="2" id="136521648">
+<dd_then>
+<dd_node index="3" id="136521632">
+<dd_then>
+<dd_node index="4" id="136521616">
+<dd_then>
+<dd_node index="5" id="136516096">
+<dd_then node_ref="136515872" />
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="3" id="136517472">
+<dd_then>
+<dd_node index="4" id="136516544">
+<dd_then>
+<dd_node index="5" id="136516528">
+<dd_then>
+<dd_node index="6" id="136516416">
+<dd_then node_ref="136516384" />
+<dd_else node_ref="136516400" />
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else const_value="0.0" />
+</dd_node>
+</dd_then>
+<dd_else>
+<dd_node index="4" id="136516272">
+<dd_then node_ref="136516096" />
+<dd_else node_ref="136516256" />
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd_else>
+</dd_node>
+</dd>
+</model>
