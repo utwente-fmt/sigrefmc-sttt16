@@ -1,0 +1,42 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 48 workers.
+Lace startup, creating 48 worker threads with program stack 8388608 bytes.
+[    1.04] Finished reading system from models/polling-15.xctmc.
+[    1.04] Number of state variables: 20.
+[    1.04] Number of block variables: 21.
+[    1.04] Number of transition relations: 1.
+[    1.04] Initial partition: 737,280 states in 1 block(s).
+[    1.04] Number of Markovian transitions: 6,144,000
+[    1.05] After iteration 1: 31 blocks.
+[    1.06] After iteration 2: 45 blocks.
+[    1.07] After iteration 3: 71 blocks.
+[    1.08] After iteration 4: 108 blocks.
+[    1.09] After iteration 5: 166 blocks.
+[    1.10] After iteration 6: 253 blocks.
+[    1.12] After iteration 7: 385 blocks.
+[    1.14] After iteration 8: 583 blocks.
+[    1.19] After iteration 9: 879 blocks.
+[    1.22] After iteration 10: 1,318 blocks.
+[    1.27] After iteration 11: 1,964 blocks.
+[    1.33] After iteration 12: 2,905 blocks.
+[    1.44] After iteration 13: 4,259 blocks.
+[    1.55] After iteration 14: 6,177 blocks.
+[    1.72] After iteration 15: 8,839 blocks.
+[    1.92] After iteration 16: 12,432 blocks.
+[    2.16] After iteration 17: 17,092 blocks.
+[    2.48] After iteration 18: 22,792 blocks.
+[    2.85] After iteration 19: 29,200 blocks.
+[    3.29] After iteration 20: 35,622 blocks.
+[    3.74] After iteration 21: 41,180 blocks.
+[    4.14] After iteration 22: 45,207 blocks.
+[    4.46] After iteration 23: 47,575 blocks.
+[    4.70] After iteration 24: 48,667 blocks.
+[    4.82] After iteration 25: 49,045 blocks.
+[    4.90] After iteration 26: 49,137 blocks.
+[    4.95] After iteration 27: 49,151 blocks.
+[    4.98] After iteration 28: 49,152 blocks.
+[    5.02] After iteration 29: 49,152 blocks.
+[    5.02] 
+[    5.02] Time for computing the bisimulation relation: 3.98 sec.
+[    5.02] Time needed for signature computation: 3.44 s.
+[    5.02] Time needed for partition refinement: 0.54 s.
+[    5.02] Current/Max RSS: 2,669,842,432 / 2,669,838,336 bytes.

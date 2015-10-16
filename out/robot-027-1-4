@@ -1,0 +1,66 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 1 workers.
+Lace startup, creating 1 worker threads with program stack 8388608 bytes.
+[    0.72] Finished reading system from models/robot-027.xctmc.
+[    0.72] Number of state variables: 21.
+[    0.72] Number of block variables: 22.
+[    0.72] Number of transition relations: 1.
+[    0.72] Initial partition: 77,220 states in 1 block(s).
+[    0.72] Number of Markovian transitions: 412,253
+[    0.73] After iteration 1: 10 blocks.
+[    0.73] After iteration 2: 53 blocks.
+[    0.75] After iteration 3: 146 blocks.
+[    0.77] After iteration 4: 306 blocks.
+[    0.79] After iteration 5: 551 blocks.
+[    0.83] After iteration 6: 898 blocks.
+[    0.87] After iteration 7: 1,363 blocks.
+[    0.92] After iteration 8: 1,958 blocks.
+[    0.99] After iteration 9: 2,703 blocks.
+[    1.07] After iteration 10: 3,610 blocks.
+[    1.16] After iteration 11: 4,699 blocks.
+[    1.26] After iteration 12: 5,982 blocks.
+[    1.38] After iteration 13: 7,479 blocks.
+[    1.52] After iteration 14: 9,199 blocks.
+[    1.67] After iteration 15: 11,129 blocks.
+[    1.83] After iteration 16: 13,237 blocks.
+[    2.02] After iteration 17: 15,510 blocks.
+[    2.21] After iteration 18: 17,933 blocks.
+[    2.42] After iteration 19: 20,496 blocks.
+[    2.64] After iteration 20: 23,175 blocks.
+[    2.88] After iteration 21: 25,958 blocks.
+[    3.12] After iteration 22: 28,825 blocks.
+[    3.38] After iteration 23: 31,764 blocks.
+[    3.64] After iteration 24: 34,755 blocks.
+[    3.92] After iteration 25: 37,786 blocks.
+[    4.20] After iteration 26: 40,733 blocks.
+[    4.48] After iteration 27: 43,547 blocks.
+[    4.76] After iteration 28: 46,302 blocks.
+[    5.04] After iteration 29: 49,007 blocks.
+[    5.32] After iteration 30: 51,663 blocks.
+[    5.59] After iteration 31: 54,249 blocks.
+[    5.86] After iteration 32: 56,755 blocks.
+[    6.13] After iteration 33: 59,159 blocks.
+[    6.38] After iteration 34: 61,451 blocks.
+[    6.63] After iteration 35: 63,609 blocks.
+[    6.87] After iteration 36: 65,623 blocks.
+[    7.10] After iteration 37: 67,471 blocks.
+[    7.32] After iteration 38: 69,143 blocks.
+[    7.53] After iteration 39: 70,615 blocks.
+[    7.73] After iteration 40: 71,881 blocks.
+[    7.92] After iteration 41: 72,946 blocks.
+[    8.09] After iteration 42: 73,837 blocks.
+[    8.25] After iteration 43: 74,564 blocks.
+[    8.40] After iteration 44: 75,149 blocks.
+[    8.54] After iteration 45: 75,602 blocks.
+[    8.67] After iteration 46: 75,945 blocks.
+[    8.80] After iteration 47: 76,188 blocks.
+[    8.91] After iteration 48: 76,353 blocks.
+[    9.03] After iteration 49: 76,450 blocks.
+[    9.13] After iteration 50: 76,501 blocks.
+[    9.24] After iteration 51: 76,516 blocks.
+[    9.34] After iteration 52: 76,518 blocks.
+[    9.44] After iteration 53: 76,518 blocks.
+[    9.44] 
+[    9.44] Time for computing the bisimulation relation: 8.71 sec.
+[    9.44] Time needed for signature computation: 5.65 s.
+[    9.44] Time needed for partition refinement: 3.07 s.
+[    9.44] Current/Max RSS: 1,874,632,704 / 1,874,628,608 bytes.

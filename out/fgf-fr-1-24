@@ -1,0 +1,22 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 1 workers.
+Lace startup, creating 1 worker threads with program stack 8388608 bytes.
+[    1.37] Finished reading system from models/fgf.xctmc.
+[    1.37] Number of state variables: 36.
+[    1.37] Number of block variables: 25.
+[    1.37] Number of transition relations: 1.
+[    1.38] Initial partition: 80,616 states in 1 block(s).
+[    1.39] Number of Markovian transitions: 562,536
+[    1.99] After iteration 1: 12,642 blocks.
+[    4.52] After iteration 2: 29,774 blocks.
+[    7.12] After iteration 3: 34,737 blocks.
+[    8.56] After iteration 4: 37,131 blocks.
+[    9.38] After iteration 5: 38,448 blocks.
+[    9.81] After iteration 6: 38,613 blocks.
+[    9.99] After iteration 7: 38,633 blocks.
+[   10.11] After iteration 8: 38,639 blocks.
+[   10.22] After iteration 9: 38,639 blocks.
+[   10.22] 
+[   10.22] Time for computing the bisimulation relation: 8.83 sec.
+[   10.22] Time needed for signature computation: 7.82 s.
+[   10.22] Time needed for partition refinement: 1.01 s.
+[   10.22] Current/Max RSS: 1,970,167,808 / 1,970,159,616 bytes.

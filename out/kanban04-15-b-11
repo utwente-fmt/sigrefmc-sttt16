@@ -1,0 +1,101 @@
+[INFO] Input file = models/kanban04.xlts
+[INFO] Searching the input file ... finished.
+[INFO] Creating BDD variables ... finished.
+[INFO] Building BDDs ... finished.
+[INFO] Changing the variable order for refinement ... finished.
+[INFO] System is an LTS.
+[INFO] Number of states (before min.) =                        16777216
+[INFO] Number of initial states =                                     0
+[INFO] Number of transitions (before min.) =                   74424320
+[INFO] Number of nodes of the transition BDD (before min.) =       1234
+[INFO] Size of the initial partition  =                               1
+[INFO] Using Branching Bisimulation
+[INFO] Converting the initial partition ... finished.
+[INFO] Number of state variables: 24
+[INFO] Number of action variables: 5
+[INFO] Number of block number variables: 24
+[INFO] Performing the preprocessing step ... finished.
+[INFO] Using ordering heuristic NoBlockOrder.
+
+[INFO] Starting iteration 1
+[INFO] Number of blocks (before) = 1
+[INFO] Number of unstable blocks (before) = 1
+[INFO] Size of the partition BDD (before) = 25
+[INFO] Number of split blocks = 1
+[INFO] Number of blocks (after) = 64
+[INFO] Size of the partition BDD (after) = 512
+[INFO] Time needed for this iteration = 0.01 s
+
+[INFO] Starting iteration 2
+[INFO] Number of blocks (before) = 64
+[INFO] Number of unstable blocks (before) = 64
+[INFO] Size of the partition BDD (before) = 512
+[INFO] Number of split blocks = 63
+[INFO] Number of blocks (after) = 1051
+[INFO] Size of the partition BDD (after) = 4165
+[INFO] Time needed for this iteration = 0.41 s
+
+[INFO] Starting iteration 3
+[INFO] Number of blocks (before) = 1051
+[INFO] Number of unstable blocks (before) = 1050
+[INFO] Size of the partition BDD (before) = 4165
+[INFO] Number of split blocks = 615
+[INFO] Number of blocks (after) = 2077
+[INFO] Size of the partition BDD (after) = 7382
+[INFO] Time needed for this iteration = 2.9 s
+
+[INFO] Starting iteration 4
+[INFO] Number of blocks (before) = 2077
+[INFO] Number of unstable blocks (before) = 1686
+[INFO] Size of the partition BDD (before) = 7382
+[INFO] Number of split blocks = 425
+[INFO] Number of blocks (after) = 2543
+[INFO] Size of the partition BDD (after) = 8676
+[INFO] Time needed for this iteration = 2.95 s
+
+[INFO] Starting iteration 5
+[INFO] Number of blocks (before) = 2543
+[INFO] Number of unstable blocks (before) = 962
+[INFO] Size of the partition BDD (before) = 8676
+[INFO] Number of split blocks = 194
+[INFO] Number of blocks (after) = 2739
+[INFO] Size of the partition BDD (after) = 9215
+[INFO] Time needed for this iteration = 1.38 s
+
+[INFO] Starting iteration 6
+[INFO] Number of blocks (before) = 2739
+[INFO] Number of unstable blocks (before) = 398
+[INFO] Size of the partition BDD (before) = 9215
+[INFO] Number of split blocks = 46
+[INFO] Number of blocks (after) = 2785
+[INFO] Size of the partition BDD (after) = 9340
+[INFO] Time needed for this iteration = 0.54 s
+
+[INFO] Starting iteration 7
+[INFO] Number of blocks (before) = 2785
+[INFO] Number of unstable blocks (before) = 96
+[INFO] Size of the partition BDD (before) = 9340
+[INFO] Number of split blocks = 0
+[INFO] Number of blocks (after) = 2785
+[INFO] Size of the partition BDD (after) = 9340
+[INFO] Time needed for this iteration = 0.09 s
+
+[INFO] Number of refined blocks = 4257
+[INFO] Number of potentially refined blocks = 11260
+[INFO] Actual refinements per block = 1.52855
+[INFO] Potential refinements per block = 4.04309
+
+[INFO] Performing the postprocessing step ... finished
+[INFO] Extracting the quotient ...Quotient optimization enabled.
+finished.
+
+[INFO] Number of iterations =                                         7
+[INFO] Number of states (after min.) =                             2785
+[INFO] Number of nodes of the transition BDD (after min.) =       19346
+[INFO] Number of transitions (after min.) =                       10932
+[INFO] Node peak =                                              1130332
+[INFO] Time for computing the bisimulation relation =              8.29 s
+[INFO] Time for extracting the quotient system =                   0.50 s
+[INFO] Time for parsing and preprocessing =                        0.02 s
+[INFO] Total time needed for minimization =                        8.81 s
+

@@ -1,0 +1,48 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 48 workers.
+Lace startup, creating 48 worker threads with program stack 8388608 bytes.
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+ding transition relations to full domain.
+[    1.55] Number of transitions: 2,617,982,976 transitions.
+[    1.55] Initial partition: 268,430,272 states in 1 block(s).
+[    1.56] After iteration 1: 128 blocks.
+[    1.62] After iteration 2: 3,852 blocks.
+[    1.79] After iteration 3: 54,169 blocks.
+[    2.74] After iteration 4: 346,046 blocks.
+[    5.84] (GC) Starting garbage collection...
+[    6.37] (GC) Garbage collection done.
+[    8.07] After iteration 5: 1,435,860 blocks.
+[   10.91] (GC) Starting garbage collection...
+[   11.62] (GC) Garbage collection done.
+[   19.69] (GC) Starting garbage collection...
+[   21.15] (GC) Garbage collection done.
+[   27.69] After iteration 6: 4,408,629 blocks.
+[   37.72] (GC) Starting garbage collection...
+[   40.04] (GC) Garbage collection done.
+[   82.00] After iteration 7: 10,160,881 blocks.
+[   88.44] (GC) Starting garbage collection...
+[   91.86] (GC) Garbage collection done.
+[  196.67] After iteration 8: 18,824,880 blocks.
+[  200.66] (GC) Starting garbage collection...
+[  204.52] (GC) Garbage collection done.
+[  250.50] (GC) Starting garbage collection...
+[  258.30] (GC) Garbage collection done.
+[  284.69] (GC) Starting garbage collection...
+[  293.97] (GC) Garbage collection done.
+[  396.39] After iteration 9: 29,631,018 blocks.
+[  406.60] (GC) Starting garbage collection...
+[  411.64] (GC) Garbage collection done.
+[  449.89] (GC) Starting garbage collection...
+[  457.87] (GC) Garbage collection done.
+[  489.31] (GC) Starting garbage collection...
+[  499.80] (GC) Garbage collection done.
+[  531.34] (GC) Starting garbage collection...
+[  544.08] (GC) Garbage collection done.
+[  566.08] (GC) Starting garbage collection...
+[  579.43] (GC) Garbage collection done.

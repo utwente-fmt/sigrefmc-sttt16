@@ -1,0 +1,33 @@
+[INFO] Input file = models/ftwc03.ximc
+[INFO] Searching the input file ... finished.
+[INFO] Creating BDD variables ... finished.
+[INFO] Building BDDs ... finished.
+[INFO] Changing the variable order for refinement ... finished.
+[INFO] System is an IMC.
+[INFO] Number of states (before min.) =                          524288
+[INFO] Number of initial states =                                     1
+[INFO] Number of transitions (before min.) =                  26964119784
+[INFO] Number of Markov transitions (before min.) =           44879564798
+[INFO] Number of nodes of the transition BDD (before min.) =        494
+[INFO] Size of the initial partition  =                               1
+[INFO] Using Stochastic Branching Bisimulation
+[INFO] Converting the initial partition ... finished.
+[INFO] Number of state variables: 19
+[INFO] Number of action variables: 6
+[INFO] Number of block number variables: 19
+[INFO] Performing the preprocessing step ... making the IMC maximal-progress cut ... before: 18938after: 40551finished.
+[INFO] Using ordering heuristic NoBlockOrder.
+
+[INFO] Starting iteration 1
+[INFO] Number of blocks (before) = 1
+[INFO] Number of unstable blocks (before) = 1
+[INFO] Size of the partition BDD (before) = 20
+[INFO] Number of split blocks = 1
+[INFO] Number of blocks (after) = 24628
+[INFO] Size of the partition BDD (after) = 119005
+[INFO] Time needed for this iteration = 31.47 s
+
+[INFO] Starting iteration 2
+[INFO] Number of blocks (before) = 24628
+[INFO] Number of unstable blocks (before) = 24627
+[INFO] Size of the partition BDD (before) = 119005

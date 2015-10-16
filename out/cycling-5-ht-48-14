@@ -1,0 +1,36 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 48 workers.
+Lace startup, creating 48 worker threads with program stack 8388608 bytes.
+[    9.92] Finished reading system from models/cycling-5.xctmc.
+[    9.92] Number of state variables: 45.
+[    9.92] Number of block variables: 25.
+[    9.92] Number of transition relations: 1.
+[    9.92] Initial partition: 2,326,666 states in 1 block(s).
+[    9.93] Number of Markovian transitions: 16,778,785
+[   10.30] After iteration 1: 19,633 blocks.
+[   14.34] After iteration 2: 1,380,926 blocks.
+[   14.76] (GC) Starting garbage collection...
+[   15.23] (GC) Garbage collection done.
+[   20.48] (GC) Starting garbage collection...
+[   21.56] (GC) Garbage collection done.
+[   23.96] After iteration 3: 1,494,449 blocks.
+[   29.83] After iteration 4: 1,568,121 blocks.
+[   31.38] After iteration 5: 1,624,665 blocks.
+[   32.70] After iteration 6: 1,659,576 blocks.
+[   33.70] After iteration 7: 1,678,857 blocks.
+[   34.60] After iteration 8: 1,689,489 blocks.
+[   34.66] (GC) Starting garbage collection...
+[   35.75] (GC) Garbage collection done.
+[   42.27] After iteration 9: 1,695,261 blocks.
+[   44.08] After iteration 10: 1,698,219 blocks.
+[   44.32] After iteration 11: 1,699,943 blocks.
+[   44.54] After iteration 12: 1,700,890 blocks.
+[   44.73] After iteration 13: 1,701,359 blocks.
+[   44.91] After iteration 14: 1,701,535 blocks.
+[   45.08] After iteration 15: 1,701,580 blocks.
+[   45.24] After iteration 16: 1,701,581 blocks.
+[   45.40] After iteration 17: 1,701,581 blocks.
+[   45.40] 
+[   45.40] Time for computing the bisimulation relation: 35.47 sec.
+[   45.40] Time needed for signature computation: 31.58 s.
+[   45.40] Time needed for partition refinement: 3.89 s.
+[   45.40] Current/Max RSS: 20,566,708,224 / 20,567,044,096 bytes.

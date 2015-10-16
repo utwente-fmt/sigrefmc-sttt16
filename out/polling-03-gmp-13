@@ -1,0 +1,23 @@
+
+sigref_exact version 0.03-trunk
+
+[INFO] Input file: models/polling-03.xctmc
+[INFO] Searching the input file ... finished.
+[INFO] Creating BDD variables ... Order:  0 1 2 3 4 5 6 7 8 9 10 11
+finished.
+[INFO] Building BDDs ... finished.
+[INFO] Using rational arithmetic
+Current value of epsilon: 0
+Number of states before minimization: 36
+Number of transitions before minimization: 84
+
+  Iteration 1 finished, 7 blocks generated.
+  Iteration 2 finished, 9 blocks generated.
+  Iteration 3 finished, 11 blocks generated.
+  Iteration 4 finished, 12 blocks generated.
+  Iteration 5 finished, 12 blocks generated.
+[INFO] Number of iterations: 5
+[INFO] Final number of blocks: 12
+[INFO] Time for refinement: 0 s
+[INFO] Memory used: 38.7656 MB
+[INFO] Maximal number of live nodes: 726

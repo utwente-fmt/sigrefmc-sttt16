@@ -1,0 +1,42 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 48 workers.
+Lace startup, creating 48 worker threads with program stack 8388608 bytes.
+[    1.69] Finished reading system from models/kanban08.xlts.
+[    1.69] Number of state variables: 32.
+[    1.69] Number of action variables: 5.
+[    1.69] Number of block variables: 25.
+[    1.69] Number of transition relations: 1.
+[    1.69] Extending transition relations to full domain.
+[    1.69] Number of transitions: 29,070,458,880 transitions.
+[    1.69] Initial partition: 4,224,876,912 states in 1 block(s).
+[    1.69] Precomputing tau transitions for branching bisimulation.
+[    1.72] After iteration 1: 64 blocks.
+[    1.75] After iteration 2: 1,178 blocks.
+[    1.84] After iteration 3: 6,708 blocks.
+[    2.03] After iteration 4: 17,956 blocks.
+[    2.30] After iteration 5: 28,169 blocks.
+[    2.57] After iteration 6: 36,145 blocks.
+[    2.78] After iteration 7: 41,455 blocks.
+[    2.97] After iteration 8: 46,631 blocks.
+[    3.14] After iteration 9: 50,487 blocks.
+[    3.31] After iteration 10: 54,226 blocks.
+[    3.46] After iteration 11: 56,893 blocks.
+[    3.59] After iteration 12: 59,573 blocks.
+[    3.71] After iteration 13: 61,436 blocks.
+[    3.83] After iteration 14: 63,118 blocks.
+[    3.94] After iteration 15: 64,386 blocks.
+[    4.04] After iteration 16: 65,444 blocks.
+[    4.13] After iteration 17: 66,150 blocks.
+[    4.22] After iteration 18: 66,801 blocks.
+[    4.29] After iteration 19: 67,264 blocks.
+[    4.35] After iteration 20: 67,596 blocks.
+[    4.41] After iteration 21: 67,878 blocks.
+[    4.46] After iteration 22: 68,047 blocks.
+[    4.51] After iteration 23: 68,127 blocks.
+[    4.54] After iteration 24: 68,207 blocks.
+[    4.58] After iteration 25: 68,217 blocks.
+[    4.61] After iteration 26: 68,217 blocks.
+[    4.61] 
+[    4.61] Time for computing the bisimulation relation: 2.92 sec.
+[    4.61] Time needed for signature computation: 2.42 s.
+[    4.61] Time needed for partition refinement: 0.49 s.
+[    4.62] Current/Max RSS: 2,136,231,936 / 2,136,231,936 bytes.

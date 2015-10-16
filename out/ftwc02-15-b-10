@@ -1,0 +1,75 @@
+[INFO] Input file = models/ftwc02.ximc
+[INFO] Searching the input file ... finished.
+[INFO] Creating BDD variables ... finished.
+[INFO] Building BDDs ... finished.
+[INFO] Changing the variable order for refinement ... finished.
+[INFO] System is an IMC.
+[INFO] Number of states (before min.) =                           32768
+[INFO] Number of initial states =                                     1
+[INFO] Number of transitions (before min.) =                  101158440
+[INFO] Number of Markov transitions (before min.) =           169618430
+[INFO] Number of nodes of the transition BDD (before min.) =        382
+[INFO] Size of the initial partition  =                               1
+[INFO] Using Stochastic Branching Bisimulation
+[INFO] Converting the initial partition ... finished.
+[INFO] Number of state variables: 15
+[INFO] Number of action variables: 6
+[INFO] Number of block number variables: 15
+[INFO] Performing the preprocessing step ... making the IMC maximal-progress cut ... before: 7280after: 15079finished.
+[INFO] Using ordering heuristic NoBlockOrder.
+
+[INFO] Starting iteration 1
+[INFO] Number of blocks (before) = 1
+[INFO] Number of unstable blocks (before) = 1
+[INFO] Size of the partition BDD (before) = 16
+[INFO] Number of split blocks = 1
+[INFO] Number of blocks (after) = 2810
+[INFO] Size of the partition BDD (after) = 13505
+[INFO] Time needed for this iteration = 0.41 s
+
+[INFO] Starting iteration 2
+[INFO] Number of blocks (before) = 2810
+[INFO] Number of unstable blocks (before) = 2809
+[INFO] Size of the partition BDD (before) = 13505
+[INFO] Number of split blocks = 1970
+[INFO] Number of blocks (after) = 5499
+[INFO] Size of the partition BDD (after) = 20010
+[INFO] Time needed for this iteration = 66.38 s
+
+[INFO] Starting iteration 3
+[INFO] Number of blocks (before) = 5499
+[INFO] Number of unstable blocks (before) = 5142
+[INFO] Size of the partition BDD (before) = 20010
+[INFO] Number of split blocks = 5
+[INFO] Number of blocks (after) = 5504
+[INFO] Size of the partition BDD (after) = 20020
+[INFO] Time needed for this iteration = 72.26 s
+
+[INFO] Starting iteration 4
+[INFO] Number of blocks (before) = 5504
+[INFO] Number of unstable blocks (before) = 322
+[INFO] Size of the partition BDD (before) = 20020
+[INFO] Number of split blocks = 0
+[INFO] Number of blocks (after) = 5504
+[INFO] Size of the partition BDD (after) = 20020
+[INFO] Time needed for this iteration = 13.68 s
+
+[INFO] Number of refined blocks = 8274
+[INFO] Number of potentially refined blocks = 13814
+[INFO] Actual refinements per block = 1.50327
+[INFO] Potential refinements per block = 2.50981
+
+[INFO] Performing the postprocessing step ... finished
+[INFO] Extracting the quotient ... finished.
+
+[INFO] Number of iterations =                                         4
+[INFO] Number of states (after min.) =                             5504
+[INFO] Number of nodes of the transition BDD (after min.) =      111542
+[INFO] Number of transitions (after min.) =                      180155
+[INFO] Numer of Markov transitions (after min.) =               4760204
+[INFO] Node peak =                                              5357324
+[INFO] Time for computing the bisimulation relation =            152.76 s
+[INFO] Time for extracting the quotient system =                  94.00 s
+[INFO] Time for parsing and preprocessing =                        0.01 s
+[INFO] Total time needed for minimization =                      246.77 s
+

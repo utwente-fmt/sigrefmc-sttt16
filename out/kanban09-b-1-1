@@ -1,0 +1,45 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 1 workers.
+Lace startup, creating 1 worker threads with program stack 8388608 bytes.
+[    0.84] Finished reading system from models/kanban09.xlts.
+[    0.84] Number of state variables: 32.
+[    0.84] Number of action variables: 5.
+[    0.84] Number of block variables: 25.
+[    0.84] Number of transition relations: 1.
+[    0.84] Extending transition relations to full domain.
+[    0.84] Number of transitions: 41,055,336,960 transitions.
+[    0.84] Initial partition: 4,293,193,072 states in 1 block(s).
+[    0.84] Precomputing tau transitions for branching bisimulation.
+[    0.87] After iteration 1: 64 blocks.
+[    1.00] After iteration 2: 1,178 blocks.
+[    1.46] After iteration 3: 7,361 blocks.
+[    2.71] After iteration 4: 22,823 blocks.
+[    5.20] After iteration 5: 41,004 blocks.
+[    8.37] After iteration 6: 57,030 blocks.
+[   11.41] After iteration 7: 67,307 blocks.
+[   13.99] After iteration 8: 76,751 blocks.
+[   16.38] After iteration 9: 84,162 blocks.
+[   18.54] After iteration 10: 91,271 blocks.
+[   20.63] After iteration 11: 96,580 blocks.
+[   22.44] After iteration 12: 101,954 blocks.
+[   24.08] After iteration 13: 105,870 blocks.
+[   25.62] After iteration 14: 109,545 blocks.
+[   26.95] After iteration 15: 112,388 blocks.
+[   28.11] After iteration 16: 114,907 blocks.
+[   29.23] After iteration 17: 116,691 blocks.
+[   30.15] After iteration 18: 118,373 blocks.
+[   30.97] After iteration 19: 119,539 blocks.
+[   31.74] After iteration 20: 120,457 blocks.
+[   32.31] After iteration 21: 121,293 blocks.
+[   32.83] After iteration 22: 121,879 blocks.
+[   33.32] After iteration 23: 122,299 blocks.
+[   33.71] After iteration 24: 122,653 blocks.
+[   34.06] After iteration 25: 122,861 blocks.
+[   34.40] After iteration 26: 122,960 blocks.
+[   34.66] After iteration 27: 123,059 blocks.
+[   34.90] After iteration 28: 123,070 blocks.
+[   35.15] After iteration 29: 123,070 blocks.
+[   35.15] 
+[   35.15] Time for computing the bisimulation relation: 34.30 sec.
+[   35.15] Time needed for signature computation: 30.75 s.
+[   35.15] Time needed for partition refinement: 3.55 s.
+[   35.15] Current/Max RSS: 2,079,391,744 / 2,079,391,744 bytes.

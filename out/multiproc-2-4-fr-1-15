@@ -1,0 +1,4 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 1 workers.
+Lace startup, creating 1 worker threads with program stack 8388608 bytes.
+[ERROR] String 912541/10000000000 is not a number, or x/y does not fit in 32-bit integers
+terminate called after throwing an instance of 'sigref::ParseError'

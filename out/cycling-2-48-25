@@ -1,0 +1,19 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 48 workers.
+Lace startup, creating 48 worker threads with program stack 8388608 bytes.
+[    1.31] Finished reading system from models/cycling-2.xctmc.
+[    1.31] Number of state variables: 32.
+[    1.31] Number of block variables: 25.
+[    1.31] Number of transition relations: 1.
+[    1.31] Initial partition: 4,666 states in 1 block(s).
+[    1.31] Number of Markovian transitions: 18,342
+[    1.32] After iteration 1: 609 blocks.
+[    1.33] After iteration 2: 3,007 blocks.
+[    1.35] After iteration 3: 3,452 blocks.
+[    1.36] After iteration 4: 3,509 blocks.
+[    1.39] After iteration 5: 3,511 blocks.
+[    1.41] After iteration 6: 3,511 blocks.
+[    1.41] 
+[    1.41] Time for computing the bisimulation relation: 0.10 sec.
+[    1.41] Time needed for signature computation: 0.03 s.
+[    1.41] Time needed for partition refinement: 0.07 s.
+[    1.41] Current/Max RSS: 1,975,726,080 / 1,975,726,080 bytes.

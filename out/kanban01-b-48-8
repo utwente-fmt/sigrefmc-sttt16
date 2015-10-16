@@ -1,0 +1,21 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 48 workers.
+Lace startup, creating 48 worker threads with program stack 8388608 bytes.
+[    0.83] Finished reading system from models/kanban01.xlts.
+[    0.84] Number of state variables: 8.
+[    0.84] Number of action variables: 5.
+[    0.84] Number of block variables: 9.
+[    0.84] Number of transition relations: 1.
+[    0.84] Extending transition relations to full domain.
+[    0.85] Number of transitions: 904 transitions.
+[    0.85] Initial partition: 256 states in 1 block(s).
+[    0.85] Precomputing tau transitions for branching bisimulation.
+[    0.94] After iteration 1: 14 blocks.
+[    0.99] After iteration 2: 20 blocks.
+[    1.02] After iteration 3: 22 blocks.
+[    1.02] After iteration 4: 24 blocks.
+[    1.03] After iteration 5: 24 blocks.
+[    1.03] 
+[    1.03] Time for computing the bisimulation relation: 0.18 sec.
+[    1.03] Time needed for signature computation: 0.16 s.
+[    1.03] Time needed for partition refinement: 0.01 s.
+[    1.03] Current/Max RSS: 1,965,424,640 / 1,965,424,640 bytes.

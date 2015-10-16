@@ -1,0 +1,46 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 1 workers.
+Lace startup, creating 1 worker threads with program stack 8388608 bytes.
+[    0.72] Finished reading system from models/polling-16.xctmc.
+[    0.72] Number of state variables: 21.
+[    0.72] Number of block variables: 22.
+[    0.72] Number of transition relations: 1.
+[    0.72] Initial partition: 1,572,864 states in 1 block(s).
+[    0.72] Number of Markovian transitions: 13,893,632
+[    0.73] After iteration 1: 33 blocks.
+[    0.74] After iteration 2: 48 blocks.
+[    0.75] After iteration 3: 76 blocks.
+[    0.77] After iteration 4: 116 blocks.
+[    0.80] After iteration 5: 179 blocks.
+[    0.85] After iteration 6: 274 blocks.
+[    0.92] After iteration 7: 419 blocks.
+[    1.02] After iteration 8: 638 blocks.
+[    1.19] After iteration 9: 968 blocks.
+[    1.44] After iteration 10: 1,462 blocks.
+[    1.82] After iteration 11: 2,197 blocks.
+[    2.40] After iteration 12: 3,282 blocks.
+[    3.25] After iteration 13: 4,869 blocks.
+[    4.50] After iteration 14: 7,164 blocks.
+[    6.33] After iteration 15: 10,436 blocks.
+[    8.97] After iteration 16: 15,016 blocks.
+[   12.71] After iteration 17: 21,271 blocks.
+[   17.88] After iteration 18: 29,524 blocks.
+[   24.86] After iteration 19: 39,884 blocks.
+[   33.96] After iteration 20: 51,992 blocks.
+[   45.38] After iteration 21: 64,822 blocks.
+[   59.21] After iteration 22: 76,802 blocks.
+[   66.50] (GC) Starting garbage collection...
+[   68.47] (GC) Garbage collection done.
+[   80.95] After iteration 23: 86,387 blocks.
+[   97.31] After iteration 24: 92,782 blocks.
+[  104.99] After iteration 25: 96,242 blocks.
+[  109.97] After iteration 26: 97,712 blocks.
+[  113.00] After iteration 27: 98,182 blocks.
+[  114.94] After iteration 28: 98,288 blocks.
+[  116.39] After iteration 29: 98,303 blocks.
+[  117.69] After iteration 30: 98,304 blocks.
+[  118.95] After iteration 31: 98,304 blocks.
+[  118.95] 
+[  118.95] Time for computing the bisimulation relation: 118.23 sec.
+[  118.95] Time needed for signature computation: 101.50 s.
+[  118.95] Time needed for partition refinement: 16.72 s.
+[  118.95] Current/Max RSS: 4,822,364,160 / 4,822,360,064 bytes.

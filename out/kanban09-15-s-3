@@ -1,0 +1,24 @@
+[INFO] Input file = models/kanban09.xlts
+[INFO] Searching the input file ... finished.
+[INFO] Creating BDD variables ... finished.
+[INFO] Building BDDs ... finished.
+[INFO] Changing the variable order for refinement ... finished.
+[INFO] System is an LTS.
+[INFO] Number of states (before min.) =                       4294967296
+[INFO] Number of initial states =                                     0
+[INFO] Number of transitions (before min.) =                  41055336960
+[INFO] Number of nodes of the transition BDD (before min.) =       5763
+[INFO] Size of the initial partition  =                               1
+[INFO] Using Strong Bisimulation
+[INFO] Converting the initial partition ... finished.
+[INFO] Number of state variables: 32
+[INFO] Number of action variables: 5
+[INFO] Number of block number variables: 32
+[INFO] Performing the preprocessing step ... finished.
+[INFO] Starting refinement ... 
+
+Time 0.02: Iteration 1 finished. 128 blocks created.
+Time 0.29: Iteration 2 finished. 3890 blocks created.
+Time 8.35: Iteration 3 finished. 67530 blocks created.
+Time 112.5: Iteration 4 finished. 570420 blocks created.
+Time 964.09: Iteration 5 finished. 3128239 blocks created.

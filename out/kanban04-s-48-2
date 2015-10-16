@@ -1,0 +1,44 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 48 workers.
+Lace startup, creating 48 worker threads with program stack 8388608 bytes.
+[    1.57] Finished reading system from models/kanban04.xlts.
+[    1.57] Number of state variables: 24.
+[    1.57] Number of action variables: 5.
+[    1.57] Number of block variables: 25.
+[    1.57] Number of transition relations: 1.
+[    1.57] Extending transition relations to full domain.
+[    1.57] Number of transitions: 74,424,320 transitions.
+[    1.57] Initial partition: 16,020,316 states in 1 block(s).
+[    1.58] After iteration 1: 128 blocks.
+[    1.60] After iteration 2: 2,386 blocks.
+[    1.64] After iteration 3: 14,340 blocks.
+[    1.75] After iteration 4: 46,485 blocks.
+[    2.05] After iteration 5: 116,859 blocks.
+[    2.57] After iteration 6: 226,522 blocks.
+[    3.40] After iteration 7: 352,716 blocks.
+[    4.36] (GC) Starting garbage collection...
+[    4.78] (GC) Garbage collection done.
+[    5.00] After iteration 8: 480,435 blocks.
+[    6.56] After iteration 9: 591,900 blocks.
+[    7.41] After iteration 10: 671,116 blocks.
+[    7.78] (GC) Starting garbage collection...
+[    8.40] (GC) Garbage collection done.
+[    9.62] After iteration 11: 718,952 blocks.
+[   10.81] After iteration 12: 744,874 blocks.
+[   11.13] After iteration 13: 758,696 blocks.
+[   11.40] After iteration 14: 766,645 blocks.
+[   11.57] After iteration 15: 771,609 blocks.
+[   11.72] After iteration 16: 774,707 blocks.
+[   11.82] After iteration 17: 776,455 blocks.
+[   11.91] After iteration 18: 777,544 blocks.
+[   12.00] After iteration 19: 778,100 blocks.
+[   12.07] After iteration 20: 778,386 blocks.
+[   12.13] After iteration 21: 778,468 blocks.
+[   12.19] After iteration 22: 778,481 blocks.
+[   12.25] After iteration 23: 778,484 blocks.
+[   12.30] After iteration 24: 778,485 blocks.
+[   12.38] After iteration 25: 778,485 blocks.
+[   12.38] 
+[   12.38] Time for computing the bisimulation relation: 10.80 sec.
+[   12.38] Time needed for signature computation: 9.53 s.
+[   12.38] Time needed for partition refinement: 1.27 s.
+[   12.38] Current/Max RSS: 10,411,307,008 / 10,411,307,008 bytes.

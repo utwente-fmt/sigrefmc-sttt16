@@ -1,0 +1,49 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 48 workers.
+Lace startup, creating 48 worker threads with program stack 8388608 bytes.
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+[    1.55] Finished reading system from models/kanban07.xlts.
+[    1.55] Number of state variables: 28.
+[    1.55] Number of action variables: 5.
+[    1.55] Number of block variables: 25.
+[    1.55] Number of transition relations: 1.
+[    1.55] Extending transition relations to full domain.
+[    1.55] Number of transitions: 2,617,982,976 transitions.
+[    1.55] Initial partition: 268,430,272 states in 1 block(s).
+[    1.56] After iteration 1: 128 blocks.
+[    1.62] After iteration 2: 3,852 blocks.
+[    1.80] After iteration 3: 54,169 blocks.
+[    2.70] After iteration 4: 346,046 blocks.
+[    5.54] (GC) Starting garbage collection...
+[    6.05] (GC) Garbage collection done.
+[    7.86] After iteration 5: 1,435,860 blocks.
+[   10.43] (GC) Starting garbage collection...
+[   11.11] (GC) Garbage collection done.
+[   18.72] (GC) Starting garbage collection...
+[   20.17] (GC) Garbage collection done.
+[   27.86] After iteration 6: 4,408,629 blocks.
+[   37.01] (GC) Starting garbage collection...
+[   39.33] (GC) Garbage collection done.
+[   82.34] After iteration 7: 10,160,881 blocks.
+[   88.04] (GC) Starting garbage collection...
+[   91.32] (GC) Garbage collection done.
+[  191.29] After iteration 8: 18,824,880 blocks.
+[  195.00] (GC) Starting garbage collection...
+[  198.93] (GC) Garbage collection done.
+[  246.16] (GC) Starting garbage collection...
+[  253.92] (GC) Garbage collection done.
+[  283.50] (GC) Starting garbage collection...
+[  292.97] (GC) Garbage collection done.
+[  387.08] After iteration 9: 29,631,018 blocks.
+[  400.20] (GC) Starting garbage collection...
+[  405.31] (GC) Garbage collection done.
+[  443.79] (GC) Starting garbage collection...
+[  452.02] (GC) Garbage collection done.
+[  484.29] (GC) Starting garbage collection...
+[  494.96] (GC) Garbage collection done.
+[  527.02] (GC) Starting garbage collection...
+[  539.90] (GC) Garbage collection done.
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available

@@ -1,0 +1,59 @@
+[INFO] Input file = models/kanban09.xlts
+[INFO] Searching the input file ... finished.
+[INFO] Creating BDD variables ... finished.
+[INFO] Building BDDs ... finished.
+[INFO] Changing the variable order for refinement ... finished.
+[INFO] System is an LTS.
+[INFO] Number of states (before min.) =                       4294967296
+[INFO] Number of initial states =                                     0
+[INFO] Number of transitions (before min.) =                  41055336960
+[INFO] Number of nodes of the transition BDD (before min.) =       5763
+[INFO] Size of the initial partition  =                               1
+[INFO] Using Branching Bisimulation
+[INFO] Converting the initial partition ... finished.
+[INFO] Number of state variables: 32
+[INFO] Number of action variables: 5
+[INFO] Number of block number variables: 32
+[INFO] Performing the preprocessing step ... finished.
+[INFO] Using ordering heuristic NoBlockOrder.
+
+[INFO] Starting iteration 1
+[INFO] Number of blocks (before) = 1
+[INFO] Number of unstable blocks (before) = 1
+[INFO] Size of the partition BDD (before) = 33
+[INFO] Number of split blocks = 1
+[INFO] Number of blocks (after) = 64
+[INFO] Size of the partition BDD (after) = 1234
+[INFO] Time needed for this iteration = 0.02 s
+
+[INFO] Starting iteration 2
+[INFO] Number of blocks (before) = 64
+[INFO] Number of unstable blocks (before) = 64
+[INFO] Size of the partition BDD (before) = 1234
+[INFO] Number of split blocks = 63
+[INFO] Number of blocks (after) = 2658
+[INFO] Size of the partition BDD (after) = 14958
+[INFO] Time needed for this iteration = 2.86 s
+
+[INFO] Starting iteration 3
+[INFO] Number of blocks (before) = 2658
+[INFO] Number of unstable blocks (before) = 2657
+[INFO] Size of the partition BDD (before) = 14958
+[INFO] Number of split blocks = 2227
+[INFO] Number of blocks (after) = 26674
+[INFO] Size of the partition BDD (after) = 93617
+[INFO] Time needed for this iteration = 52.54 s
+
+[INFO] Starting iteration 4
+[INFO] Number of blocks (before) = 26674
+[INFO] Number of unstable blocks (before) = 26435
+[INFO] Size of the partition BDD (before) = 93617
+[INFO] Number of split blocks = 12432
+[INFO] Number of blocks (after) = 64441
+[INFO] Size of the partition BDD (after) = 209438
+[INFO] Time needed for this iteration = 452.1 s
+
+[INFO] Starting iteration 5
+[INFO] Number of blocks (before) = 64441
+[INFO] Number of unstable blocks (before) = 54361
+[INFO] Size of the partition BDD (before) = 209438

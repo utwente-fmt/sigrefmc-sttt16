@@ -1,0 +1,19 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 1 workers.
+Lace startup, creating 1 worker threads with program stack 8388608 bytes.
+[    0.77] Finished reading system from models/multiproc-2-2.xctmc.
+[    0.77] Number of state variables: 34.
+[    0.77] Number of block variables: 25.
+[    0.77] Number of transition relations: 1.
+[    0.77] Initial partition: 15,769 states in 1 block(s).
+[    0.77] Number of Markovian transitions: 91,232
+[    0.85] After iteration 1: 393 blocks.
+[    0.95] After iteration 2: 1,069 blocks.
+[    1.05] After iteration 3: 1,219 blocks.
+[    1.08] After iteration 4: 1,274 blocks.
+[    1.10] After iteration 5: 1,287 blocks.
+[    1.11] After iteration 6: 1,287 blocks.
+[    1.11] 
+[    1.11] Time for computing the bisimulation relation: 0.34 sec.
+[    1.11] Time needed for signature computation: 0.31 s.
+[    1.11] Time needed for partition refinement: 0.04 s.
+[    1.12] Current/Max RSS: 1,768,521,728 / 1,768,521,728 bytes.

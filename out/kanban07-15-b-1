@@ -1,0 +1,26 @@
+[INFO] Input file = models/kanban07.xlts
+[INFO] System is an LTS.
+[INFO] Number of states (before min.) =                       268435456
+[INFO] Number of initial states =                                     0
+[INFO] Number of transitions (before min.) =                  2617982976
+[INFO] Number of nodes of the transition BDD (before min.) =       3220
+[INFO] Size of the initial partition  =                               1
+[INFO] Using Branching Bisimulation
+[INFO] Using ordering heuristic NoBlockOrder.
+[INFO] Number of refined blocks = 53930
+[INFO] Number of potentially refined blocks = 216253
+[INFO] Actual refinements per block = 1.52104
+[INFO] Potential refinements per block = 6.09919
+
+Quotient optimization enabled.
+
+[INFO] Number of iterations =                                        10
+[INFO] Number of states (after min.) =                            35456
+[INFO] Number of nodes of the transition BDD (after min.) =      259211
+[INFO] Number of transitions (after min.) =                      172382
+[INFO] Node peak =                                              3216234
+[INFO] Time for computing the bisimulation relation =            400.92 s
+[INFO] Time for extracting the quotient system =                  64.47 s
+[INFO] Time for parsing and preprocessing =                        0.36 s
+[INFO] Total time needed for minimization =                      465.75 s
+

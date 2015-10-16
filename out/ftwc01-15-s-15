@@ -1,0 +1,40 @@
+[INFO] Input file = models/ftwc01.ximc
+[INFO] Searching the input file ... finished.
+[INFO] Creating BDD variables ... finished.
+[INFO] Building BDDs ... finished.
+[INFO] Changing the variable order for refinement ... finished.
+[INFO] System is an IMC.
+[INFO] Number of states (before min.) =                            2048
+[INFO] Number of initial states =                                     1
+[INFO] Number of transitions (before min.) =                     355176
+[INFO] Number of Markov transitions (before min.) =              605438
+[INFO] Number of nodes of the transition BDD (before min.) =        270
+[INFO] Size of the initial partition  =                               1
+[INFO] Using Stochastic Strong Bisimulation
+[INFO] Converting the initial partition ... finished.
+[INFO] Number of state variables: 11
+[INFO] Number of action variables: 6
+[INFO] Number of block number variables: 11
+[INFO] Performing the preprocessing step ... making the IMC maximal-progress cut ... before: 1488after: 2709finished.
+[INFO] Starting refinement ... 
+
+ Iteration 1 finished. 305 blocks created.
+ Iteration 2 finished. 1837 blocks created.
+ Iteration 3 finished. 2015 blocks created.
+ Iteration 4 finished. 2045 blocks created.
+ Iteration 5 finished. 2045 blocks created.
+
+[INFO] Performing the postprocessing step ... finished.
+[INFO] Extracting the quotient ... finished.
+
+[INFO] Number of iterations =                                         5
+[INFO] Number of states (after min.) =                             2045
+[INFO] Number of nodes of the transition BDD (after min.) =        3798
+[INFO] Number of transitions (after min.) =                      355176
+[INFO] Numer of Markov transitions (after min.) =                230522
+[INFO] Node peak =                                              1287720
+[INFO] Time for computing the bisimulation relation =              1.23 s
+[INFO] Time for extracting the quotient system =                   0.97 s
+[INFO] Time for parsing and preprocessing =                        0.00 s
+[INFO] Total time needed for minimization =                        2.20 s
+

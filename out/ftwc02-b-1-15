@@ -1,0 +1,23 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 1 workers.
+Lace startup, creating 1 worker threads with program stack 8388608 bytes.
+[    0.73] Finished reading system from models/ftwc02.ximc.
+[    0.73] Number of state variables: 15.
+[    0.73] Number of action variables: 6.
+[    0.73] Number of block variables: 16.
+[    0.74] Number of Markovian transitions: 169,618,430
+[    0.74] Number of interactive transitions: 101,158,440
+[    0.74] Initial partition: 32,768 states in 1 block(s).
+[    0.74] Computing maximal-progress cut.
+[    1.08] After iteration 1-a: 1,459 blocks.
+[    5.92] After iteration 1-b: 2,431 blocks.
+[   10.41] After iteration 2-a: 3,886 blocks.
+[   20.70] After iteration 2-b: 3,886 blocks.
+[   22.29] After iteration 3-a: 3,886 blocks.
+[   22.29] 
+[   22.29] Time for computing the bisimulation relation: 21.55 sec.
+[   22.29] Time needed for Markovian signature computation: 4.81 s.
+[   22.29] Time needed for Markovian partition refinement: 0.01 s.
+[   22.29] Time needed for interactive signature computation: 15.12 s.
+[   22.29] Time needed for interactive partition refinement: 0.01 s.
+[   22.55] Current #nodes in table: 16,274,616 of 67,108,864 BDD nodes.
+[   22.55] Current/Max RSS: 2,018,742,272 / 2,018,734,080 bytes.

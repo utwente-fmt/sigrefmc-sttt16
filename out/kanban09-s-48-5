@@ -1,0 +1,31 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 48 workers.
+Lace startup, creating 48 worker threads with program stack 8388608 bytes.
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+[    1.68] Finished reading system from models/kanban09.xlts.
+[    1.68] Number of state variables: 32.
+[    1.68] Number of action variables: 5.
+[    1.68] Number of block variables: 25.
+[    1.68] Number of transition relations: 1.
+[    1.68] Extending transition relations to full domain.
+[    1.68] Number of transitions: 41,055,336,960 transitions.
+[    1.68] Initial partition: 4,293,193,072 states in 1 block(s).
+[    1.70] After iteration 1: 128 blocks.
+[    1.76] After iteration 2: 3,890 blocks.
+[    2.08] After iteration 3: 67,530 blocks.
+[    3.94] After iteration 4: 570,420 blocks.
+[    6.46] (GC) Starting garbage collection...
+[    6.92] (GC) Garbage collection done.
+[   13.80] (GC) Starting garbage collection...
+[   14.62] (GC) Garbage collection done.
+[   18.61] After iteration 5: 3,128,239 blocks.
+[   25.41] (GC) Starting garbage collection...
+[   26.76] (GC) Garbage collection done.
+[   46.91] (GC) Starting garbage collection...
+[   49.83] (GC) Garbage collection done.
+[  153.37] After iteration 6: 12,470,351 blocks.
+[  166.31] (GC) Starting garbage collection...
+[  170.25] (GC) Garbage collection done.
+[  235.46] (GC) Starting garbage collection...
+[  242.95] (GC) Garbage collection done.
+Out of cheese exception, no more blocks available

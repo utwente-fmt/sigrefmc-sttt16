@@ -1,0 +1,38 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 48 workers.
+Lace startup, creating 48 worker threads with program stack 8388608 bytes.
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+Out of cheese exception, no more blocks available
+ 1.64] Number of block variables: 25.
+[    1.64] Number of transition relations: 1.
+[    1.64] Extending transition relations to full domain.
+[    1.64] Number of transitions: 29,070,458,880 transitions.
+[    1.64] Initial partition: 4,224,876,912 states in 1 block(s).
+[    1.65] After iteration 1: 128 blocks.
+[    1.70] After iteration 2: 3,890 blocks.
+[    1.93] After iteration 3: 62,602 blocks.
+[    3.18] After iteration 4: 465,585 blocks.
+[    5.66] (GC) Starting garbage collection...
+[    6.18] (GC) Garbage collection done.
+[   12.06] After iteration 5: 2,264,869 blocks.
+[   12.73] (GC) Starting garbage collection...
+[   13.36] (GC) Garbage collection done.
+[   21.18] (GC) Starting garbage collection...
+[   22.56] (GC) Garbage collection done.
+[   55.90] After iteration 6: 7,902,175 blocks.
+[   56.07] (GC) Starting garbage collection...
+[   57.57] (GC) Garbage collection done.
+[   86.13] (GC) Starting garbage collection...
+[   91.11] (GC) Garbage collection done.
+[  244.39] After iteration 7: 20,133,864 blocks.
+[  261.42] (GC) Starting garbage collection...
+[  266.31] (GC) Garbage collection done.
+[  307.90] (GC) Starting garbage collection...
+[  315.93] (GC) Garbage collection done.
+[  351.78] (GC) Starting garbage collection...
+[  361.88] (GC) Garbage collection done.
+[  388.72] (GC) Starting garbage collection...
+[  399.85] (GC) Garbage collection done.

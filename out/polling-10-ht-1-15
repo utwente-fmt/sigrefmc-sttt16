@@ -1,0 +1,32 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 1 workers.
+Lace startup, creating 1 worker threads with program stack 8388608 bytes.
+[    0.66] Finished reading system from models/polling-10.xctmc.
+[    0.66] Number of state variables: 15.
+[    0.66] Number of block variables: 16.
+[    0.66] Number of transition relations: 1.
+[    0.66] Initial partition: 15,360 states in 1 block(s).
+[    0.66] Number of Markovian transitions: 89,600
+[    0.66] After iteration 1: 21 blocks.
+[    0.67] After iteration 2: 30 blocks.
+[    0.67] After iteration 3: 46 blocks.
+[    0.68] After iteration 4: 68 blocks.
+[    0.68] After iteration 5: 101 blocks.
+[    0.69] After iteration 6: 148 blocks.
+[    0.71] After iteration 7: 215 blocks.
+[    0.73] After iteration 8: 308 blocks.
+[    0.77] After iteration 9: 434 blocks.
+[    0.81] After iteration 10: 598 blocks.
+[    0.87] After iteration 11: 799 blocks.
+[    0.94] After iteration 12: 1,022 blocks.
+[    1.02] After iteration 13: 1,234 blocks.
+[    1.11] After iteration 14: 1,396 blocks.
+[    1.18] After iteration 15: 1,489 blocks.
+[    1.22] After iteration 16: 1,526 blocks.
+[    1.25] After iteration 17: 1,535 blocks.
+[    1.27] After iteration 18: 1,536 blocks.
+[    1.28] After iteration 19: 1,536 blocks.
+[    1.28] 
+[    1.28] Time for computing the bisimulation relation: 0.62 sec.
+[    1.28] Time needed for signature computation: 0.51 s.
+[    1.28] Time needed for partition refinement: 0.11 s.
+[    1.28] Current/Max RSS: 1,762,508,800 / 1,762,844,672 bytes.
