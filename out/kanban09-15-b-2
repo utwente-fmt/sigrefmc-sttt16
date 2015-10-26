@@ -24,7 +24,7 @@
 [INFO] Number of split blocks = 1
 [INFO] Number of blocks (after) = 64
 [INFO] Size of the partition BDD (after) = 1234
-[INFO] Time needed for this iteration = 0.02 s
+[INFO] Time needed for this iteration = 0.03 s
 
 [INFO] Starting iteration 2
 [INFO] Number of blocks (before) = 64
@@ -33,7 +33,7 @@
 [INFO] Number of split blocks = 63
 [INFO] Number of blocks (after) = 2658
 [INFO] Size of the partition BDD (after) = 14958
-[INFO] Time needed for this iteration = 2.43 s
+[INFO] Time needed for this iteration = 2.29 s
 
 [INFO] Starting iteration 3
 [INFO] Number of blocks (before) = 2658
@@ -42,7 +42,7 @@
 [INFO] Number of split blocks = 2227
 [INFO] Number of blocks (after) = 26674
 [INFO] Size of the partition BDD (after) = 93617
-[INFO] Time needed for this iteration = 54.04 s
+[INFO] Time needed for this iteration = 59.28 s
 
 [INFO] Starting iteration 4
 [INFO] Number of blocks (before) = 26674
@@ -51,7 +51,7 @@
 [INFO] Number of split blocks = 12432
 [INFO] Number of blocks (after) = 64441
 [INFO] Size of the partition BDD (after) = 209438
-[INFO] Time needed for this iteration = 453.62 s
+[INFO] Time needed for this iteration = 453.85 s
 
 [INFO] Starting iteration 5
 [INFO] Number of blocks (before) = 64441
@@ -60,7 +60,7 @@
 [INFO] Number of split blocks = 18267
 [INFO] Number of blocks (after) = 99246
 [INFO] Size of the partition BDD (after) = 313124
-[INFO] Time needed for this iteration = 945.4 s
+[INFO] Time needed for this iteration = 949.34 s
 
 [INFO] Starting iteration 6
 [INFO] Number of blocks (before) = 99246
@@ -69,7 +69,7 @@
 [INFO] Number of split blocks = 9713
 [INFO] Number of blocks (after) = 114723
 [INFO] Size of the partition BDD (after) = 357372
-[INFO] Time needed for this iteration = 982.48 s
+[INFO] Time needed for this iteration = 989.33 s
 
 [INFO] Starting iteration 7
 [INFO] Number of blocks (before) = 114723
@@ -78,7 +78,7 @@
 [INFO] Number of split blocks = 4085
 [INFO] Number of blocks (after) = 119555
 [INFO] Size of the partition BDD (after) = 370889
-[INFO] Time needed for this iteration = 429.15 s
+[INFO] Time needed for this iteration = 428.15 s
 
 [INFO] Starting iteration 8
 [INFO] Number of blocks (before) = 119555
@@ -87,7 +87,7 @@
 [INFO] Number of split blocks = 2111
 [INFO] Number of blocks (after) = 121847
 [INFO] Size of the partition BDD (after) = 377453
-[INFO] Time needed for this iteration = 146.56 s
+[INFO] Time needed for this iteration = 147.21 s
 
 [INFO] Starting iteration 9
 [INFO] Number of blocks (before) = 121847
@@ -96,7 +96,7 @@
 [INFO] Number of split blocks = 973
 [INFO] Number of blocks (after) = 122845
 [INFO] Size of the partition BDD (after) = 380362
-[INFO] Time needed for this iteration = 70.1 s
+[INFO] Time needed for this iteration = 70.31 s
 
 [INFO] Starting iteration 10
 [INFO] Number of blocks (before) = 122845
@@ -105,7 +105,7 @@
 [INFO] Number of split blocks = 225
 [INFO] Number of blocks (after) = 123070
 [INFO] Size of the partition BDD (after) = 381037
-[INFO] Time needed for this iteration = 30.96 s
+[INFO] Time needed for this iteration = 31.1 s
 
 [INFO] Starting iteration 11
 [INFO] Number of blocks (before) = 123070
@@ -114,7 +114,7 @@
 [INFO] Number of split blocks = 0
 [INFO] Number of blocks (after) = 123070
 [INFO] Size of the partition BDD (after) = 381037
-[INFO] Time needed for this iteration = 4.8 s
+[INFO] Time needed for this iteration = 4.6 s
 
 [INFO] Number of refined blocks = 191273
 [INFO] Number of potentially refined blocks = 795124
@@ -122,4 +122,14 @@
 [INFO] Potential refinements per block = 6.46075
 
 [INFO] Performing the postprocessing step ... finished
-[INFO] Extracting the quotient ...Quotient optimization enabled.
+
+[INFO] Number of iterations =                                        11
+[INFO] Number of states (after min.) =                        4294967296
+[INFO] Number of nodes of the transition BDD (after min.) =        5763
+[INFO] Number of transitions (after min.) =                   41055336960
+[INFO] Node peak =                                              3419612
+[INFO] Time for computing the bisimulation relation =           3136.13 s
+[INFO] Time for extracting the quotient system =                   0.00 s
+[INFO] Time for parsing and preprocessing =                        1.47 s
+[INFO] Total time needed for minimization =                     3137.60 s
+

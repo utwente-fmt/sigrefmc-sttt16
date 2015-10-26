@@ -13,3 +13,9 @@ Number of transitions before minimization: 601295421441
 
   Iteration 1 finished, 72 blocks generated.
   Iteration 2 finished, 336 blocks generated.
+  Iteration 3 finished, 336 blocks generated.
+[INFO] Number of iterations: 3
+[INFO] Final number of blocks: 336
+[INFO] Time for refinement: 2155.17 s
+[INFO] Memory used: 115.375 MB
+[INFO] Maximal number of live nodes: 1674847

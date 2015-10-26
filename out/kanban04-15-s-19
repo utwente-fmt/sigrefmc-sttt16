@@ -1,0 +1,57 @@
+[INFO] Input file = models/kanban04.xlts
+[INFO] Searching the input file ... finished.
+[INFO] Creating BDD variables ... finished.
+[INFO] Building BDDs ... finished.
+[INFO] Changing the variable order for refinement ... finished.
+[INFO] System is an LTS.
+[INFO] Number of states (before min.) =                        16777216
+[INFO] Number of initial states =                                     0
+[INFO] Number of transitions (before min.) =                   74424320
+[INFO] Number of nodes of the transition BDD (before min.) =       1234
+[INFO] Size of the initial partition  =                               1
+[INFO] Using Strong Bisimulation
+[INFO] Converting the initial partition ... finished.
+[INFO] Number of state variables: 24
+[INFO] Number of action variables: 5
+[INFO] Number of block number variables: 24
+[INFO] Performing the preprocessing step ... finished.
+[INFO] Starting refinement ... 
+
+Time 0: Iteration 1 finished. 128 blocks created.
+Time 0.08: Iteration 2 finished. 2386 blocks created.
+Time 0.71: Iteration 3 finished. 14340 blocks created.
+Time 4.45: Iteration 4 finished. 46485 blocks created.
+Time 15.4: Iteration 5 finished. 116859 blocks created.
+Time 38.15: Iteration 6 finished. 226522 blocks created.
+Time 76.39: Iteration 7 finished. 352716 blocks created.
+Time 127.49: Iteration 8 finished. 480435 blocks created.
+Time 191.91: Iteration 9 finished. 591900 blocks created.
+Time 269.14: Iteration 10 finished. 671116 blocks created.
+Time 338.89: Iteration 11 finished. 718952 blocks created.
+Time 410.36: Iteration 12 finished. 744874 blocks created.
+Time 480.59: Iteration 13 finished. 758696 blocks created.
+Time 550.15: Iteration 14 finished. 766645 blocks created.
+Time 620.66: Iteration 15 finished. 771609 blocks created.
+Time 691.69: Iteration 16 finished. 774707 blocks created.
+Time 762.33: Iteration 17 finished. 776455 blocks created.
+Time 833.57: Iteration 18 finished. 777544 blocks created.
+Time 905.01: Iteration 19 finished. 778100 blocks created.
+Time 976.29: Iteration 20 finished. 778386 blocks created.
+Time 1047.81: Iteration 21 finished. 778468 blocks created.
+Time 1119.6: Iteration 22 finished. 778481 blocks created.
+Time 1190.98: Iteration 23 finished. 778484 blocks created.
+Time 1262.19: Iteration 24 finished. 778485 blocks created.
+Time 1332.91: Iteration 25 finished. 778485 blocks created.
+
+[INFO] Performing the postprocessing step ... finished.
+
+[INFO] Number of iterations =                                        25
+[INFO] Number of states (after min.) =                         16777216
+[INFO] Number of nodes of the transition BDD (after min.) =        1234
+[INFO] Number of transitions (after min.) =                    74424320
+[INFO] Node peak =                                             23275028
+[INFO] Time for computing the bisimulation relation =           1332.91 s
+[INFO] Time for extracting the quotient system =                   0.00 s
+[INFO] Time for parsing and preprocessing =                        0.60 s
+[INFO] Total time needed for minimization =                     1333.51 s
+

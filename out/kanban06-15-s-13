@@ -17,10 +17,11 @@
 [INFO] Performing the preprocessing step ... finished.
 [INFO] Starting refinement ... 
 
- Iteration 1 finished. 128 blocks created.
- Iteration 2 finished. 3679 blocks created.
- Iteration 3 finished. 42520 blocks created.
- Iteration 4 finished. 222402 blocks created.
- Iteration 5 finished. 773583 blocks created.
- Iteration 6 finished. 2107575 blocks created.
- Iteration 7 finished. 4280385 blocks created.
+Time 0.01: Iteration 1 finished. 128 blocks created.
+Time 0.18: Iteration 2 finished. 3679 blocks created.
+Time 2.81: Iteration 3 finished. 42520 blocks created.
+Time 27.28: Iteration 4 finished. 222402 blocks created.
+Time 127.58: Iteration 5 finished. 773583 blocks created.
+Time 451.94: Iteration 6 finished. 2107575 blocks created.
+Time 1210.21: Iteration 7 finished. 4280385 blocks created.
+Time 2525.63: Iteration 8 finished. 7091884 blocks created.

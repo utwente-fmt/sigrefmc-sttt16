@@ -17,31 +17,41 @@
 [INFO] Performing the preprocessing step ... finished.
 [INFO] Starting refinement ... 
 
- Iteration 1 finished. 128 blocks created.
- Iteration 2 finished. 2386 blocks created.
- Iteration 3 finished. 14340 blocks created.
- Iteration 4 finished. 46485 blocks created.
- Iteration 5 finished. 116859 blocks created.
- Iteration 6 finished. 226522 blocks created.
- Iteration 7 finished. 352716 blocks created.
- Iteration 8 finished. 480435 blocks created.
- Iteration 9 finished. 591900 blocks created.
- Iteration 10 finished. 671116 blocks created.
- Iteration 11 finished. 718952 blocks created.
- Iteration 12 finished. 744874 blocks created.
- Iteration 13 finished. 758696 blocks created.
- Iteration 14 finished. 766645 blocks created.
- Iteration 15 finished. 771609 blocks created.
- Iteration 16 finished. 774707 blocks created.
- Iteration 17 finished. 776455 blocks created.
- Iteration 18 finished. 777544 blocks created.
- Iteration 19 finished. 778100 blocks created.
- Iteration 20 finished. 778386 blocks created.
- Iteration 21 finished. 778468 blocks created.
- Iteration 22 finished. 778481 blocks created.
- Iteration 23 finished. 778484 blocks created.
- Iteration 24 finished. 778485 blocks created.
- Iteration 25 finished. 778485 blocks created.
+Time 0: Iteration 1 finished. 128 blocks created.
+Time 0.07: Iteration 2 finished. 2386 blocks created.
+Time 0.7: Iteration 3 finished. 14340 blocks created.
+Time 3.9: Iteration 4 finished. 46485 blocks created.
+Time 13.84: Iteration 5 finished. 116859 blocks created.
+Time 35.86: Iteration 6 finished. 226522 blocks created.
+Time 74.38: Iteration 7 finished. 352716 blocks created.
+Time 127.55: Iteration 8 finished. 480435 blocks created.
+Time 191.91: Iteration 9 finished. 591900 blocks created.
+Time 268.93: Iteration 10 finished. 671116 blocks created.
+Time 340.7: Iteration 11 finished. 718952 blocks created.
+Time 411.93: Iteration 12 finished. 744874 blocks created.
+Time 482.06: Iteration 13 finished. 758696 blocks created.
+Time 551.84: Iteration 14 finished. 766645 blocks created.
+Time 622.43: Iteration 15 finished. 771609 blocks created.
+Time 693.51: Iteration 16 finished. 774707 blocks created.
+Time 764.49: Iteration 17 finished. 776455 blocks created.
+Time 835.82: Iteration 18 finished. 777544 blocks created.
+Time 907.33: Iteration 19 finished. 778100 blocks created.
+Time 978.51: Iteration 20 finished. 778386 blocks created.
+Time 1053.85: Iteration 21 finished. 778468 blocks created.
+Time 1158.03: Iteration 22 finished. 778481 blocks created.
+Time 1236.36: Iteration 23 finished. 778484 blocks created.
+Time 1307.7: Iteration 24 finished. 778485 blocks created.
+Time 1379.02: Iteration 25 finished. 778485 blocks created.
 
 [INFO] Performing the postprocessing step ... finished.
-[INFO] Extracting the quotient ...Quotient optimization enabled.
+
+[INFO] Number of iterations =                                        25
+[INFO] Number of states (after min.) =                         16777216
+[INFO] Number of nodes of the transition BDD (after min.) =        1234
+[INFO] Number of transitions (after min.) =                    74424320
+[INFO] Node peak =                                             23274006
+[INFO] Time for computing the bisimulation relation =           1379.02 s
+[INFO] Time for extracting the quotient system =                   0.00 s
+[INFO] Time for parsing and preprocessing =                        0.60 s
+[INFO] Total time needed for minimization =                     1379.62 s
+

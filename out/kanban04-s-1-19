@@ -1,0 +1,42 @@
+Initializing Lace, 8 nodes, 48 cores, 48 logical processors, 1 workers.
+Lace startup, creating 1 worker threads with program stack 8388608 bytes.
+[    0.66] Finished reading system from models/kanban04.xlts.
+[    0.66] Number of state variables: 24.
+[    0.66] Number of action variables: 5.
+[    0.66] Number of block variables: 25.
+[    0.66] Number of transition relations: 1.
+[    0.66] Extending transition relations to full domain.
+[    0.66] Number of transitions: 74,424,320 transitions.
+[    0.66] Initial partition: 16,020,316 states in 1 block(s).
+[    0.67] After iteration 1: 128 blocks.
+[    0.70] After iteration 2: 2,386 blocks.
+[    0.97] After iteration 3: 14,340 blocks.
+[    2.16] After iteration 4: 46,485 blocks.
+[    5.68] After iteration 5: 116,859 blocks.
+[   13.39] After iteration 6: 226,522 blocks.
+[   26.39] After iteration 7: 352,716 blocks.
+[   46.89] After iteration 8: 480,435 blocks.
+[   47.68] (GC) Starting garbage collection...
+[   49.07] (GC) Garbage collection done.
+[   76.24] After iteration 9: 591,900 blocks.
+[   94.34] After iteration 10: 671,116 blocks.
+[  108.24] After iteration 11: 718,952 blocks.
+[  118.94] After iteration 12: 744,874 blocks.
+[  125.91] After iteration 13: 758,696 blocks.
+[  130.78] After iteration 14: 766,645 blocks.
+[  134.00] After iteration 15: 771,609 blocks.
+[  136.59] After iteration 16: 774,707 blocks.
+[  138.55] After iteration 17: 776,455 blocks.
+[  140.19] After iteration 18: 777,544 blocks.
+[  141.56] After iteration 19: 778,100 blocks.
+[  142.79] After iteration 20: 778,386 blocks.
+[  143.93] After iteration 21: 778,468 blocks.
+[  145.02] After iteration 22: 778,481 blocks.
+[  146.07] After iteration 23: 778,484 blocks.
+[  147.12] After iteration 24: 778,485 blocks.
+[  148.16] After iteration 25: 778,485 blocks.
+[  148.16] 
+[  148.16] Time for computing the bisimulation relation: 147.50 sec.
+[  148.16] Time needed for signature computation: 126.14 s.
+[  148.16] Time needed for partition refinement: 21.36 s.
+[  148.16] Current/Max RSS: 5,594,181,632 / 5,594,181,632 bytes.

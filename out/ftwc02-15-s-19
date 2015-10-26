@@ -1,0 +1,39 @@
+[INFO] Input file = models/ftwc02.ximc
+[INFO] Searching the input file ... finished.
+[INFO] Creating BDD variables ... finished.
+[INFO] Building BDDs ... finished.
+[INFO] Changing the variable order for refinement ... finished.
+[INFO] System is an IMC.
+[INFO] Number of states (before min.) =                           32768
+[INFO] Number of initial states =                                     1
+[INFO] Number of transitions (before min.) =                  101158440
+[INFO] Number of Markov transitions (before min.) =           169618430
+[INFO] Number of nodes of the transition BDD (before min.) =        382
+[INFO] Size of the initial partition  =                               1
+[INFO] Using Stochastic Strong Bisimulation
+[INFO] Converting the initial partition ... finished.
+[INFO] Number of state variables: 15
+[INFO] Number of action variables: 6
+[INFO] Number of block number variables: 15
+[INFO] Performing the preprocessing step ... making the IMC maximal-progress cut ... before: 7280after: 15079finished.
+[INFO] Starting refinement ... 
+
+Time 0.36: Iteration 1 finished. 2812 blocks created.
+Time 20.03: Iteration 2 finished. 29813 blocks created.
+Time 94.72: Iteration 3 finished. 32345 blocks created.
+Time 134.27: Iteration 4 finished. 32765 blocks created.
+Time 154.46: Iteration 5 finished. 32765 blocks created.
+
+[INFO] Performing the postprocessing step ... finished.
+
+[INFO] Number of iterations =                                         5
+[INFO] Number of states (after min.) =                            32768
+[INFO] Number of nodes of the transition BDD (after min.) =         382
+[INFO] Number of transitions (after min.) =                   101158440
+[INFO] Numer of Markov transitions (after min.) =              36528602
+[INFO] Node peak =                                             15740844
+[INFO] Time for computing the bisimulation relation =            154.46 s
+[INFO] Time for extracting the quotient system =                   0.00 s
+[INFO] Time for parsing and preprocessing =                        0.03 s
+[INFO] Total time needed for minimization =                      154.49 s
+

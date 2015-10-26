@@ -1,0 +1,135 @@
+[INFO] Input file = models/kanban09.xlts
+[INFO] Searching the input file ... finished.
+[INFO] Creating BDD variables ... finished.
+[INFO] Building BDDs ... finished.
+[INFO] Changing the variable order for refinement ... finished.
+[INFO] System is an LTS.
+[INFO] Number of states (before min.) =                       4294967296
+[INFO] Number of initial states =                                     0
+[INFO] Number of transitions (before min.) =                  41055336960
+[INFO] Number of nodes of the transition BDD (before min.) =       5763
+[INFO] Size of the initial partition  =                               1
+[INFO] Using Branching Bisimulation
+[INFO] Converting the initial partition ... finished.
+[INFO] Number of state variables: 32
+[INFO] Number of action variables: 5
+[INFO] Number of block number variables: 32
+[INFO] Performing the preprocessing step ... finished.
+[INFO] Using ordering heuristic NoBlockOrder.
+
+[INFO] Starting iteration 1
+[INFO] Number of blocks (before) = 1
+[INFO] Number of unstable blocks (before) = 1
+[INFO] Size of the partition BDD (before) = 33
+[INFO] Number of split blocks = 1
+[INFO] Number of blocks (after) = 64
+[INFO] Size of the partition BDD (after) = 1234
+[INFO] Time needed for this iteration = 0.02 s
+
+[INFO] Starting iteration 2
+[INFO] Number of blocks (before) = 64
+[INFO] Number of unstable blocks (before) = 64
+[INFO] Size of the partition BDD (before) = 1234
+[INFO] Number of split blocks = 63
+[INFO] Number of blocks (after) = 2658
+[INFO] Size of the partition BDD (after) = 14958
+[INFO] Time needed for this iteration = 2.83 s
+
+[INFO] Starting iteration 3
+[INFO] Number of blocks (before) = 2658
+[INFO] Number of unstable blocks (before) = 2657
+[INFO] Size of the partition BDD (before) = 14958
+[INFO] Number of split blocks = 2227
+[INFO] Number of blocks (after) = 26674
+[INFO] Size of the partition BDD (after) = 93617
+[INFO] Time needed for this iteration = 52.03 s
+
+[INFO] Starting iteration 4
+[INFO] Number of blocks (before) = 26674
+[INFO] Number of unstable blocks (before) = 26435
+[INFO] Size of the partition BDD (before) = 93617
+[INFO] Number of split blocks = 12432
+[INFO] Number of blocks (after) = 64441
+[INFO] Size of the partition BDD (after) = 209438
+[INFO] Time needed for this iteration = 462.2 s
+
+[INFO] Starting iteration 5
+[INFO] Number of blocks (before) = 64441
+[INFO] Number of unstable blocks (before) = 54361
+[INFO] Size of the partition BDD (before) = 209438
+[INFO] Number of split blocks = 18267
+[INFO] Number of blocks (after) = 99246
+[INFO] Size of the partition BDD (after) = 313124
+[INFO] Time needed for this iteration = 1003 s
+
+[INFO] Starting iteration 6
+[INFO] Number of blocks (before) = 99246
+[INFO] Number of unstable blocks (before) = 61129
+[INFO] Size of the partition BDD (before) = 313124
+[INFO] Number of split blocks = 9713
+[INFO] Number of blocks (after) = 114723
+[INFO] Size of the partition BDD (after) = 357372
+[INFO] Time needed for this iteration = 1043.09 s
+
+[INFO] Starting iteration 7
+[INFO] Number of blocks (before) = 114723
+[INFO] Number of unstable blocks (before) = 29382
+[INFO] Size of the partition BDD (before) = 357372
+[INFO] Number of split blocks = 4085
+[INFO] Number of blocks (after) = 119555
+[INFO] Size of the partition BDD (after) = 370889
+[INFO] Time needed for this iteration = 437.18 s
+
+[INFO] Starting iteration 8
+[INFO] Number of blocks (before) = 119555
+[INFO] Number of unstable blocks (before) = 9709
+[INFO] Size of the partition BDD (before) = 370889
+[INFO] Number of split blocks = 2111
+[INFO] Number of blocks (after) = 121847
+[INFO] Size of the partition BDD (after) = 377453
+[INFO] Time needed for this iteration = 146.04 s
+
+[INFO] Starting iteration 9
+[INFO] Number of blocks (before) = 121847
+[INFO] Number of unstable blocks (before) = 4880
+[INFO] Size of the partition BDD (before) = 377453
+[INFO] Number of split blocks = 973
+[INFO] Number of blocks (after) = 122845
+[INFO] Size of the partition BDD (after) = 380362
+[INFO] Time needed for this iteration = 69.44 s
+
+[INFO] Starting iteration 10
+[INFO] Number of blocks (before) = 122845
+[INFO] Number of unstable blocks (before) = 2219
+[INFO] Size of the partition BDD (before) = 380362
+[INFO] Number of split blocks = 225
+[INFO] Number of blocks (after) = 123070
+[INFO] Size of the partition BDD (after) = 381037
+[INFO] Time needed for this iteration = 30.77 s
+
+[INFO] Starting iteration 11
+[INFO] Number of blocks (before) = 123070
+[INFO] Number of unstable blocks (before) = 436
+[INFO] Size of the partition BDD (before) = 381037
+[INFO] Number of split blocks = 0
+[INFO] Number of blocks (after) = 123070
+[INFO] Size of the partition BDD (after) = 381037
+[INFO] Time needed for this iteration = 4.94 s
+
+[INFO] Number of refined blocks = 191273
+[INFO] Number of potentially refined blocks = 795124
+[INFO] Actual refinements per block = 1.55418
+[INFO] Potential refinements per block = 6.46075
+
+[INFO] Performing the postprocessing step ... finished
+
+[INFO] Number of iterations =                                        11
+[INFO] Number of states (after min.) =                        4294967296
+[INFO] Number of nodes of the transition BDD (after min.) =        5763
+[INFO] Number of transitions (after min.) =                   41055336960
+[INFO] Node peak =                                              3572912
+[INFO] Time for computing the bisimulation relation =           3252.20 s
+[INFO] Time for extracting the quotient system =                   0.00 s
+[INFO] Time for parsing and preprocessing =                        1.35 s
+[INFO] Total time needed for minimization =                     3253.55 s
+
