@@ -1,6 +1,6 @@
 SigrefMC experiments
 ====================
-This repository hosts the source code of the experimental section in the paper on [SigrefMC](https://github.com/utwente-fmt/sigrefmc) submitted to TACAS 2016.
+This repository hosts the source code of the experimental section in the paper on [SigrefMC](https://github.com/utwente-fmt/sigrefmc) submitted to STTT. This is an extended version of the paper published in TACAS 2016.
 
 You can contact the main author of SigrefMC at <t.vandijk@utwente.nl>.
 
@@ -31,44 +31,14 @@ The `exp.py` file runs the experiments and reports data.
 
 Experiments
 ===========
-To reproduce the results, start with a clean `out` directory and run:
+To reproduce the results, start with a clean `out-q` directory and run:
 
 ```
-exp.py run
+exp.py qrun
 ```
 
 To view the results of experiments and generate latex tables written to `results_*.tex`, run:
 
 ```
-exp.py report
-```
-
-The script runs the following commands for LTS strong bisimulation:
-```
-sigref --bisi=2 --verbosity=1 --infile=<model>
-sigrefmc -b 2 -w <workers> <model>
-```
-
-The script runs the following commands for LTS branching bisimulation:
-```
-sigref --bisi=1 --verbosity=1 --infile=<model>
-sigrefmc -b 1 -w <workers> <model>
-```
-
-The script runs the following commands for CTMC strong bisimulation:
-```
-sigref_gmp <model>
-sigrefmc -l fraction -w <workers> <model>
-
-```
-The script runs the following commands for IMC strong bisimulation:
-```
-sigref --bisi=2 --verbosity=1 --infile=<model>
-sigrefmc -b 2 -w <workers> <model>
-```
-
-The script runs the following commands for IMC branching bisimulation:
-```
-sigref --bisi=1 --verbosity=1 --infile=<model>
-sigrefmc -l floating -b 1 -w <workers> <model>
+exp.py qreport
 ```
