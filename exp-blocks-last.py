@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 from __future__ import print_function
-from contextlib import contextmanager
 import os
 import sys
 import re
@@ -14,14 +13,6 @@ from tabulate import tabulate
 # import framework
 from expfw import *
 
-@contextmanager
-def cd(newdir):
-    prevdir = os.getcwd()
-    os.chdir(os.path.expanduser(newdir))
-    try:
-        yield
-    finally:
-        os.chdir(prevdir)
 
 class ExperimentMC(Experiment):
     """
@@ -44,7 +35,7 @@ class ExperimentMC(Experiment):
         if len(s) == 1: res['tquot'] = float(s[0].replace(',',''))
         s = re.compile('New Markov transition relation: ([\d\.,]+) transitions, ([\d\.,]+) MTBDD nodes').findall(contents)
         if len(s) == 1: res['newmarkov'] = int(s[0][1].replace(',',''))
-        s = re.compile('New interactive transition relation: ([\d\.,inf]+) transitions, ([\d\.,]+) MTBDD nodes').findall(contents)
+        s = re.compile('New interactive transition relation: ([\d\.,]+) transitions, ([\d\.,]+) MTBDD nodes').findall(contents)
         if len(s) == 1: res['newtrans'] = int(s[0][1].replace(',',''))
         return res
 
@@ -322,19 +313,19 @@ class CTMCExperiments():
 class ExperimentCTMC_blocks1(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-w", str(workers), "-q", "block-s1"] + model
 
 
 class ExperimentCTMC_block(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-w", str(workers), "-q", "block"] + model
 
 
 class ExperimentCTMC_pick(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-w", str(workers), "-q", "pick"] + model
 
 
 class CTMCQExperiments(CTMCExperiments):
@@ -619,37 +610,37 @@ class LTSExperiments:
 class ExperimentLTS_s_blocks1(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-s-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "block-s1"] + model
 
 
 class ExperimentLTS_s_block(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-s-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "block"] + model
 
 
 class ExperimentLTS_s_pick(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-s-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "pick"] + model
 
 
 class ExperimentLTS_b_blocks1(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-b-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "block-s1"] + model
 
 
 class ExperimentLTS_b_block(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-b-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "block"] + model
 
 
 class ExperimentLTS_b_pick(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-b-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "pick"] + model
 
 
 class LTSQExperiments(LTSExperiments):
@@ -715,6 +706,9 @@ class LTSQExperiments(LTSExperiments):
         for d in dicts:
             results_for_d = [v for n, v in results if n == getattr(self, d)[name].name]
             r['n_'+d], r[d] = online_variance([v['tquot'] for v in results_for_d])[0:2]
+            r['t_'+d] = online_variance([v['time'] for v in results_for_d])[1]
+            r['sig_'+d] = online_variance([v['tsig'] for v in results_for_d])[1]
+            r['ref_'+d] = online_variance([v['tref'] for v in results_for_d])[1]
         # get new Markov size from single-worker instances AND CHECK THEY ARE SAME.
         results_for_s_b1 = [v for n, v in results if n == self.s_b1[name].name or n == self.s_bs1[name].name]
         count, r['s_bnodes'], check = online_variance([v['newtrans'] for v in results_for_s_b1])
@@ -729,235 +723,6 @@ class LTSQExperiments(LTSExperiments):
         count, r['b_pnodes'], check = online_variance([v['newtrans'] for v in results_for_b_p1])
         if count > 1: assert check == 0
         # get signature refinement times
-        dictsb1 = ["b_bs1", "b_b1", "b_p1"]
-        dictsb48 = ["b_bs48", "b_b48", "b_p48"]
-        dictss1 = ["s_bs1", "s_b1", "s_p1"]
-        dictss48 = ["s_bs48", "s_b48", "s_p48"]
-        timesb1 = []
-        timesb48 = []
-        timess1 = []
-        timess48 = []
-        for d in dictsb1: timesb1 += [v['time'] for n, v in results if n == getattr(self, d)[name].name]
-        for d in dictsb48: timesb48 += [v['time'] for n, v in results if n == getattr(self, d)[name].name]
-        for d in dictss1: timess1 += [v['time'] for n, v in results if n == getattr(self, d)[name].name]
-        for d in dictss48: timess48 += [v['time'] for n, v in results if n == getattr(self, d)[name].name]
-        r['time_b1'] = online_variance(timesb1)[1]
-        r['time_b48'] = online_variance(timesb48)[1]
-        r['time_s1'] = online_variance(timess1)[1]
-        r['time_s48'] = online_variance(timess48)[1]
-        return r
-
-    def analyse(self, results, timeouts):
-        data = {}
-        for name, fn in self.models:
-            data[name] = self.analyse_experiment(name, results, timeouts)
-        self.data = data
-        return data
-
-    def report(self, res=None):
-        if res is None: res = self.data
-
-        # Report #experiments
-        table = []
-        for name in sorted(res.keys()):
-            r = res[name]
-
-            if r['time_s48'] > 0: stimes = r['time_s1']/r['time_s48']
-            else: stimes = float('nan')
-
-            table.append([name+"-s",
-                          "{}".format(r['n_s_bs1']),
-                          "{}".format(r['n_s_bs48']),
-                          "{}".format(r['n_s_b1']),
-                          "{}".format(r['n_s_b48']),
-                          "{}".format(r['n_s_p1']),
-                          "{}".format(r['n_s_p48']),
-                          "{:<6.2f}".format(r['time_s1']),
-                          "{:<6.2f}".format(r['time_s48']),
-                          "{:<6.2f}".format(stimes),
-                          ])
-        for name in sorted(res.keys()):
-            r = res[name]
-
-            if r['time_b48'] > 0: stimes = r['time_b1']/r['time_b48']
-            else: stimes = float('nan')
-
-            table.append([name+"-b",
-                          "{}".format(r['n_b_bs1']),
-                          "{}".format(r['n_b_bs48']),
-                          "{}".format(r['n_b_b1']),
-                          "{}".format(r['n_b_b48']),
-                          "{}".format(r['n_b_p1']),
-                          "{}".format(r['n_b_p48']),
-                          "{:<6.2f}".format(r['time_b1']),
-                          "{:<6.2f}".format(r['time_b48']),
-                          "{:<6.2f}".format(stimes),
-                          ])
-        headers = ["Model      ", "#bs1", "#bs48", "#b1", "#_b48", "#p1", "#p48", "T1", "T48", "S"]
-        print(tabulate(table, headers))
-
-        print()
-
-        # Report times and MTBDD sizes
-        table = []
-        for name in sorted(res.keys()):
-            r = res[name]
-
-            if r['s_bs48'] > 0: s_sbs48 = r['s_bs1']/r['s_bs48']
-            else: s_sbs48 = float('nan')
-            if r['s_b48'] > 0: s_sb48 = r['s_b1']/r['s_b48']
-            else: s_sb48 = float('nan')
-            if r['s_p48'] > 0: s_sp48 = r['s_p1']/r['s_p48']
-            else: s_sp48 = float('nan')
-            if r['s_pnodes'] > 0: s_f = float(r['s_bnodes'])/r['s_pnodes']
-            else: s_f = float('nan')
-
-            table.append([name+"-s",
-                          "{:<6.2f}".format(r['s_bs1']),
-                          "{:<6.2f}".format(r['s_bs48']),
-                          "{:<6.2f}".format(s_sbs48),
-                          "{:<6.2f}".format(r['s_b1']),
-                          "{:<6.2f}".format(r['s_b48']),
-                          "{:<6.2f}".format(s_sb48),
-                          "{:<6.2f}".format(r['s_p1']),
-                          "{:<6.2f}".format(r['s_p48']),
-                          "{:<6.2f}".format(s_sp48),
-                          "{}".format(float_str(r['s_bnodes'])),
-                          "{}".format(float_str(r['s_pnodes'])),
-                          "{:<6.2f}".format(s_f),
-                          ])
-
-        for name in sorted(res.keys()):
-            r = res[name]
-
-            if r['b_bs48'] > 0: b_sbs48 = r['b_bs1']/r['b_bs48']
-            else: b_sbs48 = float('nan')
-            if r['b_b48'] > 0: b_sb48 = r['b_b1']/r['b_b48']
-            else: b_sb48 = float('nan')
-            if r['b_p48'] > 0: b_sp48 = r['b_p1']/r['b_p48']
-            else: b_sp48 = float('nan')
-            if r['b_pnodes'] > 0: b_f = float(r['b_bnodes'])/r['b_pnodes']
-            else: b_f = float('nan')
-
-            table.append([name+"-b",
-                          "{:<6.2f}".format(r['b_bs1']),
-                          "{:<6.2f}".format(r['b_bs48']),
-                          "{:<6.2f}".format(b_sbs48),
-                          "{:<6.2f}".format(r['b_b1']),
-                          "{:<6.2f}".format(r['b_b48']),
-                          "{:<6.2f}".format(b_sb48),
-                          "{:<6.2f}".format(r['b_p1']),
-                          "{:<6.2f}".format(r['b_p48']),
-                          "{:<6.2f}".format(b_sp48),
-                          "{}".format(float_str(r['b_bnodes'])),
-                          "{}".format(float_str(r['b_pnodes'])),
-                          "{:<6.2f}".format(b_f),
-                          ])
-
-        headers = ["Model      ", "T_bs1", "T_bs48", "Sbs", "T_b1", "T_b48", "Sb", "T_p1", "T_p48", "Sp", "B", "P", "f"]
-        print(tabulate(table, headers))
-
-class ExperimentBDD_s_blocks1(ExperimentMCQ):
-    def __init__(self, name, workers, model):
-        self.name = "{}-s-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
-
-
-class ExperimentBDD_s_block(ExperimentMCQ):
-    def __init__(self, name, workers, model):
-        self.name = "{}-s-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block"] + model
-
-
-class ExperimentBDD_s_pick(ExperimentMCQ):
-    def __init__(self, name, workers, model):
-        self.name = "{}-s-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
-
-
-class ExperimentBDD_b_blocks1(ExperimentMCQ):
-    def __init__(self, name, workers, model):
-        self.name = "{}-b-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
-
-
-class ExperimentBDD_b_block(ExperimentMCQ):
-    def __init__(self, name, workers, model):
-        self.name = "{}-b-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block"] + model
-
-
-class ExperimentBDD_b_pick(ExperimentMCQ):
-    def __init__(self, name, workers, model):
-        self.name = "{}-b-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
-
-
-class BDDQExperiments(object):
-    def __init__(self):
-        # block standard 1,48
-        self.s_bs1 = {}
-        self.s_bs48 = {}
-        self.b_bs1 = {}
-        self.b_bs48 = {}
-        # block custom 1,48
-        self.s_b1 = {}
-        self.s_b48 = {}
-        self.b_b1 = {}
-        self.b_b48 = {}
-        # pick 1,48
-        self.s_p1 = {}
-        self.s_p48 = {}
-        self.b_p1 = {}
-        self.b_p48 = {}
-
-        # initialize self.models
-        with cd("models"):
-            files = list(filter(os.path.isfile, os.listdir(os.curdir)))
-        files = [f[:-len(".bdd")] for f in filter(lambda f: f.endswith(".bdd"), files)]
- 
-        self.models = tuple([m, ["models/{}.bdd".format(m)]] for m in files)
-
-        for m,a in self.models:
-            self.s_bs1[m]  = ExperimentBDD_s_blocks1(m, 1, a)
-            self.s_bs48[m] = ExperimentBDD_s_blocks1(m, 48, a)
-            self.s_b1[m]   = ExperimentBDD_s_block(m, 1, a)
-            self.s_b48[m]  = ExperimentBDD_s_block(m, 48, a)
-            self.s_p1[m]   = ExperimentBDD_s_pick(m, 1, a)
-            self.s_p48[m]  = ExperimentBDD_s_pick(m, 48, a)
-            self.b_bs1[m]  = ExperimentBDD_b_blocks1(m, 1, a)
-            self.b_bs48[m] = ExperimentBDD_b_blocks1(m, 48, a)
-            self.b_b1[m]   = ExperimentBDD_b_block(m, 1, a)
-            self.b_b48[m]  = ExperimentBDD_b_block(m, 48, a)
-            self.b_p1[m]   = ExperimentBDD_b_pick(m, 1, a)
-            self.b_p48[m]  = ExperimentBDD_b_pick(m, 48, a)
-
-    def __iter__(self):
-        dicts = ["s_bs1", "s_bs48", "s_b1", "s_b48", "s_p1", "s_p48", "b_bs1", "b_bs48", "b_b1", "b_b48", "b_p1", "b_p48"]
-        return itertools.chain(*(getattr(self, x).values() for x in dicts))
-
-    def analyse_experiment(self, name, results, timeouts):
-        r = {}
-        # compute (count,average) for all times
-        dicts = ["s_bs1", "s_bs48", "s_b1", "s_b48", "s_p1", "s_p48", "b_bs1", "b_bs48", "b_b1", "b_b48", "b_p1", "b_p48"]
-        for d in dicts:
-            results_for_d = [v for n, v in results if n == getattr(self, d)[name].name]
-            r['n_'+d], r[d] = online_variance([v['tquot'] for v in results_for_d])[0:2]
-        # get new Markov size from single-worker instances AND CHECK THEY ARE SAME.
-        print(name)
-        results_for_s_b1 = [v for n, v in results if n == self.s_b1[name].name or n == self.s_bs1[name].name]
-        count, r['s_bnodes'], check = online_variance([v['newtrans'] for v in results_for_s_b1])
-        if count > 1: assert check == 0
-        results_for_s_p1 = [v for n, v in results if n == self.s_p1[name].name]
-        count, r['s_pnodes'], check = online_variance([v['newtrans'] for v in results_for_s_p1])
-        if count > 1: assert check == 0
-        results_for_b_b1 = [v for n, v in results if n == self.b_b1[name].name or n == self.b_bs1[name].name]
-        count, r['b_bnodes'], check = online_variance([v['newtrans'] for v in results_for_b_b1])
-        if count > 1: assert check == 0
-        results_for_b_p1 = [v for n, v in results if n == self.b_p1[name].name]
-        count, r['b_pnodes'], check = online_variance([v['newtrans'] for v in results_for_b_p1])
-        if count > 1: assert check == 0
-        # get signature refinement time
         dictsb1 = ["b_bs1", "b_b1", "b_p1"]
         dictsb48 = ["b_bs48", "b_b48", "b_p48"]
         dictss1 = ["s_bs1", "s_b1", "s_p1"]
@@ -1243,37 +1008,37 @@ class IMCExperiments:
 class ExperimentIMC_s_blocks1(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-s-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "block-s1"] + model
 
 
 class ExperimentIMC_s_block(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-s-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "block"] + model
 
 
 class ExperimentIMC_s_pick(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-s-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "pick"] + model
 
 
 class ExperimentIMC_b_blocks1(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-b-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "block-s1"] + model
 
 
 class ExperimentIMC_b_block(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-b-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "block"] + model
 
 
 class ExperimentIMC_b_pick(ExperimentMCQ):
     def __init__(self, name, workers, model):
         self.name = "{}-b-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "pick"] + model
 
 
 class IMCQExperiments(IMCExperiments):
@@ -1462,13 +1227,11 @@ sr += imc
 ctmcq = CTMCQExperiments()
 ltsq = LTSQExperiments()
 imcq = IMCQExperiments()
-bddq = BDDQExperiments()
 
-q = ExperimentEngine(outdir='out-q', timeout=1200)
-q += ctmcq
+q = ExperimentEngine(outdir='out-q-blocks-last', timeout=3600)
+# q += ctmcq
 q += ltsq
-q += imcq
-q += bddq
+# q += imcq
 
 if __name__ == "__main__":
     # select engine
@@ -1479,6 +1242,7 @@ if __name__ == "__main__":
             sr.run_experiments()
         elif sys.argv[1] == 'qrun':
             q.run_experiments()
+            pass
         elif sys.argv[1] == 'report':
             n, no, results, timeouts = sr.get_results()
             ctmc.analyse(results, timeouts)
@@ -1504,12 +1268,9 @@ if __name__ == "__main__":
             ctmcq.analyse(results, timeouts)
             ltsq.analyse(results, timeouts)
             imcq.analyse(results, timeouts)
-            bddq.analyse(results, timeouts)
 
             ctmcq.report()
             print()
             ltsq.report()
             print()
             imcq.report()
-            print()
-            bddq.report()
