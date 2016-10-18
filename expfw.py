@@ -2,19 +2,16 @@
 from __future__ import print_function
 import os
 import sys
-import re
-from subprocess32 import call,TimeoutExpired
-import math
+from subprocess32 import call, TimeoutExpired
 import time
 import random
 import itertools
-from tabulate import tabulate
 
 
 class Experiment(object):
-    NOTDONE=0
-    DONE=1
-    TIMEOUT=2
+    NOTDONE = 0
+    DONE = 1
+    TIMEOUT = 2
 
     def __init__(self, name=None, call=None):
         self.name = name
@@ -25,7 +22,7 @@ class Experiment(object):
 
         Return None if not good, or a dict with the results otherwise.
         """
-        return None        
+        return None
 
     def parse_logfile(self, filename):
         """Parse the log file.
@@ -40,7 +37,7 @@ class Experiment(object):
                 return self.parse_log(handle.read())
         else:
             return None
-    
+
     def get_status(self, filename):
         """Obtain the status of the experiment.
 
@@ -127,9 +124,7 @@ class ExperimentEngine(object):
         """
         results = []
         timeouts = []
-        yes = 0
         no = 0
-        timeout = 0
 
         for i in itertools.count():
             stop = True
@@ -155,7 +150,6 @@ class ExperimentEngine(object):
                 e.run_experiment(self.timeout, "{}/{}-{}".format(self.outdir, e.name, i))
 
     def __iadd__(self, other):
-        import inspect
         if isinstance(other, Experiment):
             self.experiments.append(other)
             return self
@@ -164,7 +158,7 @@ class ExperimentEngine(object):
             return self
         elif hasattr(other, '__iter__'):
             for item in other:
-                self += item 
+                self += item
             return self
         else:
             return NotImplemented
@@ -178,16 +172,15 @@ def online_variance(data):
     for x in data:
         n = n + 1
         delta = x - mean
-        mean = mean + delta/n
-        M2 = M2 + delta*(x - mean)
+        mean = mean + delta / n
+        M2 = M2 + delta * (x - mean)
 
     if n < 1: return n, float('nan'), float('nan')
     if n < 2: return n, mean, float('nan')
 
-    variance = M2/(n - 1)
+    variance = M2 / (n - 1)
     return n, mean, variance
 
 
 def fixnan(table):
     return [['--' if s.strip() == 'nan' else s for s in row] for row in table]
-
