@@ -54,7 +54,7 @@ int tau_action = 0; // default: 0
 int ordering = 0; // 0 = s,t < a < B, 1 = s,t < B < a, default: 0
 int quotient_type = 0; // 0 = no quotient, 1 = standard operations, 2 = standard operations variant 2, 3 = custom operations, 4 = pick-random, 5 = test (generate explicit output file for each type except pick-random)
 int output_type = 0; // 0 = no output, 1 = explicit output, 2 = symbolic output
-const char *table_sizes = "22,27,21,26"; // default table sizes (powers of 2)
+const char *table_sizes = "26,31,25,30"; // default table sizes (powers of 2)
 
 /* argp configuration */
 static struct argp_option options[] =
@@ -242,6 +242,7 @@ VOID_TASK_1(main_lace, void*, arg)
     INFO("Initial nodes table and operation cache requires %s.", buf);
 
     sylvan_init_package(1LL<<tablesize, 1LL<<maxtablesize, 1LL<<cachesize, 1LL<<maxcachesize);
+    sylvan_set_granularity(3);
     sylvan_init_mtbdd();
     gmp_init();
     sylvan_gc_hook_pregc(TASK(gc_start));
