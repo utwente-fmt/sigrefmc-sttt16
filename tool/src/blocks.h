@@ -23,6 +23,7 @@
 extern "C" {
 #endif
 
+extern uint32_t block_base; // base for block variables
 extern int block_length; // number of block variables
 extern BDD block_variables;
 

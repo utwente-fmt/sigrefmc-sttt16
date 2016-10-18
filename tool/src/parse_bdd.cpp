@@ -15,11 +15,12 @@
  */
 
 #include <sylvan.h>
+#include <sigref.h>
 #include <parse_bdd.hpp>
 
-using namespace sylvan;
-
 namespace sigref {
+
+using namespace sylvan;
 
 BddLtsParser::BddLtsParser(const char* filename)
 {
@@ -117,12 +118,33 @@ BddLtsParser::BddLtsParser(const char* filename)
         lts.states = sylvan_true;
     }
 
+    int actions = 0;
+    if (fread(&actions, sizeof(int), 1, f) == 1) {
+        for (int i=0; i<actions; i++) {
+            uint32_t len;
+            if (fread(&len, sizeof(uint32_t), 1, f) != 1) {
+                fprintf(stderr, "Invalid file format.\n");
+                return;
+            }
+            char s[len+1];
+            s[len] = 0;
+            if (fread(s, sizeof(char), len, f) != len) {
+                fprintf(stderr, "Invalid file format.\n");
+            }
+            if (strcmp(s, "tau") == 0) {
+                tau_action = i;
+            }
+        }
+    }
+
     fclose(f);
 
     /* Compute tau from tau_action (default: 0) */
     int action_bits = sylvan_set_count(lts.varA.GetBDD());
     std::vector<uint8_t> tau_value;
-    for (int i=0; i<action_bits; i++) tau_value.push_back(0);
+    for (int i=0; i<action_bits; i++) {
+        tau_value.push_back(tau_action & (1LL<<(action_bits-i-1)) ? 1 : 0);
+    }
     lts.tau = Bdd::bddCube(lts.varA, tau_value);
 
     /* Default initial partition: just 1 block containing the reachable states */

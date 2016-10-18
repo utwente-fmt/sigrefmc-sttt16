@@ -2,13 +2,18 @@
  * Heavily modified version of Ralf Wimmer's XML parser
  */
 
+#include <algorithm> // for std::sort
+#include <cstddef> // to fix errors with gmp
 #include <iomanip>
 #include <boost/lexical_cast.hpp>
 #include "parse_xml.hpp"
-
-using namespace sylvan;
+#include <gmp.h>
+#include <sylvan_gmp.h>
+#include <sigref.h>
 
 namespace sigref {
+
+using namespace sylvan;
 
 /**
  * @brief Tests if an xml-node has a given attribute
@@ -49,7 +54,7 @@ readIntAttribute(const TiXmlNode* node, const char* att)
 /**
   \brief Reads the value of the given attribute of an xml-node and converts it to a double.
  */
-inline double
+inline Mtbdd
 readDoubleAttribute(const TiXmlNode* node, const char* att)
 {
     const std::string numberString = readStringAttribute(node, att);
@@ -58,35 +63,78 @@ readDoubleAttribute(const TiXmlNode* node, const char* att)
         if ((pos = numberString.find('/')) != std::string::npos) {
             const std::string numerator = numberString.substr(0,pos);
             const std::string denominator = numberString.substr(pos+1);
-            return boost::lexical_cast<double>(numerator)/boost::lexical_cast<double>(denominator);
+            double value = boost::lexical_cast<double>(numerator)/boost::lexical_cast<double>(denominator);
+            if (value == 0.0) return mtbdd_false;
+            return Mtbdd::doubleTerminal(value);
         } else {
-            return boost::lexical_cast<double>(numberString);
+            double value = boost::lexical_cast<double>(numberString);
+            if (value == 0.0) return mtbdd_false;
+            return Mtbdd::doubleTerminal(value);
         }
     } catch(boost::bad_lexical_cast&) {
         throw ParseError("[ERROR] String " + numberString + " is not a number");
     }
 }
 
-inline uint64_t
+inline Mtbdd
+readMPQAttribute(const TiXmlNode* node, const char* att)
+{
+    const std::string numberString = readStringAttribute(node, att);
+    mpq_t gmp_value;
+    mpq_init(gmp_value);
+    try {
+        size_t pos = 0;
+        if ((pos = numberString.find('.')) != std::string::npos) {
+            mpf_t f_value;
+            mpf_init(f_value);
+            mpf_set_str(f_value, numberString.c_str(), 10);
+            mpq_set_f(gmp_value, f_value);
+            mpf_clear(f_value);
+        } else {
+            mpq_set_str(gmp_value, numberString.c_str(), 10);
+        }
+        if (mpq_sgn(gmp_value) == 0) {
+            mpq_clear(gmp_value);
+            return mtbdd_false;
+        }
+        MTBDD res = mtbdd_gmp(gmp_value);
+        mpq_clear(gmp_value);
+        return res;
+    } catch(boost::bad_lexical_cast&) {
+        throw ParseError("[ERROR] String " + numberString + " is not a number");
+    }
+}
+
+inline Mtbdd
 readSimpleFractionAttribute(const TiXmlNode* node, const char* att)
 {
     const std::string numberString = readStringAttribute(node, att);
+
     try {
         size_t pos = 0;
         if ((pos = numberString.find('/')) != std::string::npos) {
             const std::string numerator = numberString.substr(0,pos);
             const std::string denominator = numberString.substr(pos+1);
-            return ((uint64_t)boost::lexical_cast<unsigned int>(numerator) << 32)|boost::lexical_cast<unsigned int>(denominator);
+
+            uint64_t num = ((uint64_t)boost::lexical_cast<unsigned int>(numerator));
+            uint64_t den = ((uint64_t)boost::lexical_cast<unsigned int>(denominator));
+            if (num == 0) return mtbdd_false;
+            if (num > 0xffffffff || den > 0xffffffff) throw ParseError("[ERROR] Fraction " + numberString + " does not fit in 32-bit integers");
+            return Mtbdd::fractionTerminal(num, den);
         } else if ((pos = numberString.find('.')) != std::string::npos) {
             const std::string before = numberString.substr(0,pos);
             const std::string after = numberString.substr(pos+1);
-            uint64_t nom = boost::lexical_cast<uint64_t>(before+after);
-            uint64_t denom = 1;
-            for (unsigned int i=0; i<after.length(); i++) denom *= 10;
-            if (nom > 0xffffffff || denom > 0xffffffff) throw ParseError("[ERROR] Fraction " + numberString + " does not fit in 32-bit integers");
-            return nom<<32 | denom;
+            uint64_t num = boost::lexical_cast<uint64_t>(before+after);
+            uint64_t den = 1;
+            for (unsigned int i=0; i<after.length(); i++) den *= 10;
+            if (num > 0xffffffff || den > 0xffffffff) throw ParseError("[ERROR] Fraction " + numberString + " does not fit in 32-bit integers");
+            if (num == 0) return mtbdd_false;
+            return Mtbdd::fractionTerminal(num, den);
         } else {
-            return ((uint64_t)boost::lexical_cast<unsigned int>(numberString) << 32)|1;
+            uint64_t num = (uint64_t)boost::lexical_cast<unsigned int>(numberString);
+            if (num == 0) return mtbdd_false;
+            if (num > 0xffffffff) throw ParseError("[ERROR] Fraction " + numberString + " does not fit in 32-bit integers");
+            return Mtbdd::fractionTerminal(num, 1);
         }
     } catch(boost::bad_lexical_cast&) {
         throw ParseError("[ERROR] String " + numberString + " is not a number, or x/y does not fit in 32-bit integers");
@@ -208,7 +256,9 @@ SystemParser::SystemParser(const char* filename, unsigned int verbosity, LeafTyp
             // Default value of tau: 0
             int action_bits = sylvan_set_count(varA.GetBDD());
             std::vector<uint8_t> tau_value;
-            for (int i=0; i<action_bits; i++) tau_value.push_back(0);
+            for (int i=0; i<action_bits; i++) {
+                tau_value.push_back(tau_action & (1LL<<(action_bits-i-1)) ? 1 : 0);
+            }
             tau = Bdd::bddCube(varA, tau_value);
         }
 
@@ -332,7 +382,9 @@ SystemParser::createVariables(TiXmlNode *varinfoNode) {
 Bdd
 SystemParser::nodeToBdd(const TiXmlNode *node)
 {
-    return nodeToMtbdd(node).BddStrictThreshold(0);
+    LACE_ME;
+    if (leaf_type == mpq_type) return gmp_strict_threshold_d(nodeToMtbdd(node).GetMTBDD(), 0);
+    else return nodeToMtbdd(node).BddStrictThreshold(0);
 }
 
 Mtbdd
@@ -341,13 +393,11 @@ SystemParser::nodeToMtbdd(const TiXmlNode* node)
     // Have we reached a leaf of the (MT)BDD?
     if (hasAttribute(node, "const_value")) {
         if (leaf_type == float_type) {
-            const double value = readDoubleAttribute(node, "const_value");
-            if (value == 0.0) return mtbdd_false;
-            return Mtbdd::doubleTerminal(value);
+            return readDoubleAttribute(node, "const_value");
         } else if (leaf_type == simple_fraction_type) {
-            const uint64_t value = readSimpleFractionAttribute(node, "const_value");
-            if (value>>32 == 0) return mtbdd_false;
-            return Mtbdd::fractionTerminal(value>>32, value&0xffffffff);
+            return readSimpleFractionAttribute(node, "const_value");
+        } else if (leaf_type == mpq_type) {
+            return readMPQAttribute(node, "const_value");
         }
     }
 
@@ -396,8 +446,13 @@ SystemParser::nodeToMtbdd(const TiXmlNode* node)
 
 Bdd
 SystemParser::computeStateSpace(const Bdd& transitions, const Mtbdd& markov_transitions) const {
+    LACE_ME;
+    Bdd markovs;
+    if (leaf_type == mpq_type) markovs = Bdd(gmp_strict_threshold_d(markov_transitions.GetMTBDD(), 0));
+    else markovs = markov_transitions.BddStrictThreshold(0);
+
     // Compute all transitions
-    const Bdd all_trans = transitions.ExistAbstract(varA) + markov_transitions.BddStrictThreshold(0.0);
+    const Bdd all_trans = transitions.ExistAbstract(varA) + markovs;
 
     // Take all transitions.
     Bdd states = Bdd::bddOne().RelNext(all_trans, varS*varT); // all "to" states

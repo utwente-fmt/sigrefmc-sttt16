@@ -15,20 +15,25 @@
  */
 
 #include <assert.h>
+#include <stddef.h>
 #include <sys/time.h>
 
 #include <sylvan.h>
+#include <sylvan_int.h>
 #include <sylvan_obj.hpp>
-#include <sylvan_common.h>
 
-#include <bisimulation.h>
+#include <bisimulation.hpp>
 #include <blocks.h>
 #include <getrss.h>
 #include <inert.h>
 #include <refine.h>
 #include <sigref.h>
-#include <sigref_util.h>
+#include <sigref_util.hpp>
+#include <sylvan_gmp.h>
 
+namespace sigref {
+
+using namespace sylvan;
 
 /**
  * Compute equivalent of functions a and b
@@ -64,7 +69,7 @@ TASK_4(MTBDD, equi, MTBDD, a, MTBDD, b, MTBDD, vars, MTBDD, neq)
     }
 
     MTBDD result;
-    if (cache_get(a|(300LL<<42), b, vars, &result)) return result;
+    if (cache_get3(CACHE_EQUI, a, b, vars, &result)) return result;
 
     MTBDD a0 = va == v ? mtbdd_getlow(a) : a;
     MTBDD a1 = va == v ? mtbdd_gethigh(a) : a;
@@ -79,7 +84,7 @@ TASK_4(MTBDD, equi, MTBDD, a, MTBDD, b, MTBDD, vars, MTBDD, neq)
     mtbdd_refs_pop(1);
     result = mtbdd_makenode(v, r0, r1);
 
-    cache_put(a|(300LL<<42), b, vars, result);
+    cache_put3(CACHE_EQUI, a, b, vars, result);
     return result;
 }
 
@@ -117,7 +122,7 @@ TASK_3(MTBDD, relprev, MTBDD, a, MTBDD, b, MTBDD, vars)
 
     /* Consult cache */
     MTBDD result;
-    if (cache_get(a | CACHE_BDD_RELPREV, b, vars, &result)) return result;
+    if (cache_get3(CACHE_BDD_RELPREV, a, b, vars, &result)) return result;
 
     /* Get s and t */
     uint32_t s = level & (~1);
@@ -175,7 +180,7 @@ TASK_3(MTBDD, relprev, MTBDD, a, MTBDD, b, MTBDD, vars)
     mtbdd_refs_pop(5);
     result = mtbdd_makenode(s, r0, r1);
 
-    cache_put(a | CACHE_BDD_RELPREV, b, vars, result);
+    cache_put3(CACHE_BDD_RELPREV, a, b, vars, result);
     return result;
 }
 
@@ -184,7 +189,7 @@ TASK_3(MTBDD, relprev, MTBDD, a, MTBDD, b, MTBDD, vars)
  * Implementation of strong IMC minimisation
  */
 
-VOID_TASK_IMPL_1(min_imc_strong, sigref::IMC&, imc)
+TASK_IMPL_1(BDD, min_imc_strong, IMC&, imc)
 {
     /* Gather data, prepare block variables and signatures array */
 
@@ -240,19 +245,22 @@ VOID_TASK_IMPL_1(min_imc_strong, sigref::IMC&, imc)
     size_t n_blocks = count_blocks();
 
     /* Write some information */
+
+    double n_states = sylvan_satcount(partition, sylvan_and(prime_variables, block_variables));
+    double markov_transitions_before = mtbdd_satcount(markov_relation, state_length*2);
+    double action_transitions_before = mtbdd_satcount(action_relation, state_length*2 + action_length);
+
     INFO("Number of state variables: %d.", state_length);
     INFO("Number of action variables: %d.", action_length);
     INFO("Number of block variables: %d.", block_length);
-
-    INFO("Number of Markovian transitions: %'0.0f", mtbdd_satcount(markov_relation, state_length*2));
-    INFO("Number of interactive transitions: %'0.0f", sylvan_satcount(action_relation, sta_variables));
+    INFO("Number of Markovian transitions: %'0.0f", markov_transitions_before);
+    INFO("Number of interactive transitions: %'0.0f", action_transitions_before);
 
     if (verbosity >= 2) {
         INFO("Markovian transition relation: %'zu MTBDD nodes.", mtbdd_nodecount(markov_relation));
         INFO("Interactive transition relation: %'zu BDD nodes.", mtbdd_nodecount(action_relation));
     }
 
-    double n_states = sylvan_satcount(partition, sylvan_and(prime_variables, block_variables));
     INFO("Initial partition: %'0.0f states in %zu block(s).", n_states, n_blocks);
 
     if (verbosity >= 2) {
@@ -297,11 +305,20 @@ VOID_TASK_IMPL_1(min_imc_strong, sigref::IMC&, imc)
 
     if (leaftype == 0) markov_relation = mtbdd_max(markov_relation, mtbdd_double(0));
     else if (leaftype == 1) markov_relation = mtbdd_max(markov_relation, mtbdd_fraction(0, 1));
+    else if (leaftype == 2) {
+        mpq_t m_zero;
+        mpq_init(m_zero);
+        mpq_set_ui(m_zero, 0, 1);
+        MTBDD zero = mtbdd_gmp(m_zero);
+        mpq_clear(m_zero);
+        markov_relation = gmp_max(markov_relation, zero);
+    }
 
     /* Apply maximal progress cut */
 
     INFO("Computing maximal-progress cut.");
-    markov_relation = mtbdd_times(markov_relation, sylvan_not(tau_states));
+    if (leaftype == 2) markov_relation = gmp_times(markov_relation, sylvan_not(tau_states));
+    else markov_relation = mtbdd_times(markov_relation, sylvan_not(tau_states));
 
     if (verbosity >= 1) {
         INFO("Number of Markovian transitions (mp): %'0.0f", mtbdd_satcount(markov_relation, state_length*2));
@@ -325,7 +342,9 @@ VOID_TASK_IMPL_1(min_imc_strong, sigref::IMC&, imc)
         double i1 = wctime();
 
         // compute strong signature
-        MTBDD signature = mtbdd_and_exists(markov_relation, partition, prime_variables);
+        MTBDD signature;
+        if (leaftype == 2) signature = gmp_and_exists(markov_relation, partition, prime_variables);
+        else signature = mtbdd_and_exists(markov_relation, partition, prime_variables);
 
         if (verbosity >= 2) {
             INFO("Calculated signature: %'zu BDD nodes. Assigning blocks...", mtbdd_nodecount(signature));
@@ -383,13 +402,24 @@ VOID_TASK_IMPL_1(min_imc_strong, sigref::IMC&, imc)
 
     INFO("");
     INFO("Time for computing the bisimulation relation: %'0.2f sec.", t2-t1);
-    INFO("Time needed for Markovian signature computation: %'0.2f s.", t_msig);
-    INFO("Time needed for Markovian partition refinement: %'0.2f s.", t_mref);
-    INFO("Time needed for interactive signature computation: %'0.2f s.", t_isig);
-    INFO("Time needed for interactive partition refinement: %'0.2f s.", t_iref);
+    INFO("Time for Markovian signature computation: %'0.2f s.", t_msig);
+    INFO("Time for Markovian partition refinement: %'0.2f s.", t_mref);
+    INFO("Time for interactive signature computation: %'0.2f s.", t_isig);
+    INFO("Time for interactive partition refinement: %'0.2f s.", t_iref);
+    INFO("");
     INFO("Number of iterations: %'zu.", iteration-1);
     INFO("Number of states before bisimulation minimisation: %'0.0f.", n_states);
     INFO("Number of blocks after bisimulation minimisation: %'zu.", n_blocks);
+
+    mtbdd_unprotect(&markov_relation); // markov_relation object might be changed
+    sylvan_deref(st_variables);
+    sylvan_deref(sta_variables);
+    sylvan_deref(ta_variables);
+    sylvan_unprotect(&partition);
+    sylvan_unprotect(&tau_transitions);
+    sylvan_unprotect(&tau_states);
+
+    return partition;
 }
 
 
@@ -397,7 +427,7 @@ VOID_TASK_IMPL_1(min_imc_strong, sigref::IMC&, imc)
  * Implementation of branching IMC minimisation
  */
 
-VOID_TASK_IMPL_1(min_imc_branching, sigref::IMC&, imc)
+TASK_IMPL_1(BDD, min_imc_branching, IMC&, imc)
 {
     /* Gather data, prepare block variables and signatures array */
 
@@ -454,19 +484,21 @@ VOID_TASK_IMPL_1(min_imc_branching, sigref::IMC&, imc)
 
     /* Write some information */
  
+    double n_states = sylvan_satcount(partition, sylvan_and(prime_variables, block_variables));
+    double markov_transitions_before = mtbdd_satcount(markov_relation, state_length*2);
+    double action_transitions_before = mtbdd_satcount(action_relation, state_length*2 + action_length);
+
     INFO("Number of state variables: %d.", state_length);
     INFO("Number of action variables: %d.", action_length);
     INFO("Number of block variables: %d.", block_length);
-
-    INFO("Number of Markovian transitions: %'0.0f", mtbdd_satcount(markov_relation, state_length*2));
-    INFO("Number of interactive transitions: %'0.0f", sylvan_satcount(action_relation, sta_variables));
+    INFO("Number of Markovian transitions: %'0.0f", markov_transitions_before);
+    INFO("Number of interactive transitions: %'0.0f", action_transitions_before);
 
     if (verbosity >= 2) {
         INFO("Markovian transition relation: %'zu MTBDD nodes.", mtbdd_nodecount(markov_relation));
         INFO("Interactive transition relation: %'zu BDD nodes.", mtbdd_nodecount(action_relation));
     }
 
-    double n_states = sylvan_satcount(partition, sylvan_and(prime_variables, block_variables));
     INFO("Initial partition: %'0.0f states in %zu block(s).", n_states, n_blocks);
 
     if (verbosity >= 2) {
@@ -511,11 +543,20 @@ VOID_TASK_IMPL_1(min_imc_branching, sigref::IMC&, imc)
 
     if (leaftype == 0) markov_relation = mtbdd_max(markov_relation, mtbdd_double(0));
     else if (leaftype == 1) markov_relation = mtbdd_max(markov_relation, mtbdd_fraction(0, 1));
+    else if (leaftype == 2) {
+        mpq_t m_zero;
+        mpq_init(m_zero);
+        mpq_set_ui(m_zero, 0, 1);
+        MTBDD zero = mtbdd_gmp(m_zero);
+        mpq_clear(m_zero);
+        markov_relation = gmp_max(markov_relation, zero);
+    }
 
     /* Apply maximal progress cut */
 
     INFO("Computing maximal-progress cut.");
-    markov_relation = mtbdd_times(markov_relation, sylvan_not(tau_states));
+    if (leaftype == 2) markov_relation = gmp_times(markov_relation, sylvan_not(tau_states));
+    else markov_relation = mtbdd_times(markov_relation, sylvan_not(tau_states));
 
     if (verbosity >= 1) {
         INFO("Number of Markovian transitions (mp): %'0.0f", mtbdd_satcount(markov_relation, state_length*2));
@@ -559,7 +600,9 @@ VOID_TASK_IMPL_1(min_imc_branching, sigref::IMC&, imc)
         // compute branching signature
         if (verbosity >= 1) INFO("Computing last step.");
 
-        MTBDD signature = mtbdd_and_exists(markov_relation, partition, prime_variables);
+        MTBDD signature;
+        if (leaftype == 2) signature = gmp_and_exists(markov_relation, partition, prime_variables);
+        else signature = mtbdd_and_exists(markov_relation, partition, prime_variables);
 
         if (verbosity >= 2) INFO("Signature: %'zu BDD nodes.", mtbdd_nodecount(signature));
 
@@ -697,11 +740,24 @@ VOID_TASK_IMPL_1(min_imc_branching, sigref::IMC&, imc)
 
     INFO("");
     INFO("Time for computing the bisimulation relation: %'0.2f sec.", t2-t1);
-    INFO("Time needed for Markovian signature computation: %'0.2f s.", t_msig);
-    INFO("Time needed for Markovian partition refinement: %'0.2f s.", t_mref);
-    INFO("Time needed for interactive signature computation: %'0.2f s.", t_isig);
-    INFO("Time needed for interactive partition refinement: %'0.2f s.", t_iref);
+    INFO("Time for Markovian signature computation: %'0.2f s.", t_msig);
+    INFO("Time for Markovian partition refinement: %'0.2f s.", t_mref);
+    INFO("Time for interactive signature computation: %'0.2f s.", t_isig);
+    INFO("Time for interactive partition refinement: %'0.2f s.", t_iref);
+    INFO("");
     INFO("Number of iterations: %'zu.", iteration-1);
     INFO("Number of states before bisimulation minimisation: %'0.0f.", n_states);
     INFO("Number of blocks after bisimulation minimisation: %'zu.", n_blocks);
+
+    mtbdd_unprotect(&markov_relation); // markov_relation object might be changed
+    sylvan_deref(st_variables);
+    sylvan_deref(sta_variables);
+    sylvan_deref(ta_variables);
+    sylvan_unprotect(&partition);
+    sylvan_unprotect(&tau_transitions);
+    sylvan_unprotect(&tau_states);
+
+    return partition;
+}
+
 }

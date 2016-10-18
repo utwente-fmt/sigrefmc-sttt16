@@ -1,0 +1,415 @@
+%!TEX root = main.tex
+
+This chapter contains a condensed version of several sections from~\cite{DBLP:conf/tacas/DijkP16}.
+
+\section{Bisimulation minimisation}
+
+One core challenge in model checking is the state space explosion problem.
+The space and time requirements of model checking
+increase exponentially with the size of the models.
+Bisimulation minimisation computes the smallest equivalent model (maximal bisimulation) under some notion of equivalence, which can significantly reduce the number of states.
+This technique is also used to abstract models from internal behavior, when only observable behavior is relevant.
+
+
+
+
+The maximal bisimulation of a model is typically computed using
+partition refinement.
+Starting with an initially coarse partition (e.g. all states are equivalent),
+the partition is refined until states in each equivalence class can no longer be distinguished.
+The result is the maximal bisimulation with respect to the initial partition.
+%
+%
+%
+Another well-known method to deal with very large state spaces is symbolic model checking, where sets of states are represented by their characteristic function, which is efficiently stored using  binary decision diagrams (BDDs).
+
+
+One particular application of symbolic bisimulation minimisation is as a bridge between symbolical models and explicit-state analysis algorithms.
+Such models can have very large state spaces that are efficiently encoded using BDDs.
+If the minimised model is sufficiently small, then it can be analyzed efficiently using explicit-state algorithms.
+The symbolic representation of the maximal bisimulation, when effective, often tends to be much larger than the original model.
+
+
+
+Blom and Orzan~\cite{DBLP:journals/entcs/BlomO03} introduced a signature-based method for partition refinement, which assigns states to equivalence classes according to a characterizing signature.
+This method easily extends to various types of bisimulation.
+Wimmer et al. \cite{DBLP:conf/glvlsi/WimmerHB07,DBLP:conf/atva/WimmerHHSB06} implemented symbolic bisimulation minimisation based on the signatures introduced by Blom.
+Their tool is called \textsc{Sigref} and their work is the basis for \textsc{SigrefMC}.
+
+
+To take advantage of computer systems with multiple processors,
+developing scalable parallel algorithms is the way forward.
+In~\cite{DBLP:conf/tacas/DijkP15}, 
+we implemented the multi-core BDD package Sylvan, applying parallelism to symbolic model checking.
+\textsc{SigrefMC} is based on Sylvan to implement multi-core signature-based symbolic partition refinement.
+
+
+
+\section{Definitions}
+
+We recall the basic definitions of partitions, of LTSs, of CTMCs, of IMCs, and of various bisimulations as in~\cite{DBLP:journals/entcs/BlomO03,DBLP:conf/fmco/HermannsK09,DBLP:conf/glvlsi/WimmerHB07,DBLP:conf/atva/WimmerHHSB06,atr16}.
+
+
+
+
+%\subsection{Partitions}
+
+\begin{definition}
+Given a set $S$, a partition $\pi$ of $S$ is a subset $\pi\subseteq 2^S$ such that
+$$\bigcup_{C\in \pi} C=S \qquad \text{and}\qquad \forall C,C'\in \pi\colon (C=C'\vee C\cap C'=\emptyset).$$
+\end{definition}
+
+If $\pi'$ and $\pi$ are two partitions, then $\pi'$ is a refinement of $\pi$, written $\pi'\refines \pi$, 
+%and $\pi$ is coarser than $\pi'$, written $\pi\refinedby \pi'$, 
+if each block of $\pi'$ is contained in a block of $\pi$.
+%
+%
+The elements of $\pi$ are called equivalence classes or blocks.
+%
+Each equivalence relation $\equiv$ is associated with a partition $\pi=S/\!\equiv$.
+In this paper, we use $\pi$ and $\equiv$ interchangeably.
+%
+
+
+
+%\subsection{Transition systems}
+
+\begin{definition}
+A labeled transition system (LTS) is a tuple $(S,\act,\rightarrow)$, consisting of a set of states $S$, a set of labels $\act$ that may contain the non-observable action $\tau$, and transitions $\rightarrow\,\subseteq S\times\act\times S$.
+\end{definition}
+
+We write $s\overset{a}\rightarrow t$ for $(s,a,t)\!\in\,\rightarrow$.
+and $s\!\stackrel{\tau}{\nrightarrow}$ when $s$ has no outgoing $\tau$-transitions.
+We use $\overset{a*}\rightarrow$ to denote the transitive reflexive closure of $\overset{a}\rightarrow$.
+Given an equivalence relation $\equiv$, we write $\smash{\stackrel[\raisebox{1ex}{$\scriptstyle\equiv$}]{a}{\rightarrow}}$ for $\overset{a}\rightarrow\!\cap\!\equiv$, i.e., transitions between equivalent states, called \emph{inert} transitions.
+We use $\smash{\stackrel[\raisebox{1ex}{$\scriptstyle\equiv$}]{a*}{\rightarrow}}$ 
+for the transitive reflexive closure of $\smash{\stackrel[\raisebox{1ex}{$\scriptstyle\equiv$}]{a}{\rightarrow}}$.
+
+
+
+\begin{definition}
+A continuous-time Markov chain (CTMC) is a tuple $(S,\Rightarrow)$, consisting of a set of states $S$ and Markovian transitions $\Rightarrow\,\subseteq S\times \mathbb{R}^{> 0}\times S$.
+%,and a labeling function $L\colon S\rightarrow 2^{AP}$, which assigns each state a set of atomic propositions from $AP$.
+\end{definition}
+
+
+We write $s\overset{\lambda}\Rightarrow t$ for $(s,\lambda,t)\!\in\,\Rightarrow$. The interpretation of %a Markovian transition 
+$s\overset{\lambda}\Rightarrow t$ is that the CTMC can switch from $s$ to $t$ within $d$ time units with probability $1\!-\!e^{-\lambda\cdot d}$.
+%
+For a state $s$, let $\textbf{R}(s)(s')=\sum\{\lambda\mid s\overset{\lambda}\Rightarrow s'\}$ be the rate to move from state $s$ to state $s'$,
+and let $\textbf{R}(s)(C)=\sum_{s'\in C} \textbf{R}(s)(s')$ be the cumulative rate to reach a set of states $C\subseteq S$ from state $s$.
+
+
+
+
+\begin{definition}
+An interactive Markov chain (IMC) is a tuple ($S,\act,\rightarrow,\Rightarrow)$, consisting of a set of states $S$, a set of labels $\act$ that may contain the non-observable action $\tau$, transitions $\rightarrow\,\subseteq S\times\act\times S$, and Markovian transitions $\Rightarrow\,\subseteq S\times\mathbb{R}^{> 0}\times S$. 
+\end{definition}
+
+An IMC basically combines the features of an LTS and a CTMC.
+%
+One feature of IMCs is the \emph{maximal progress assumption}.
+Internal interactive transitions, i.e. $\tau$-transitions, can be assumed to take place immediately, while the probability that a Markovian transition executes immediately is zero.
+Therefore, we may remove all Markovian transitions from states that have outgoing $\tau$-transitions: $s\stackrel{\tau}{\rightarrow}$ implies $\textbf{R}(s)(S)=0$.
+We call IMCs to which this operation has been applied \emph{maximal-progress-cut} (mp-cut) IMCs.
+
+
+
+
+
+%\subsection{Bisimulation}
+\label{sec:bisim_lit}
+
+\newcommand{\eqs}[0]{\ensuremath{\equiv_{S}}}
+\newcommand{\eqb}[0]{\ensuremath{\equiv_{B}}}
+%$\thicksim_s$
+
+%
+%A partition $\pi$ of $S$ is a subset $\pi\subseteq 2^S$ such that $\mathlarger{\bigcup}_{C\in\pi}C=S$ and $\forall C,C'\in\pi\colon C=C'\vee C\cap C'=\emptyset$.
+%
+%
+%
+%Every equivalence relation $\mathcal{R}$ corresponds to a partition $\pi$.
+%In the context of bisimulation, the equivalence classes are called {\em blocks}.
+%We write $\pi(s)$ to denote the block containing $s$ and 
+%$\pi(s,t)$ as shorthand for $\pi(s)=\pi(t)$, i.e., $\mathcal{R}(s,t)$.
+%Unless otherwise stated,
+%we use $\mathcal{R}$ and $\pi$ interchangeably.
+
+%\td{Perhaps modify use of $\mathcal{R}$ and $\pi$, since elsewhere we use $\equiv$ for equivalence relations}
+
+For LTSs, strong and branching bisimulation are typically defined as follows:
+
+\begin{definition}%[strong bisimulation]
+\label{def:stronglts}
+An equivalence relation $\eqs$ is a strong bisimulation on an LTS if for all states $s,t,s'$ with $s\eqs t$ and for all $s\overset{a}\rightarrow s'$, there exists a state $t'$ with $t\overset{a}\rightarrow t'$ and $s'\eqs t'$.
+\end{definition}
+
+\begin{definition}%[branching bisimulation]
+\label{def:branchinglts}
+An equivalence relation $\eqb$ is a branching bisimulation on an LTS if for all states $s,t,s'$ with $s\eqb t$ and for all $s\overset{a}\rightarrow s'$, either
+\begin{compactitem}
+\item $a=\tau$ and $s'\eqb t$, or
+\item there exist states $t',t''$ with $t\overset{\tau*}\rightarrow t'\overset{a}\rightarrow t''$ and $t\eqb t'$ and $s'\eqb t''$.
+\end{compactitem}
+\end{definition}
+
+For CTMCs, strong bisimulation is defined as follows:
+
+\begin{definition}
+\label{def:strongctmc}
+An equivalence relation $\eqs$ is a strong bisimulation on a CTMC if for all $(s,t)\in\;\eqs$ and for all classes $C\in S/\!\eqs$, $\textbf{R}(s)(C)=\textbf{R}(t)(C)$.
+\end{definition}
+
+For mp-cut IMCs, strong and branching bisimulation are defined as follows:
+
+%\begin{definition}
+%An equivalence relation $\eqs$ is a strong bisimulation on an IMC if for all $(s,t)\in\eqs$ and for all equivalence classes $C$, the following holds:
+%\begin{compactitem}
+%\item $s\overset{a}\rightarrow s'$ implies $t\overset{a}\rightarrow t'$ for a $t'\in S$ with $s'\eqs t'$
+%\item $s\stackrel{\tau}{\nrightarrow}$ implies $\textbf{R}(s)(C)=\textbf{R}(t)(C)$
+%\end{compactitem}
+%\end{definition}
+%
+%\begin{definition}
+%An equivalence relation $\eqb$ is a branching bisimulation on an IMC if for all $(s,t)\in\eqb$ and for all equivalence classes $C$, the following holds:
+%\begin{compactitem}
+%\item $s\overset{a}\rightarrow s'$ implies
+%\begin{compactitem}
+%\item $a=\tau$ and $s'\eqb t$, or
+%\item there are $t',t''\in S$ with $t {\stackrel[\raisebox{1ex}{$\scriptstyle\eqb$}]{\tau*}{\rightarrow}} t'\overset{a}\rightarrow t''$ and  $s'\eqb t''$.
+%\end{compactitem}
+%\item $s\stackrel{\tau}{\nrightarrow}$ implies $\exists t'\in S\colon t \smash{\stackrel[\raisebox{1ex}{$\scriptstyle\eqb$}]{\tau*}{\rightarrow}} t'\stackrel{\tau}{\nrightarrow}\wedge\;\textbf{R}(s)(C)=\textbf{R}(t')(C)$
+%\end{compactitem}
+%\end{definition}
+
+
+
+%For an mp-cut IMC, $s\stackrel{\tau}{\rightarrow}$ implies $\textbf{R}(s)=0$.
+%\cite{atr16} defines and proves:
+
+\begin{definition}
+\label{def:strongimc}
+An equivalence relation $\eqs$ is a strong bisimulation on an mp-cut IMC if for all $(s,t)\in\eqs$ and for all classes $C\in S/\!\eqs$
+\begin{compactitem}
+%\item $s\overset{a}\rightarrow s'$ for some $s'$ implies $t\overset{a}\rightarrow t'$ for some $t'\in S$ with $(s',t')\in\,\eqs$
+\item $s\overset{a}\rightarrow s'$ for some $s'\in C$ implies $t\overset{a}\rightarrow t'$ for some $t'\in C$
+\item $\textbf{R}(s)(C)=\textbf{R}(t)(C)$
+\end{compactitem}
+\end{definition}
+
+\begin{definition}
+\label{def:branchingimc}
+An equivalence relation $\eqb$ is a branching bisimulation on an mp-cut IMC if for all $(s,t)\in\eqb$ and for all classes $C\in S/\!\eqb$
+\begin{compactitem}
+\item $s\overset{a}\rightarrow s'$ for some $s'\in C$ implies
+\begin{compactitem}
+\item $a=\tau$ and $(s,s')\in\,\eqb$, or
+\item there exist states $t',t''\in S$ with $t \overset{\tau*}{\rightarrow} t'\overset{a}\rightarrow t''$ and $(t,t')\in\,\eqb$ and $t''\in C$.
+\end{compactitem}
+\item $\textbf{R}(s)(C)>0$ implies
+\begin{compactitem}
+\item $\textbf{R}(s)(C)=\textbf{R}(t')(C)$ for some $t'\in S$ such that $t \overset{\tau*}{\rightarrow} t'\!\stackrel{\tau}{\nrightarrow}$ and $(t,t')\in\,\eqb$.
+\end{compactitem}
+\item $s\!\stackrel{\tau}{\nrightarrow}$ implies $t\overset{\tau*}{\rightarrow} t'\!\stackrel{\tau}{\nrightarrow}$ for some $t'$
+\end{compactitem}
+\end{definition}
+
+
+%Branching bisimulation for IMCs is \emph{divergence sensitive}.
+%If a state $s$ can do internal $\tau$-transitions to a state without internal $\tau$-transitions ($s\smash{\stackrel[\raisebox{1ex}{$\scriptstyle\eqb$}]{\tau*}{\rightarrow}\stackrel{\tau}{\nrightarrow}}$), it is said to be \emph{time-convergent}, otherwise it is \emph{time-divergent}.
+
+
+
+
+\section{Signature-based Bisimulation}
+\label{sec:sigref}
+
+%\subsection{Signature-based partition refinement}
+
+Blom and Orzan~\cite{DBLP:journals/entcs/BlomO03} introduced a signature-based approach to compute the maximal bisimulation of an LTS,
+which was further developed into a symbolic method by Wimmer et al.~\cite{DBLP:conf/atva/WimmerHHSB06}.
+%The signatures are the same as the signatures defined above.
+%
+%
+%In the literature, signature-based partition refinement is a well-known method to compute the maximal bisimulation of a system.
+Each state is characterized by a \emph{signature}, which is the same for all equivalent states in a bisimulation.
+These signatures are used to refine a partition of the state space until a fixed point is reached, which is the maximal bisimulation.
+
+%In the current paper, we generalize this approach
+%%by redefining bisimulation based on the associated signature 
+%and define a key property of the signature that causes partition refinement to result in the maximal bisimulation associated with that signature.
+
+In the literature, multiple signatures are sometimes used that together fully characterize states, for example based on the state labels, based on the rates of continous-time transitions, and based on the enabled interactive transitions.
+%
+%
+In the current paper, these multiple signatures are considered elements of a single signature that fully characterizes each state.
+
+\begin{definition}
+A signature $\sigma(\pi)(s)$ is a tuple of functions $f_i(\pi)(s)$, that together characterize each state $s$ with respect to a partition $\pi$.
+\end{definition}
+
+Two signatures $\sigma(\pi)(s)$ and $\sigma(\pi)(t)$ are equivalent, if and only if for all $f_i$, $f_i(\pi)(s)=f_i(\pi)(t)$.
+%
+%
+
+
+
+
+
+
+The signatures of five bisimulations from Section~\ref{sec:bisim_lit} are known from the literature.
+%
+%
+For all actions $a\in\act$ and equivalence classes $C\in \pi$, we define
+%
+%\begin{align*}
+%\textbf{T}({\pi})(s)&=\{(a,C)\mid \exists s'\in C\colon s\overset{a}\rightarrow s'\} \\
+%\textbf{B}({\pi})(s)&=\{(a,C)\mid\exists s'\in C\colon s\smash{\stackrel[\raisebox{1ex}{$\scriptstyle\equiv$}]{\tau*}{\rightarrow}}\overset{a}\rightarrow s' \wedge \neg(a=\tau\wedge s\in C)\} \\
+%\textbf{R}^s({\pi})(s)&=C\mapsto\textbf{R}(s)(C) \\
+%\textbf{R}^b({\pi})(s)&=C\mapsto\max(\{\textbf{R}(s')(C)\mid s\stackrel[\raisebox{1ex}{$\scriptstyle\equiv$}]{\tau*}{\rightarrow}s'\stackrel{\tau}{\nrightarrow}\})
+%\end{align*}
+%
+%
+%
+\begin{itemize}
+\def\arraystretch{1.1}
+\item $\textbf{T}({\pi})(s)=\{(a,C)\mid \exists s'\in C\colon s\overset{a}\rightarrow s'\}$
+\item $\textbf{B}({\pi})(s)=\{(a,C)\mid\exists s'\in C\colon s\smash\taustarpi\overset{a}\rightarrow s' \wedge \neg(a=\tau\wedge s\in C)\}$
+\item $\textbf{R}^s({\pi})(s)=C\mapsto\textbf{R}(s)(C)$
+\item $\textbf{R}^b({\pi})(s)=C\mapsto\max(\{\textbf{R}(s')(C)\mid \exists s'\colon s\smash\taustarpi s'\!\stackrel{\tau}{\nrightarrow}\})$
+%\item $\textbf{D}(\pi)(s)=\exists s'\colon s{\stackrel{\tau*}{\rightarrow}s'\stackrel{\tau}{\nrightarrow}}$
+\end{itemize}
+%
+%
+The five bisimulations are associated with the following signatures:
+%
+%The signatures for each type of bisimulation are as follows:
+%
+\begin{center}
+{
+%\noindent
+\def\arraystretch{1.1}
+%\setlength\tabcolsep{0.3em}
+%\setlength\tabcolsep{0em}
+\begin{tabular}{@{}p{70mm}p{25mm}@{}l@{}}
+Strong bisimulation for an LTS & $(\textbf{T})$ & \cite{DBLP:conf/atva/WimmerHHSB06} \\
+Branching bisimulation for an LTS & $(\textbf{B})$ & \cite{DBLP:conf/atva/WimmerHHSB06} \\
+Strong bisimulation for a CTMC & $(\textbf{R}^s)$ & \cite{DBLP:conf/mmb/WimmerB10} \\
+Strong bisimulation for an mp-cut IMC & $(\textbf{T}, \textbf{R}^s)$ & \cite{atr16} \\
+Branching bisimulation for an mp-cut IMC & $(\textbf{B}, \textbf{R}^b,s\smash{\stackrel{\tau*}{\rightarrow}\stackrel{\tau}{\nrightarrow}})$ & \cite{atr16} \\
+\end{tabular}
+}
+\end{center}
+
+%The function $\textbf{T}_{\eqs}(s)$ can be understood as describing the \emph{signature} or \emph{fingerprint} of state $s$ with respect to strong bisimulation, and $\textbf{B}_{\eqs}(s)$ with respect to branching bisimulation.
+Functions $\textbf{T}$ and $\textbf{B}$ assign to each state $s$ all actions $a$ and equivalence classes $C\in\pi$, such that state $s$ can reach $C$ by an action $a$ either directly ($\textbf{T}$) or via any number of inert $\tau$-steps ($\textbf{B}$).
+$\textbf{R}^s$ equals $\textbf{R}$ but with the domain restricted to the equivalence classes $C\in\pi$, and represents the cumulative rate with which state $s$ can go to states in $C$.
+%
+%
+$\textbf{R}^b$ equals $\textbf{R}^s$ for states $s\!\stackrel{\tau}{\nrightarrow}$, and takes the highest ``reachable rate'' for states with inert $\tau$-transitions.
+%
+In branching bisimulation for mp-cut IMCs, the ``highest reachable rate'' is by definition the rate that all states ${s\!\overset{\tau}{\nrightarrow}}$ in $C$ have.
+%
+The element $s\smash{\stackrel{\tau*}{\rightarrow}\stackrel{\tau}{\nrightarrow}}$ distinguishes time-convergent states from time-divergent states~\cite{atr16}, and is independent of the partition.
+%
+%
+%This is For branching bisimulation, all internal $\tau$-transitions that converge to a bisimilar state, converge to equivalent states (with the same Markovian rates), otherwise they would be external $\tau$-transitions.
+%See further below why computing the maximum is a correct approach.
+
+
+For the bisimulations of Definitions~\ref{def:stronglts}--\ref{def:branchingimc}, we state:
+
+\begin{lemma}
+\label{lem:parbi}
+A partition $\pi$ is a bisimulation, if and only if for all $s$ and $t$ that are equivalent in $\pi$, %$C\in\pi_B$, $\forall s,t\in C\colon  
+$\sigma(\pi)(s)=\sigma(\pi)(t)$.
+%all equivalent states 
+%have the same signature with respect to that equivalence relation.
+\end{lemma}
+
+For the above definitions it is fairly straightforward to prove that they are equivalent to the classical definitions of bisimulation.
+See e.g.~\cite{DBLP:journals/entcs/BlomO03,DBLP:conf/atva/WimmerHHSB06} for the bisimulations on LTSs and~\cite{atr16} for the bisimulations on IMCs.
+
+
+
+
+
+
+
+\section{Partition refinement}
+The definition of signature-based partition refinement is as follows.
+
+\begin{definition}[Partition refinement with full signatures]
+\label{def:sigrefpi}
+%Bisimulation via signature refinement:
+\setlength{\abovedisplayskip}{0.4em}
+\setlength{\belowdisplayskip}{0pt}
+\begin{align*}
+\sigref(\pi,\sig) \defeq\, & \{\{t\in S\mid \sig(\pi)(s) = \sig(\pi)(t)\}\mid s\in S\} \\
+\pi^0 \defeq\, & \{S\} \\
+\pi^{n+1} \defeq\, & \sigref(\pi^n, \sig) \\
+%\pi^{\infty} \defeq\, & \pi \colon \sigref(\pi, \sig)=\pi \\
+%\pi^0 \defeq\, & \{S\} \\
+%\pi^{n+1} \defeq\, & \{\{t\in S\mid \sig(\pi^n)(s) = \sig(\pi^n)(t)\}\mid s\in S\}
+\end{align*}
+\end{definition}
+%% fix double line after align*+definition
+\vspace{-1.5em}
+
+The algorithm iteratively refines the initial coarsest partition $\{S\}$ according to the signatures of the states, until some fixed point $\pi^{n+1}=\pi^{n}$ is obtained.
+%
+This fixed point is the maximal bisimulation for ``monotone signatures'':
+
+\begin{definition}
+%A signature $\sig$ is monotone if
+%$\forall \pi'\sqsupseteq \pi\colon \forall s,t\in S\colon \sig(\pi')(s)=\sig(\pi')(t) \implies \sig(\pi)(s)=\sig(\pi)(t)$.
+A signature is monotone if for all $\pi,\pi'$ with $\pi'\refines\pi$, whenever $\sig(\pi')(s)=\sig(\pi')(t)$, also $\sig(\pi)(s)=\sig(\pi)(t)$. 
+%all $s,t$ that have the same signature in $\pi'$ also have the same signature in $\pi$.
+\end{definition}
+For all monotone signatures, the $\sigref$ operator is monotone: $\pi\refines\pi'$ implies $\sigref(\pi,\sigma)\refines\sigref(\pi',\sigma)$. 
+Hence, following Kleene's fixed point theorem, the procedure above reaches the greatest fixed point. 
+
+%We present a variation of signature-based partition refinement.
+In Definition~\ref{def:sigrefpi}, the full signature is computed in every iteration.
+We propose to apply partition refinement using parts of the signature. By definition,
+$\sigma(\pi)(s)=\sigma(\pi)(t)$ if and only if for all parts $f_i(\pi)(s)=f_i(\pi)(t)$.
+
+\begin{definition}[Partition refinement with partial signatures]
+\label{def:sigref2}
+\setlength{\abovedisplayskip}{0.4em}
+\setlength{\belowdisplayskip}{0pt}
+\begin{align*}
+\sigref(\pi,f_i) \defeq\, & \{\{t\in S\mid f_i(\pi)(s) = f_i(\pi)(t) \wedge s \equiv_{\pi} t \}\mid s\in S\} \\
+\pi^0 \defeq\, & \{S\} \\
+\pi^{n+1} \defeq\, & \sigref(\pi^n, f_i) \qquad (\textnormal{select $f_i\in\sig$})\\
+%\pi^{\infty} \defeq\, & \pi \colon \forall f_i\in \sig\colon \sigref(\pi, f_i)=\pi \\
+\end{align*}
+\end{definition}
+%% fix double line after align*+definition
+\vspace{-1.5em}
+
+We always select some $f_i$ that refines the partition $\pi$.
+A fixed point is reached only when no $f_i$ refines the partition further: $\forall f_i\in \sig\colon \sigref(\pi^n, f_i)=\pi^n$.
+The extra clause $s \equiv_{\pi} t$ ensures that every application of $\sigref$ refines the partition.
+
+\begin{theorem}If all parts $f_i$ are monotone, Def.~\ref{def:sigref2} yields the greatest fixed point.\end{theorem}
+\begin{proof}
+The procedure terminates since the chain is decreasing ($\pi^{n+1}\refines\pi^n$), due to the added clause $s \equiv_{\pi} t$.
+We reach some fixed point $\pi^n$, since $\forall f_i\in \sig\colon \sigref(\pi^n, f_i)=\pi^n$ implies $\sigref(\pi^n, \sigma)=\pi^n$.
+Finally, to prove that we get the {\em greatest} fixed point, 
+assume there exists another fixed point $\xi=\sigref(\xi,\sigma)$. Then also $\xi=\sigref(\xi,f_i)$ for all $i$.
+We prove that $\xi\refines \pi^n$ by induction on $n$. Initially, $\xi\refines {S}=\pi^0$. Assume $\xi\refines \pi^n$, then
+for the selected $i$, $\xi=\sigref(\xi,f_i)\refines \sigref(\pi^n,f_i)=\pi^{n+1}$, using monotonicity of $f_i$. 
+\end{proof}
+
+There are several advantages to this approach due to its flexibility.
+First, for any $f_i$ that is independent of the partition, refinement with respect to that $f_i$ only needs to be applied once.
+Furthermore, refinements can be applied according to different strategies.
+For instance, for the strong bisimulation of an mp-cut IMC, one could refine w.r.t.\ $\textbf{T}$ until there is no more refinement, 
+then w.r.t.\ $\textbf{R}^s$ until there is no more refinement, 
+then repeat until neither $\textbf{T}$ nor $\textbf{R}^s$ refines the partition.
+%
+%
+Finally, computing the full signature is the most memory-intensive operation in symbolic signature-based partition refinement.
+If the partial signatures are smaller than the full signature, then larger models can be minimised.

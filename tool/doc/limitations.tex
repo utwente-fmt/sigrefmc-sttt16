@@ -1,0 +1,19 @@
+%!TEX root = main.tex
+
+This version of \textsc{SigrefMC} still has a few limitations.
+
+\begin{itemize}
+
+\item
+Sylvan currently supports rational numbers using 32-bit integers.
+The effect of this limitation is that fractions that require more than 32 bits in their numerator or denominator cannot be represented yet.
+Rudimentary support for GMP objects exists, but is not ideal and requires an extra hash table between the GMP library and Sylvan.
+True support requires a modification of the hash table inside Sylvan.
+
+\item
+Quotient extraction has been implemented, but it is not yet part of the final distribution as it requires some code cleanup. Quotient extraction is a fairly straight-forward algorithm that given a LTS/CTMC/IMC and a partition, computes the new LTS/CTMC/IMC, either in a symbolic format (not recommended due to blowup) or in explicit format.
+
+\item
+The maximum number of blocks is $2^{31}$. This is partially due to memory limitations (for $2,147,483,648$ blocks, we already require 12 gigabytes to store all signature-partition pairs, ignoring additional overhead by the skip list/hash table) and due to the design of the skip list. The limitation can be lifted easily, but then \textsc{SigrefMC} requires twice as much memory.
+
+\end{itemize}

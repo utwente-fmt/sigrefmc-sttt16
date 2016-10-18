@@ -14,30 +14,12 @@
  * limitations under the License.
  */
 
-#include <sigref_util.h>
-#include <sylvan_common.h>
+#include <sigref.h>
+#include <sigref_util.hpp>
+#include <sylvan_int.h>
+#include <refine.h>
 
-/* Calculate random height */
-DECLARE_THREAD_LOCAL(thread_rng, uint64_t);
-
-uint64_t trng()
-{
-    LOCALIZE_THREAD_LOCAL(thread_rng, uint64_t);
-    thread_rng = 2862933555777941757ULL * thread_rng + 3037000493ULL;
-    SET_THREAD_LOCAL(thread_rng, thread_rng);
-    return thread_rng;
-}
-
-VOID_TASK_0(init_trng_par)
-{
-    SET_THREAD_LOCAL(thread_rng, (((uint64_t)rand()) << 32 | rand()));
-}
-
-VOID_TASK_IMPL_0(init_trng)
-{
-    INIT_THREAD_LOCAL(thread_rng);
-    TOGETHER(init_trng_par);
-}
+namespace sigref {
 
 TASK_IMPL_3(BDD, three_and, BDD, a, BDD, b, BDD, c)
 {
@@ -48,7 +30,7 @@ TASK_IMPL_3(BDD, three_and, BDD, a, BDD, b, BDD, c)
     if (c == sylvan_true) return sylvan_and(a, b);
 
     BDD result;
-    if (cache_get(a|(260LL<<42), b, c, &result)) return result;
+    if (cache_get3(CACHE_THREEAND, a, b, c, &result)) return result;
 
     sylvan_gc_test();
 
@@ -90,7 +72,7 @@ TASK_IMPL_3(BDD, three_and, BDD, a, BDD, b, BDD, c)
     result = sylvan_makenode(var, low, high);
     bdd_refs_pop(1);
 
-    cache_put(a|(260LL<<42), b, c, result);
+    cache_put3(CACHE_THREEAND, a, b, c, result);
     return result;
 }
 
@@ -102,7 +84,7 @@ TASK_IMPL_1(MTBDD, swap_prime, MTBDD, set)
     if (mtbdd_getvar(set) >= 99999) return set;
 
     MTBDD result;
-    if (cache_get(set|(258LL<<42), set, 0, &result)) return result;
+    if (cache_get3(CACHE_SWAPPRIME, set, 0, 0, &result)) return result;
 
     sylvan_gc_test();
 
@@ -112,15 +94,18 @@ TASK_IMPL_1(MTBDD, swap_prime, MTBDD, set)
     result = mtbdd_makenode(sylvan_var(set)^1, low, high);
     mtbdd_refs_pop(1);
 
-    cache_put(set|(258LL<<42), set, 0, result);
+    cache_put3(CACHE_SWAPPRIME, set, 0, 0, result);
     return result;
 }
 
-TASK_IMPL_3(double, big_satcount, MTBDD*, dds, size_t, count, size_t, nvars)
+TASK_IMPL_4(long double, big_satcount, MTBDD*, dds, size_t, count, size_t, nvars, MTBDD, filter)
 {
-    if (count == 1) return mtbdd_satcount(*dds, nvars);
-    SPAWN(big_satcount, dds, count/2, nvars);
-    double result = big_satcount(dds+count/2, count-count/2, nvars);
+    if (count == 1) {
+        MTBDD dd = filter == mtbdd_true ? *dds : mtbdd_times(*dds, filter);
+        return (long double)mtbdd_satcount(dd, nvars);
+    }
+    SPAWN(big_satcount, dds, count/2, nvars, filter);
+    long double result = big_satcount(dds+count/2, count-count/2, nvars, filter);
     return result + SYNC(big_satcount);
 }
 
@@ -133,4 +118,48 @@ TASK_IMPL_2(MTBDD, big_union, MTBDD*, sets, size_t, count)
     MTBDD result = mtbdd_plus(left, right);
     mtbdd_refs_pop(2);
     return result;
+}
+
+TASK_IMPL_3(double, count_transitions, size_t, first, size_t, count, size_t, nvars)
+{
+    if (count == 1) return mtbdd_satcount(get_signature(first), nvars);
+    SPAWN(count_transitions, first, count/2, nvars);
+    double result = CALL(count_transitions, first+count/2, count-count/2, nvars);
+    return result + SYNC(count_transitions);
+}
+
+/**
+ * Extend a transition relation to a larger domain (using s=s')
+ */
+TASK_IMPL_3(BDD, extend_relation, BDD, relation, BDD, variables, int, state_length)
+{
+    /* first determine which state BDD variables are in rel */
+    int has[state_length];
+    for (int i=0; i<state_length; i++) has[i] = 0;
+    BDDSET s = variables;
+    while (s != sylvan_true) {
+        BDDVAR v = sylvan_var(s);
+        if (v/2 >= (unsigned)state_length) break; // action labels
+        has[v/2] = 1;
+        s = sylvan_high(s);
+    }
+
+    /* create "s=s'" for all variables not in rel */
+    BDD eq = sylvan_true;
+    for (int i=state_length-1; i>=0; i--) {
+        if (has[i]) continue;
+        BDD low = sylvan_makenode(2*i+1, eq, sylvan_false);
+        bdd_refs_push(low);
+        BDD high = sylvan_makenode(2*i+1, sylvan_false, eq);
+        bdd_refs_pop(1);
+        eq = sylvan_makenode(2*i, low, high);
+    }
+
+    bdd_refs_push(eq);
+    BDD result = sylvan_and(relation, eq);
+    bdd_refs_pop(1);
+
+    return result;
+}
+
 }

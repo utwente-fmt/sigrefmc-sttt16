@@ -27,8 +27,6 @@
 #include <sylvan_obj.hpp>
 #include <systems.hpp>
 
-using namespace sylvan;
-
 namespace sigref {
 
 class ParseError: std::exception
@@ -52,6 +50,7 @@ typedef enum {
 typedef enum {
     float_type = 0,
     simple_fraction_type = 1,
+    mpq_type = 2,
 } LeafType;
 
 class SystemParser {
@@ -81,10 +80,10 @@ public:
 private:
     void createVariables(TiXmlNode *varinfoNode);
 
-    Bdd nodeToBdd(const TiXmlNode* node);
-    Mtbdd nodeToMtbdd(const TiXmlNode* node);
+    sylvan::Bdd nodeToBdd(const TiXmlNode* node);
+    sylvan::Mtbdd nodeToMtbdd(const TiXmlNode* node);
 
-    Bdd computeStateSpace(const Bdd& transitions, const Mtbdd& markov_transitions) const;
+    sylvan::Bdd computeStateSpace(const sylvan::Bdd& transitions, const sylvan::Mtbdd& markov_transitions) const;
 
     SystemType system_type;
     LTS lts;
@@ -93,11 +92,11 @@ private:
 
     LeafType leaf_type;
 
-    mutable std::map<std::string, Mtbdd> build_table;
-    Bdd varS;
-    Bdd varT;
-    Bdd varA;
-    std::map<int, Mtbdd> var_to_mtbdd;
+    mutable std::map<std::string, sylvan::Mtbdd> build_table;
+    sylvan::Bdd varS;
+    sylvan::Bdd varT;
+    sylvan::Bdd varA;
+    std::map<int, sylvan::Mtbdd> var_to_mtbdd;
 };
 
 } // end namespace sigref

@@ -1,5 +1,6 @@
 /*
- * Copyright 2011-2015 Formal Methods and Tools, University of Twente
+ * Copyright 2011-2016 Formal Methods and Tools, University of Twente
+ * Copyright 2016 Tom van Dijk, Johannes Kepler University Linz
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +15,25 @@
  * limitations under the License.
  */
 
+#include <errno.h>  // for errno
 #include <stdio.h>  // for fprintf
 #include <stdint.h> // for uint32_t etc
 #include <stdlib.h> // for exit
+#include <string.h> // for strerror
 #include <sys/mman.h> // for mmap
 
-#include <atomics.h>
-#include <cache.h>
+#include <sylvan_cache.h>
 
 #ifndef MAP_ANONYMOUS
 #define MAP_ANONYMOUS MAP_ANON
+#endif
+
+#ifndef compiler_barrier
+#define compiler_barrier() { asm volatile("" ::: "memory"); }
+#endif
+
+#ifndef cas
+#define cas(ptr, old, new) (__sync_bool_compare_and_swap((ptr),(old),(new)))
 #endif
 
 /**
@@ -48,6 +58,14 @@ static size_t             cache_mask;         // cache_size-1
 #endif
 static cache_entry_t      cache_table;
 static uint32_t*          cache_status;
+
+static uint64_t           next_opid;
+
+uint64_t
+cache_next_opid()
+{
+    return __sync_fetch_and_add(&next_opid, 1LL<<40);
+}
 
 // status: 0x80000000 - bitlock
 //         0x7fff0000 - hash (part of the 64-bit hash not used to position)
@@ -105,9 +123,11 @@ cache_put(uint64_t a, uint64_t b, uint64_t c, uint64_t res)
     const uint32_t s = *s_bucket;
     // abort if locked
     if (s & 0x80000000) return 0;
+    // abort if hash identical -> no: in iscasmc this occasionally causes timeouts?!
+    const uint32_t hash_mask = (hash>>32) & 0x7fff0000;
+    // if ((s & 0x7fff0000) == hash_mask) return 0;
     // use cas to claim bucket
-    uint32_t new_s = (hash>>32) & 0x7fff0000;
-    new_s |= (s+1) & 0x0000ffff;
+    const uint32_t new_s = ((s+1) & 0x0000ffff) | hash_mask;
     if (!cas(s_bucket, s, new_s | 0x80000000)) return 0;
     // cas succesful: write data
     bucket->a = a;
@@ -142,13 +162,15 @@ cache_create(size_t _cache_size, size_t _max_size)
         exit(1);
     }
 
-    cache_table = (cache_entry_t)mmap(0, cache_max * sizeof(struct cache_entry), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
-    cache_status = (uint32_t*)mmap(0, cache_max * sizeof(uint32_t), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
+    cache_table = (cache_entry_t)mmap(0, cache_max * sizeof(struct cache_entry), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    cache_status = (uint32_t*)mmap(0, cache_max * sizeof(uint32_t), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 
     if (cache_table == (cache_entry_t)-1 || cache_status == (uint32_t*)-1) {
-        fprintf(stderr, "cache_create: Unable to allocate memory!\n");
+        fprintf(stderr, "cache_create: Unable to allocate memory: %s!\n", strerror(errno));
         exit(1);
     }
+
+    next_opid = 512LL << 40;
 }
 
 void
