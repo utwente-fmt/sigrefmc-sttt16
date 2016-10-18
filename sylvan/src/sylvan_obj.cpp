@@ -1,5 +1,6 @@
 /*
- * Copyright 2011-2015 Formal Methods and Tools, University of Twente
+ * Copyright 2011-2016 Formal Methods and Tools, University of Twente
+ * Copyright 2016 Tom van Dijk, Johannes Kepler University Linz
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +35,7 @@ Bdd::operator!=(const Bdd& other) const
     return bdd != other.bdd;
 }
 
-Bdd
+Bdd&
 Bdd::operator=(const Bdd& right)
 {
     bdd = right.bdd;
@@ -88,7 +89,7 @@ Bdd::operator*(const Bdd& other) const
     return Bdd(sylvan_and(bdd, other.bdd));
 }
 
-Bdd
+Bdd&
 Bdd::operator*=(const Bdd& other)
 {
     LACE_ME;
@@ -103,7 +104,7 @@ Bdd::operator&(const Bdd& other) const
     return Bdd(sylvan_and(bdd, other.bdd));
 }
 
-Bdd
+Bdd&
 Bdd::operator&=(const Bdd& other)
 {
     LACE_ME;
@@ -118,7 +119,7 @@ Bdd::operator+(const Bdd& other) const
     return Bdd(sylvan_or(bdd, other.bdd));
 }
 
-Bdd
+Bdd&
 Bdd::operator+=(const Bdd& other)
 {
     LACE_ME;
@@ -133,7 +134,7 @@ Bdd::operator|(const Bdd& other) const
     return Bdd(sylvan_or(bdd, other.bdd));
 }
 
-Bdd
+Bdd&
 Bdd::operator|=(const Bdd& other)
 {
     LACE_ME;
@@ -148,7 +149,7 @@ Bdd::operator^(const Bdd& other) const
     return Bdd(sylvan_xor(bdd, other.bdd));
 }
 
-Bdd
+Bdd&
 Bdd::operator^=(const Bdd& other)
 {
     LACE_ME;
@@ -163,7 +164,7 @@ Bdd::operator-(const Bdd& other) const
     return Bdd(sylvan_and(bdd, sylvan_not(other.bdd)));
 }
 
-Bdd
+Bdd&
 Bdd::operator-=(const Bdd& other)
 {
     LACE_ME;
@@ -172,24 +173,24 @@ Bdd::operator-=(const Bdd& other)
 }
 
 Bdd
-Bdd::AndAbstract(const Bdd &g, const Bdd &cube) const
+Bdd::AndAbstract(const Bdd &g, const BddSet &cube) const
 {
     LACE_ME;
-    return sylvan_and_exists(bdd, g.bdd, cube.bdd);
+    return sylvan_and_exists(bdd, g.bdd, cube.set.bdd);
 }
 
 Bdd
-Bdd::ExistAbstract(const Bdd &cube) const
+Bdd::ExistAbstract(const BddSet &cube) const
 {
     LACE_ME;
-    return sylvan_exists(bdd, cube.bdd);
+    return sylvan_exists(bdd, cube.set.bdd);
 }
 
 Bdd
-Bdd::UnivAbstract(const Bdd &cube) const
+Bdd::UnivAbstract(const BddSet &cube) const
 {
     LACE_ME;
-    return sylvan_forall(bdd, cube.bdd);
+    return sylvan_forall(bdd, cube.set.bdd);
 }
 
 Bdd
@@ -251,17 +252,17 @@ Bdd::Leq(const Bdd &g) const
 }
 
 Bdd
-Bdd::RelPrev(const Bdd& relation, const Bdd& cube) const
+Bdd::RelPrev(const Bdd& relation, const BddSet& cube) const
 {
     LACE_ME;
-    return sylvan_relprev(relation.bdd, bdd, cube.bdd);
+    return sylvan_relprev(relation.bdd, bdd, cube.set.bdd);
 }
 
 Bdd
-Bdd::RelNext(const Bdd &relation, const Bdd &cube) const
+Bdd::RelNext(const Bdd &relation, const BddSet &cube) const
 {
     LACE_ME;
-    return sylvan_relnext(bdd, relation.bdd, cube.bdd);
+    return sylvan_relnext(bdd, relation.bdd, cube.set.bdd);
 }
 
 Bdd
@@ -293,14 +294,14 @@ Bdd::Compose(const BddMap &m) const
 }
 
 Bdd
-Bdd::Permute(const std::vector<Bdd>& from, const std::vector<Bdd>& to) const
+Bdd::Permute(const std::vector<uint32_t>& from, const std::vector<uint32_t>& to) const
 {
     LACE_ME;
 
     /* Create a map */
     BddMap map;
     for (int i=from.size()-1; i>=0; i--) {
-        map.put(from[i].TopVar(), to[i]);
+        map.put(from[i], Bdd::bddVar(to[i]));
     }
 
     return sylvan_compose(bdd, map.bdd);
@@ -340,31 +341,39 @@ Bdd::GetShaHash() const
 }
 
 double
-Bdd::SatCount(const Bdd &variables) const
+Bdd::SatCount(const BddSet &variables) const
 {
     LACE_ME;
-    return sylvan_satcount_cached(bdd, variables.bdd);
+    return sylvan_satcount(bdd, variables.set.bdd);
+}
+
+double
+Bdd::SatCount(size_t nvars) const
+{
+    LACE_ME;
+    // Note: the mtbdd_satcount can be called without initializing the MTBDD module.
+    return mtbdd_satcount(bdd, nvars);
 }
 
 void
-Bdd::PickOneCube(const Bdd &variables, uint8_t *values) const
+Bdd::PickOneCube(const BddSet &variables, uint8_t *values) const
 {
     LACE_ME;
-    sylvan_sat_one(bdd, variables.bdd, values);
+    sylvan_sat_one(bdd, variables.set.bdd, values);
 }
 
 std::vector<bool>
-Bdd::PickOneCube(const Bdd &variables) const
+Bdd::PickOneCube(const BddSet &variables) const
 {
     std::vector<bool> result = std::vector<bool>();
 
     BDD bdd = this->bdd;
-    BDD vars = variables.bdd;
+    BDD vars = variables.set.bdd;
 
     if (bdd == sylvan_false) return result;
 
     for (; !sylvan_set_isempty(vars); vars = sylvan_set_next(vars)) {
-        uint32_t var = sylvan_set_var(vars);
+        uint32_t var = sylvan_set_first(vars);
         if (bdd == sylvan_true) {
             // pick 0
             result.push_back(false);
@@ -397,18 +406,18 @@ Bdd::PickOneCube() const
 }
 
 Bdd
-Bdd::UnionCube(const Bdd &variables, uint8_t *values) const
+Bdd::UnionCube(const BddSet &variables, uint8_t *values) const
 {
     LACE_ME;
-    return sylvan_union_cube(bdd, variables.bdd, values);
+    return sylvan_union_cube(bdd, variables.set.bdd, values);
 }
 
 Bdd
-Bdd::UnionCube(const Bdd &variables, std::vector<uint8_t> values) const
+Bdd::UnionCube(const BddSet &variables, std::vector<uint8_t> values) const
 {
     LACE_ME;
     uint8_t *data = values.data();
-    return sylvan_union_cube(bdd, variables.bdd, data);
+    return sylvan_union_cube(bdd, variables.set.bdd, data);
 }
 
 /**
@@ -463,18 +472,18 @@ Bdd::bddVar(uint32_t index)
 }
 
 Bdd
-Bdd::bddCube(const Bdd &variables, uint8_t *values)
+Bdd::bddCube(const BddSet &variables, uint8_t *values)
 {
     LACE_ME;
-    return sylvan_cube(variables.bdd, values);
+    return sylvan_cube(variables.set.bdd, values);
 }
 
 Bdd
-Bdd::bddCube(const Bdd &variables, std::vector<uint8_t> values)
+Bdd::bddCube(const BddSet &variables, std::vector<uint8_t> values)
 {
     LACE_ME;
     uint8_t *data = values.data();
-    return sylvan_cube(variables.bdd, data);
+    return sylvan_cube(variables.set.bdd, data);
 }
 
 int
@@ -535,7 +544,7 @@ BddMap::operator+(const Bdd& other) const
     return BddMap(sylvan_map_addall(bdd, other.bdd));
 }
 
-BddMap
+BddMap&
 BddMap::operator+=(const Bdd& other)
 {
     bdd = sylvan_map_addall(bdd, other.bdd);
@@ -548,7 +557,7 @@ BddMap::operator-(const Bdd& other) const
     return BddMap(sylvan_map_removeall(bdd, other.bdd));
 }
 
-BddMap
+BddMap&
 BddMap::operator-=(const Bdd& other)
 {
     bdd = sylvan_map_removeall(bdd, other.bdd);
@@ -585,9 +594,9 @@ BddMap::isEmpty() const
  */
 
 Mtbdd
-Mtbdd::uint64Terminal(uint64_t value)
+Mtbdd::int64Terminal(int64_t value)
 {
-    return mtbdd_uint64(value);
+    return mtbdd_int64(value);
 }
 
 Mtbdd
@@ -597,7 +606,7 @@ Mtbdd::doubleTerminal(double value)
 }
 
 Mtbdd
-Mtbdd::fractionTerminal(uint64_t nominator, uint64_t denominator)
+Mtbdd::fractionTerminal(int64_t nominator, uint64_t denominator)
 {
     return mtbdd_fraction(nominator, denominator);
 }
@@ -627,18 +636,18 @@ Mtbdd::mtbddZero()
 }
 
 Mtbdd
-Mtbdd::mtbddCube(const Mtbdd &variables, uint8_t *values, const Mtbdd &terminal)
+Mtbdd::mtbddCube(const BddSet &variables, uint8_t *values, const Mtbdd &terminal)
 {
     LACE_ME;
-    return mtbdd_cube(variables.mtbdd, values, terminal.mtbdd);
+    return mtbdd_cube(variables.set.bdd, values, terminal.mtbdd);
 }
 
 Mtbdd
-Mtbdd::mtbddCube(const Mtbdd &variables, std::vector<uint8_t> values, const Mtbdd &terminal)
+Mtbdd::mtbddCube(const BddSet &variables, std::vector<uint8_t> values, const Mtbdd &terminal)
 {
     LACE_ME;
     uint8_t *data = values.data();
-    return mtbdd_cube(variables.mtbdd, data, terminal.mtbdd);
+    return mtbdd_cube(variables.set.bdd, data, terminal.mtbdd);
 }
 
 int
@@ -686,6 +695,7 @@ Mtbdd::Else() const
 Mtbdd
 Mtbdd::Negate() const
 {
+    LACE_ME;
     return mtbdd_negate(mtbdd);
 }
 
@@ -704,10 +714,10 @@ Mtbdd::UApply(mtbdd_uapply_op op, size_t param) const
 }
 
 Mtbdd
-Mtbdd::Abstract(const Mtbdd &variables, mtbdd_abstract_op op) const
+Mtbdd::Abstract(const BddSet &variables, mtbdd_abstract_op op) const
 {
     LACE_ME;
-    return mtbdd_abstract(mtbdd, variables.mtbdd, op);
+    return mtbdd_abstract(mtbdd, variables.set.bdd, op);
 }
 
 Mtbdd
@@ -746,38 +756,38 @@ Mtbdd::Max(const Mtbdd &other) const
 }
 
 Mtbdd
-Mtbdd::AbstractPlus(const Mtbdd &variables) const
+Mtbdd::AbstractPlus(const BddSet &variables) const
 {
     LACE_ME;
-    return mtbdd_abstract_plus(mtbdd, variables.mtbdd);
+    return mtbdd_abstract_plus(mtbdd, variables.set.bdd);
 }
 
 Mtbdd
-Mtbdd::AbstractTimes(const Mtbdd &variables) const
+Mtbdd::AbstractTimes(const BddSet &variables) const
 {
     LACE_ME;
-    return mtbdd_abstract_times(mtbdd, variables.mtbdd);
+    return mtbdd_abstract_times(mtbdd, variables.set.bdd);
 }
 
 Mtbdd
-Mtbdd::AbstractMin(const Mtbdd &variables) const
+Mtbdd::AbstractMin(const BddSet &variables) const
 {
     LACE_ME;
-    return mtbdd_abstract_min(mtbdd, variables.mtbdd);
+    return mtbdd_abstract_min(mtbdd, variables.set.bdd);
 }
 
 Mtbdd
-Mtbdd::AbstractMax(const Mtbdd &variables) const
+Mtbdd::AbstractMax(const BddSet &variables) const
 {
     LACE_ME;
-    return mtbdd_abstract_max(mtbdd, variables.mtbdd);
+    return mtbdd_abstract_max(mtbdd, variables.set.bdd);
 }
 
 Mtbdd
-Mtbdd::AndExists(const Mtbdd &other, const Mtbdd &variables) const
+Mtbdd::AndExists(const Mtbdd &other, const BddSet &variables) const
 {
     LACE_ME;
-    return mtbdd_and_exists(mtbdd, other.mtbdd, variables.mtbdd);
+    return mtbdd_and_exists(mtbdd, other.mtbdd, variables.set.bdd);
 }
 
 int
@@ -792,7 +802,7 @@ Mtbdd::operator!=(const Mtbdd& other) const
     return mtbdd != other.mtbdd;
 }
 
-Mtbdd
+Mtbdd&
 Mtbdd::operator=(const Mtbdd& right)
 {
     mtbdd = right.mtbdd;
@@ -818,7 +828,7 @@ Mtbdd::operator*(const Mtbdd& other) const
     return mtbdd_times(mtbdd, other.mtbdd);
 }
 
-Mtbdd
+Mtbdd&
 Mtbdd::operator*=(const Mtbdd& other)
 {
     LACE_ME;
@@ -833,7 +843,7 @@ Mtbdd::operator+(const Mtbdd& other) const
     return mtbdd_plus(mtbdd, other.mtbdd);
 }
 
-Mtbdd
+Mtbdd&
 Mtbdd::operator+=(const Mtbdd& other)
 {
     LACE_ME;
@@ -845,14 +855,14 @@ Mtbdd
 Mtbdd::operator-(const Mtbdd& other) const
 {
     LACE_ME;
-    return mtbdd_plus(mtbdd, mtbdd_negate(other.mtbdd));
+    return mtbdd_minus(mtbdd, other.mtbdd);
 }
 
-Mtbdd
+Mtbdd&
 Mtbdd::operator-=(const Mtbdd& other)
 {
     LACE_ME;
-    mtbdd = mtbdd_plus(mtbdd, mtbdd_negate(other.mtbdd));
+    mtbdd = mtbdd_minus(mtbdd, other.mtbdd);
     return *this;
 }
 
@@ -904,11 +914,31 @@ Mtbdd::Compose(MtbddMap &m) const
     return mtbdd_compose(mtbdd, m.mtbdd);
 }
 
-double
-Mtbdd::SatCount(const Mtbdd &variables) const
+Mtbdd
+Mtbdd::Permute(const std::vector<uint32_t>& from, const std::vector<uint32_t>& to) const
 {
     LACE_ME;
-    return mtbdd_satcount(mtbdd, variables.mtbdd);
+
+    /* Create a map */
+    MtbddMap map;
+    for (int i=from.size()-1; i>=0; i--) {
+        map.put(from[i], Bdd::bddVar(to[i]));
+    }
+
+    return mtbdd_compose(mtbdd, map.mtbdd);
+}
+
+double
+Mtbdd::SatCount(size_t nvars) const
+{
+    LACE_ME;
+    return mtbdd_satcount(mtbdd, nvars);
+}
+
+double
+Mtbdd::SatCount(const BddSet &variables) const
+{
+    return SatCount(sylvan_set_count(variables.set.bdd));
 }
 
 size_t
@@ -934,7 +964,7 @@ MtbddMap::operator+(const Mtbdd& other) const
     return MtbddMap(mtbdd_map_addall(mtbdd, other.mtbdd));
 }
 
-MtbddMap
+MtbddMap&
 MtbddMap::operator+=(const Mtbdd& other)
 {
     mtbdd = mtbdd_map_addall(mtbdd, other.mtbdd);
@@ -947,7 +977,7 @@ MtbddMap::operator-(const Mtbdd& other) const
     return MtbddMap(mtbdd_map_removeall(mtbdd, other.mtbdd));
 }
 
-MtbddMap
+MtbddMap&
 MtbddMap::operator-=(const Mtbdd& other)
 {
     mtbdd = mtbdd_map_removeall(mtbdd, other.mtbdd);
@@ -990,9 +1020,21 @@ Sylvan::initPackage(size_t initialTableSize, size_t maxTableSize, size_t initial
 }
 
 void
-Sylvan::initBdd(int granularity)
+Sylvan::setGranularity(int granularity)
 {
-    sylvan_init_bdd(granularity);
+    sylvan_set_granularity(granularity);
+}
+
+int
+Sylvan::getGranularity()
+{
+    return sylvan_get_granularity();
+}
+
+void
+Sylvan::initBdd()
+{
+    sylvan_init_bdd();
 }
 
 void

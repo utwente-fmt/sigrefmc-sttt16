@@ -27,8 +27,6 @@
 #include <sylvan_obj.hpp>
 #include <systems.hpp>
 
-using namespace sylvan;
-
 namespace sigref {
 
 class BddLtsParser {

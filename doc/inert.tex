@@ -1,0 +1,151 @@
+%!TEX root = main.tex
+
+
+\begin{algorithm}[tbp]
+\Def{\Inert{$\mathcal{T}$, $\mathcal{P}^s$, $\mathcal{P}^{s'}$}}{
+    \lIf{$(\mathcal{T},\mathcal{P}^s,\mathcal{P}^{s'})\in\textsf{cache}$}{
+        \Return{$\textsf{cache}[(\mathcal{T},\mathcal{P}^s,\mathcal{P}^{s'})]$}
+    }
+    \tcp{find highest variable, interpreting $s_i$ in $\mathcal{P}^{s'}$ as $s'_i$}
+    $v$ = topVar($\mathcal{T}$, $\mathcal{P}^s$, $\mathcal{P}^{s'}$) \;
+    \If{$v$ equals $s_i$ for some $i$}{
+        \tcp{match $s_i$ in $\mathcal{T}$ with $\mathcal{P}^s$}
+        low $\leftarrow$ \Inert{$\mathcal{T}_{s_i=0}$, $\mathcal{P}^s_{s_i=0}$, $\mathcal{P}^{s'}$} \;
+        high $\leftarrow$ \Inert{$\mathcal{T}_{s_i=1}$, $\mathcal{P}^s_{s_i=1}$, $\mathcal{P}^{s'}$} \;
+        result $\leftarrow$ \BDDnode{$s_i$, low, high}
+    }
+    \ElseIf{$v$ equals $s'_i$ for some $i$}{
+        \tcp{match $s'_i$ in $\mathcal{T}$ with $s_i$ in $\mathcal{P}^{s'}$}
+        low $\leftarrow$ \Inert{$\mathcal{T}_{s'_i=0}$, $\mathcal{P}^s$, $\mathcal{P}^{s'}_{s_i=0}$} \;
+        high $\leftarrow$ \Inert{$\mathcal{T}_{s'_i=1}$, $\mathcal{P}^s$, $\mathcal{P}^{s'}_{s_i=1}$} \;
+        result $\leftarrow$ \BDDnode{$s'_i$, low, high}
+    }
+    \Else{
+        \tcp{match the blocks $\mathcal{P}^s$ and $\mathcal{P}^{s'}$}
+        \lIf{$\mathcal{P}^s\neq\mathcal{P}^{s'}$}{
+            result $\leftarrow$ \texttt{False}
+        }
+        \lElse{
+            result $\leftarrow$ $\mathcal{T}$
+        }
+    }
+    $\textsf{cache}[(\mathcal{T},\mathcal{P}^s,\mathcal{P}^{s'}]$ $\leftarrow$ result \;
+    \Return{result}
+}
+\caption{Computes the inert transitions of a transition relation $\mathcal{T}$ according to the block assignments to current states ($\mathcal{P}^s$) and next states ($\mathcal{P}^{s'}$).}
+\label{alg:inert}
+\end{algorithm}
+
+
+
+
+\begin{figure}[tbp]
+\begin{center}
+\scalebox{0.9}{
+\begin{tikzpicture}
+\coordinate (a) at (250:2);
+\coordinate (b) at (290:2);
+\coordinate (c) at (250:3);
+\coordinate (d) at (290:3);
+\draw (0,0) -- (a);
+\draw (0,0) -- (b);
+\draw (a) -- (b);
+\draw[dashed] (a) -- (c);
+\draw[dashed] (b) -- (d);
+\draw (0,-1.5) node {$s,s'$};
+
+\coordinate (a0) at (3,0);
+\coordinate (aa) at ($(a0) + (250:2)$);
+\coordinate (ab) at ($(a0) + (290:2)$);
+\coordinate (ac) at ($(a0) + (250:3)$);
+\coordinate (ad) at ($(a0) + (290:3)$);
+\coordinate (ae) at ($(a0) + (250:4)$);
+\coordinate (af) at ($(a0) + (290:4)$);
+\draw (a0) -- (ac);
+\draw (a0) -- (ad);
+\draw (aa) -- (ab);
+\draw (ac) -- (ad);
+\draw (3,-1.5) node {$s$};
+\draw (3,-2.35) node {$b$};
+
+\coordinate (b0) at (6,0);
+\coordinate (ba) at ($(b0) + (250:2)$);
+\coordinate (bb) at ($(b0) + (290:2)$);
+\coordinate (bc) at ($(b0) + (250:3)$);
+\coordinate (bd) at ($(b0) + (290:3)$);
+\draw (b0) -- (ba);
+\draw (b0) -- (bb);
+\draw (ba) -- (bb);
+\draw[dashed] (ba) -- (bc);
+\draw[dashed] (bb) -- (bd);
+\draw (6,-1.5) node {$s,s'$};
+
+\coordinate (c0) at (-3,0);
+\coordinate (ca) at ($(c0) + (250:2)$);
+\coordinate (cb) at ($(c0) + (290:2)$);
+\coordinate (cc) at ($(c0) + (250:3)$);
+\coordinate (cd) at ($(c0) + (290:3)$);
+\coordinate (ce) at ($(c0) + (250:4)$);
+\coordinate (cf) at ($(c0) + (290:4)$);
+\draw (c0) -- (cc);
+\draw (c0) -- (cd);
+\draw (ca) -- (cb);
+\draw (cc) -- (cd);
+\draw ($(c0) + (0,-1.5)$) node {$s$};
+\draw ($(c0) + (0,-2.35)$) node {$b$};
+
+\draw[densely dotted] ($(0,0)!0.50!(b)$) to[bend left=10] node[above] {match $s'=s$} ($(a0)!0.50!(aa)$);
+\draw[densely dotted] ($(c0)!0.50!(cb)$) to[bend left=10] node[above] {match $s=s$} ($(0,0)!0.50!(a)$);
+\draw[densely dotted] ($(cb)!0.5!(cd)$) to[bend right=10] node[below] {same block} ($(aa)!0.5!(ac)$);
+
+\draw (0,-3.5) node {$\mathcal{T}$};
+%\draw (1.5,-4.5) node {\&};
+\draw (3,-3.5) node {$\mathcal{P}^{s'}$};
+%\draw (-1.5,-4.5) node {\&};
+\draw (-3,-3.5) node {$\mathcal{P}^s$};
+%\draw (5,-4.5) node {$\Rightarrow$};
+\draw (6,-3.5) node {$\textsf{inert}$};
+
+\end{tikzpicture}
+}
+\end{center}
+\caption{Schematic overview of the BDDs in the \texttt{inert} algorithm}
+\label{fig:inert}
+\end{figure}
+
+
+
+
+To compute the set of inert $\tau$-transitions for branching bisimulation,
+i.e., $s\smash\taupi s'$, 
+or more generally,
+to compute any inert transition relation $\rightarrow\!\cap\!\equiv$ where $\equiv$ is the equivalence relation corresponding to $\pi$ computed by $\mathcal{E}(s,s')=\exists b\colon \mathcal{P}(s,b) \wedge \mathcal{P}(s',b)$,
+the expression $\mathcal{T}(s,s') \wedge \exists b\colon 
+\mathcal{P}(s,b) \wedge \mathcal{P}(s',b)$ must be computed.
+%
+%
+%
+We compute $\rightarrow\!\cap\!\equiv$ directly using a custom BDD algorithm.
+%
+%
+%
+%
+The \texttt{inert} algorithm takes parameters $\mathcal{T}(s,s')$ ($\mathcal{T}$ may contain other variables ordered after $s,s'$) and two copies of $\mathcal{P}(s,b)$: $\mathcal{P}^s$ and $\mathcal{P}^{s'}$.
+%
+%
+%It optionally also takes a parameter $\mathcal{A}(a)$, representing a set of action labels to restrict the result to (e.g. $\tau$ for only inert $\tau$-transitions).
+%
+%
+The algorithm matches $\mathcal{T}$ and $\mathcal{P}^s$ on valuations of variables $s$, and $\mathcal{T}$ and $\mathcal{P}^{s'}$ on valuations of variables $s'$.
+%
+%
+See Algorithm~\ref{alg:inert}, and also Figure~\ref{fig:inert} for a schematic overview.
+%
+%
+When in the recursive call all valuations to $s$ and $s'$ have been matched, with $S_s,S_{s'}\subseteq S$ the sets of states represented by these valuations, then $\mathcal{T}$ is the set of actions that label the transitions between states in $S_s$ and $S_{s'}$, $\mathcal{P}^s$ is the block that contains all $S_s$ and $\mathcal{P}^{s'}$ is the block that contains all $S_{s'}$.
+Then if $\mathcal{P}^s\neq\mathcal{P}^{s'}$, the transitions are not inert and \texttt{inert} returns \texttt{False}, removing the transition from $\mathcal{T}$.
+%
+%
+Otherwise, $\mathcal{T}$ (which may still contain other variables ordered after $s,s'$, such as action labels), is returned.
+
+

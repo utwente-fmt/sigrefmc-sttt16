@@ -18,11 +18,9 @@
 #include <stdio.h>
 #include <sys/mman.h> // for mmap, munmap, etc
 
-#include <sylvan.h>
-#include <sylvan_common.h> // for sylvan_gc_test
+#include <sylvan_int.h>
 
 #include <sigref.h>
-#include <sigref_util.h>
 #include <blocks.h>
 #include <refine.h>
 
@@ -138,7 +136,7 @@ VOID_TASK_0(grow)
         go_resize = 0;
     } else {
         /* wait for new frame to appear */
-        while (ATOMIC_READ(lace_newframe.t) == 0) {}
+        while (*(Task* volatile*)&(lace_newframe.t) == 0) {}
         lace_yield(__lace_worker, __lace_dq_head);
     }
 }
@@ -224,9 +222,9 @@ TASK_3(BDD, refine_partition, BDD, dd, BDD, vars, BDD, previous_partition)
 
     if (sylvan_set_isempty(vars)) {
         BDD result;
-        if (cache_get(dd|(256LL<<42), vars, previous_partition|(refine_iteration<<40), &result)) return result;
+        if (cache_get3(CACHE_REFINE, dd, vars, previous_partition|(refine_iteration<<40), &result)) return result;
         result = CALL(assign_block, dd, previous_partition);
-        cache_put(dd|(256LL<<42), vars, previous_partition|(refine_iteration<<40), result);
+        cache_put3(CACHE_REFINE, dd, vars, previous_partition|(refine_iteration<<40), result);
         return result;
     }
 
@@ -237,17 +235,17 @@ TASK_3(BDD, refine_partition, BDD, dd, BDD, vars, BDD, previous_partition)
 
     BDDVAR dd_var = sylvan_isconst(dd) ? 0xffffffff : sylvan_var(dd);
     BDDVAR pp_var = sylvan_var(previous_partition);
-    BDDVAR vars_var = sylvan_set_var(vars);
+    BDDVAR vars_var = sylvan_set_first(vars);
 
     while (vars_var < dd_var && vars_var+1 < pp_var) {
         vars = sylvan_set_next(vars);
         if (sylvan_set_isempty(vars)) return CALL(refine_partition, dd, vars, previous_partition);
-        vars_var = sylvan_set_var(vars);
+        vars_var = sylvan_set_first(vars);
     }
 
     /* Consult cache */
     BDD result;
-    if (cache_get(dd|(256LL<<42), vars, previous_partition|(refine_iteration<<40), &result)) {
+    if (cache_get3(CACHE_REFINE, dd, vars, previous_partition|(refine_iteration<<40), &result)) {
         return result;
     }
 
@@ -279,7 +277,7 @@ TASK_3(BDD, refine_partition, BDD, dd, BDD, vars, BDD, previous_partition)
     result = sylvan_makenode(vars_var+1, low, high);
 
     /* Write to cache */
-    cache_put(dd|(256LL<<42), vars, previous_partition|(refine_iteration<<40), result);
+    cache_put3(CACHE_REFINE, dd, vars, previous_partition|(refine_iteration<<40), result);
     return result;
 }
 
@@ -305,4 +303,26 @@ size_t
 get_next_block()
 {
     return next_block++;
+}
+
+BDD
+get_signature(size_t index)
+{
+    BDD result = signatures[index+1];
+    if (result == (uint64_t)-1) return sylvan_false;
+    else return result;
+}
+
+void
+free_refine_data()
+{
+    if (signatures != NULL) {
+        munmap(signatures, sizeof(BDD)*signatures_size);
+        signatures = NULL;
+    }
+
+    if (table != NULL) {
+        munmap(table, 3*8*table_size);
+        table = NULL;
+    }
 }

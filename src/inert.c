@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-#include <sylvan.h>
-#include <sylvan_common.h> // for sylvan_gc_test
+#include <sylvan_int.h>
 #include <inert.h>
 
 /**
@@ -40,13 +39,13 @@ TASK_IMPL_4(BDD, compute_inert, BDD, dd, BDD, left, BDD, right, BDD, st_vars)
 
     BDD result;
     /* assumption: st_vars does not change during program */
-    if (cache_get(dd|CACHE_INERT, left, right, &result)) {
+    if (cache_get3(CACHE_INERT, dd, left, right, &result)) {
         return result;
     }
 
     sylvan_gc_test();
 
-    BDDVAR var = sylvan_set_var(st_vars);
+    BDDVAR var = sylvan_set_first(st_vars);
 
     BDD dd_low, dd_high;
     if (dd != sylvan_true && var == sylvan_var(dd)) {
@@ -81,7 +80,7 @@ TASK_IMPL_4(BDD, compute_inert, BDD, dd, BDD, left, BDD, right, BDD, st_vars)
     bdd_refs_pop(1);
     result = sylvan_makenode(var, low, high);
 
-    cache_put(dd|CACHE_INERT, left, right, result);
+    cache_put3(CACHE_INERT, dd, left, right, result);
 
     return result;
 }

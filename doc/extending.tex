@@ -1,0 +1,44 @@
+%!TEX root = main.tex
+
+This chapter briefly outlines how to extend \textsc{SigrefMC}.
+
+\section{Files}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabu}{XX[p3]}
+\toprule
+Filename & Description \\
+\midrule
+\texttt{bisimulation.h} & Header file containing bisimulation function definitions. \\
+\texttt{bisim\_ctmc.cpp} & Implementation of (strong) bisimulation for CTMCs. \\
+\texttt{bisim\_imc.cpp} & Implementation of strong and branching bisimulation for IMCs. \\
+\texttt{bisim\_lts.cpp} & Implementation of strong and branching bisimulation for LTSs. \\
+\texttt{blocks.h} & Header file for encode\_blocks and decode\_blocks.\\
+\texttt{blocks.c} & Implementation of encode\_blocks and decode\_blocks. \\
+\texttt{inert.h} & Header file of the \texttt{inert} algorithm. \\
+\texttt{inert.c} & Implementation of the \texttt{inert} algorithm. \\
+\texttt{refine.h} & Header file of the \texttt{refine} algorithm. \\
+\texttt{refine\_ht.c} & Implementation of \texttt{refine} using a hash table. \\
+\texttt{refine\_sl.c} & Implementation of \texttt{refine} using a skip list. \\
+\texttt{sigref\_util.h} & Header file for several utility functions. \\
+\texttt{sigref\_util.cpp} & Implementation of several utility functions. \\
+\texttt{getrss.h} & Header file for computing memory usage of programs. \\
+\texttt{getrss.c} & Implementation of computing memory usage of programs. \\
+\texttt{parse\_bdd.hpp} & Header file for models in the \textsc{LTSmin} file format. \\
+\texttt{parse\_bdd.cpp} & Parser for models in the \textsc{LTSmin} file format. \\
+\texttt{parse\_xml.hpp} & Header file for models in the \textsc{Sigref} XML file format. \\
+\texttt{parse\_xml.cpp} & Parser for models in the \textsc{Sigref} XML file format. \\
+\texttt{systems.hpp} & Definitions of C++ interfaces for parsers. \\
+\texttt{sigref.h} & Header file for sigrefmc main program. \\
+\texttt{sigref.cpp} & Main sigrefmc file. \\
+\bottomrule
+\end{tabu}
+
+\section{Extending the tool}
+
+To support other file formats, create a new parser (in \texttt{parse\_x.cpp} and \texttt{parse\_x.hpp}), and modify \texttt{sigref.cpp} to include and call the new parser.
+
+For other notions of bisimulation, modify \texttt{bisimulation.h} by adding a new bisimulation task, modify \texttt{sigref.cpp} to actually call the task, and implement the bisimulation minimisation in a new \texttt{bisim\_xxx.cpp} file.
+You can use \texttt{bisim\_ctmc.cpp} as an example, as it is the simplest implementation of bisimulation minimisation.
+
+To support other systems, modify \texttt{systems.hpp}, create a parser for the system, and create a bisimulation implementation for the system.

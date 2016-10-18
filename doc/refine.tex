@@ -1,0 +1,185 @@
+%!TEX root = main.tex
+
+Partition refinement consists of two steps: computing the signatures and computing the next partition.
+Given the signatures $\sigma_T$ and/or $\sigma_R$ for the current partition $\pi$,
+the new partition can be computed as follows.
+
+
+
+Since the chosen variable ordering has variables $s,s'$ before $a,b$,
+each path in $\sigma$
+ends in a (MT)BDD representing the signature for the states encoded by that path.
+%, or
+%terminal node 0 for the empty signature.
+%
+%
+For $\sigma_T$, every path that assigns values to $s$ ends in a BDD on $a,b$.
+%
+%
+For $\sigma_R$, every path that assigns values to $s$ ends in a MTBDD on $b$ with rational leaves.
+%
+
+
+
+
+Wimmer et al.~\cite{DBLP:conf/atva/WimmerHHSB06} present a BDD operation \texttt{refine} that ``replaces''  these sub-(MT)BDDs by the BDD representing a unique block number for each distinct signature.
+The result is the BDD of the next partition.
+%
+%
+%
+They use a global counter and a hash table to associate each signature with a unique block number.
+%
+%
+This algorithm has the disadvantage that block number assignments are unstable.
+%
+%
+There is no guarantee that a stable block has the same block number in the next iteration.
+%
+%
+This has implications for the computation of the new signatures.
+%
+%
+When the block number of a stable block changes, cached results of signature computation in earlier iterations cannot be reused.
+
+
+\begin{algorithm}[t!]
+\Def{\Refine{$\sigma$, $\mathcal{P}$}}{
+    \lIf{$(\sigma,\mathcal{P},\textsf{iter})\in\textsf{cache}$}{
+        \Return{$\textsf{cache}[(\sigma,\mathcal{P},\textsf{iter})]$}
+    }
+    $v$ = topVar($\sigma$, $\mathcal{P}$) \;
+    \If{$v$ equals $s_i$ for some $i$}{
+        \tcp{match paths on $s$ in $\sigma$ and $\mathcal{P}$}
+        low $\leftarrow$ \Refine{$\sigma_{s_i=0}$, $\mathcal{P}_{s_i=0}$} \;
+        high $\leftarrow$ \Refine{$\sigma_{s_i=1}$, $\mathcal{P}_{s_i=1}$} \;
+        result $\leftarrow$ \BDDnode{$s_i$, low, high}
+    }
+    \Else{
+        \tcp{$\sigma$ now encodes the state signature}
+        \tcp{$\mathcal{P}$ now encodes the previous block}
+%        \tcp{decode previous block number}
+    		$B \leftarrow \texttt{decodeBlock}(\mathcal{P})$ \;
+    		\tcp{try to claim block B if still free}
+		\lIf{$\texttt{blocks}[B].\texttt{sig}=\bot$}{$\texttt{cas}(\texttt{blocks}[B].\texttt{sig},\bot,\sigma)$}
+%		\tcp{check if B now contains $\sigma$}
+		\lIf{$\texttt{blocks}[B].\texttt{sig}=\sigma$}{result $\leftarrow$ $\mathcal{P}$}
+		\Else{
+%		    \tcp{find a new block number and encode it}
+		    $B \leftarrow \texttt{search\_or\_insert}(\sigma, B)$ \;
+	        result $\leftarrow$ \texttt{encodeBlock}($B$)
+        }
+    }
+    $\textsf{cache}[(\sigma,\mathcal{P},\textsf{iter})]$ $\leftarrow$ result \;
+    \Return{result}
+}
+\caption{\texttt{refine}, the (MT)BDD operation that assigns block numbers to signatures, given a signature $\sigma$ and the previous partition $\mathcal{P}$.}
+\label{alg:refine}
+\end{algorithm}
+
+
+
+We modify the \texttt{refine} algorithm to use the current partition to reuse the previous block number of each state.
+%
+%accept an extra parameter $\mathcal{P}(s,b)$ to compute the previous block number of each state.
+%
+This also allows refining a partition with respect to only a part of the signature, as described in Section~\ref{sec:sigref}.
+%
+%
+The modification is applied such that it can be parallelized in Sylvan.
+%
+%
+%Thus, a new partition is computed based on the signature and the block number in the previous partition.
+%The result is the new partition on variables $s$ and $b$.
+See Algorithm~\ref{alg:refine}.
+
+
+The algorithm has two input parameters: the (MT)BDD $\sigma$ which encodes the (partial) signature for the current partition, and the BDD $\mathcal{P}$ which encodes the current partition.
+%
+%
+%The result is a BDD representing the next partition.
+%
+%
+The algorithm uses a global counter $\textsf{iter}$, which is the current iteration of partition refinement.
+%
+%
+This is necessary since the cached results of the previous iteration cannot be reused.
+%
+%
+It also uses and updates an array \texttt{blocks}, which contains the signature of each block in the new partition.
+%
+This array is cleared between iterations of partition refinement.
+
+
+The implementation is similar to other BDD operations, featuring the use of the operation cache (lines~2 and~15) and a recursion step for variables in $s$ (lines~3--7), with the two recursive operations executed in parallel.
+%
+\texttt{refine} simultaneously descends in $\sigma$ and $\mathcal{P}$ (lines~5--6), matching the valuation of $s_i$ in $\sigma$ and $\mathcal{P}$.
+%
+%
+Block assignment happens at lines~9--14.
+%
+We rely on the well-known atomic operation \texttt{compare\_and\_swap} (\texttt{cas}), which atomically compares and modifies a value in memory.
+%
+This is necessary so the algorithm is still correct when parallelized.
+%
+%
+We use \texttt{cas} to claim a block number for the signature (line 10).
+%
+%
+If the block number is already used for a different signature, then this block is being refined and we call a method \texttt{search\_or\_insert} to assign a new block number.
+%
+%
+%A new block number is assigned only when the previous block number is already used for a different signature (thus the block is being split), by calling a method \texttt{search\_or\_insert}.
+%
+%
+%
+%The result is that previous block numbers are maximally reused; \texttt{search\_or\_insert} is only called when a block is split and the the previous block number has been reused already.
+
+Different implementations of \texttt{search\_and\_insert} are possible.
+%
+We implemented a parallel hash table that uses a global counter for the next block number when inserting a new pair $(\sigma, B)$, similar to~\cite{DBLP:conf/atva/WimmerHHSB06}.
+%
+%
+An alternative implementation that performed better in our experiments integrates the \texttt{blocks} array with a skip list.
+%
+%
+A skip list is a probabilistic multi-level ordered linked list.
+See~\cite{DBLP:journals/cacm/Pugh90}.
+
+Our implementation of the skip list is restricted to at most 5 levels and supports only the \texttt{insert} operation.
+%
+%
+We use a short-lived local lock at the lowest level to insert buckets,
+and lock-free insertions using \texttt{cas} at higher levels.
+%
+%
+%
+Furthermore, by restricting the number of blocks to at most $2^{31}$, we only need 32 bytes for each bucket in the skip list:
+%
+%
+$$\texttt{struct \{ uint64\_t sig; uint32\_t prev\_block; uint32\_t next[5]; \}}$$
+%
+Each bucket in the skip list contains the pair $(\sigma,B)$ (\texttt{sig} and \texttt{prev\_block}) and the 31-bit indices of the next bucket at each level.
+The highest bit of \texttt{next[0]} is used as a lock, which is released when setting \texttt{next[0]} to a new value.
+
+
+We implement \texttt{search\_or\_insert} as follows.
+%
+%
+We traverse the skip list until either a bucket with $(\sigma,B)$ is found (and returned), or the bucket $B'$ that would immediately precede a bucket with $(\sigma,B)$.
+%
+%
+We use \texttt{cas} to set the highest bit of \texttt{next[0]} and lock bucket $B'$.
+%, promising to insert a bucket after $B''$.
+%
+%
+This ensures that no other thread can insert $(\sigma,B)$ (or any other pair directly preceded by bucket $B'$) simultaneously.
+%
+%
+A new block number $B''$ is generated using a global counter \texttt{next\_block}, which
+is increased atomically with \texttt{cas}.
+%
+%
+Bucket $B''$ is initialized and inserted into the skip list by updating \texttt{next[0]} of $B'$ with $B''$, which also releases the lock on $B'$.
+%
+%
+Finally, the new bucket is inserted at a random number of higher levels using \texttt{cas}.

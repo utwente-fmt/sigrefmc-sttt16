@@ -20,13 +20,7 @@
 #ifndef SIGREF_UTIL_H
 #define SIGREF_UTIL_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
-/* Calculate random number */
-uint64_t trng();
-VOID_TASK_DECL_0(init_trng);
+namespace sigref {
 
 /**
  * Calculate A & B & C
@@ -43,8 +37,8 @@ TASK_DECL_1(MTBDD, swap_prime, MTBDD);
 /**
  * Compute \BigSatCount sets
  */
-TASK_DECL_3(double, big_satcount, MTBDD*, size_t, size_t);
-#define big_satcount(sets, count, nvars) CALL(big_satcount, sets, count, nvars)
+TASK_DECL_4(long double, big_satcount, MTBDD*, size_t, size_t, MTBDD);
+#define big_satcount(sets, count, nvars, filter) CALL(big_satcount, sets, count, nvars, filter)
 
 /**
  * Compute \BigUnion sets
@@ -52,8 +46,19 @@ TASK_DECL_3(double, big_satcount, MTBDD*, size_t, size_t);
 TASK_DECL_2(MTBDD, big_union, MTBDD*, size_t)
 #define big_union(sets, count) CALL(big_union, sets, count)
 
-#ifdef __cplusplus
-}
-#endif
+/**
+ * Count number of transitions using the signatures
+ */
+TASK_DECL_3(double, count_transitions, size_t, size_t, size_t);
+#define count_transitions(first, count, nvars) CALL(count_transitions, first, count, nvars)
+
+/**
+ * Extend a relation <rel> defined on variables <vars> to the full domain,
+ * which has <state_length> state variables (and <state_length> prime variables)
+ */
+TASK_DECL_3(BDD, extend_relation, BDD, BDD, int);
+#define extend_relation(rel, vars, state_length) CALL(extend_relation, rel, vars, state_length)
+
+} // namespace sigref
 
 #endif

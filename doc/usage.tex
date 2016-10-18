@@ -1,0 +1,63 @@
+%!TEX root = main.tex
+
+\section{Compiling}
+
+To compile \textsc{SigrefMC}, the framework \texttt{CMake} is required.
+
+\begin{verbatim}
+    > cmake .
+    > make
+\end{verbatim}   
+
+A successful compilation produces two files called \texttt{sigrefmc} and \texttt{sigrefmc\_ht} which reside in the subdirectory \texttt{src}.
+The \texttt{sigrefmc\_ht} program is identical to \texttt{sigrefmc}, except that it uses a hash table instead of a skip list in the \texttt{refine} algorithm.
+%
+Type
+\begin{verbatim}
+    > src/sigrefmc --help
+\end{verbatim}
+or
+\begin{verbatim}
+    > src/sigrefmc --usage
+\end{verbatim}
+for a list of command-line options that the program expects.
+
+\section{Command-Line Parameters}
+
+The currently understood command-line parameters are:
+\begin{description}
+\itemsep3mm
+\item[\option{filename}] \ \\
+   Tells \texttt{sigrefmc} to look for the specification of the transition system to perform bisimulation minimisation on in the file \option{filename}.
+   
+\item[\texttt{-b \option{bisimulation}}] \ \\
+   Sets the bisimulation type. With bisimulation type 1, branching bisimulation will be applied to LTS and IMC models. With bisimulation type 2, strong bisimulation will be applied to LTS and IMC models.
+   This option is ignored for CTMC models, for which always strong bisimulation will be applied.
+   For LTS and IMC models, the default bisimulation is branching bisimulation.
+
+\item[\texttt{-v \option{verbosity}}] \ \\
+   Sets the verbosity level, valid arguments are $0$--$2$, the default is 0. 
+
+\item[\texttt{-w \option{workers}}] \ \\
+   Sets the number of workers, with $0$ for auto-detect, and $1$ for sequential execution.
+   The default is $0$.
+
+\item[\texttt{-p \option{filename}}] \ \\
+   If the \texttt{gperftools} library is installed, then this option allows CPU profiling to the file \option{filename}.
+   
+\item[\texttt{-l \option{leaftype}}] \ \\
+   Sets the leaf type for Markovian transitions in CTMC and IMC models.
+   Use \texttt{floating} for floating points, and \texttt{fraction} for the 32-bit-32-bit representation that Sylvan offers. The \texttt{gmp} option is not yet supported, due to a technicality in Sylvan's support for custom MTBDD leaves.
+   The default leaf type is \texttt{floating}.
+
+\item[\texttt{-c \option{closure}}] \ \\
+   Sets the algorithm for closure of a transition relation in branching bisimulation. Valid options are \texttt{fixpoint}, \texttt{squaring} and \texttt{recursive}. With the options \texttt{squaring} and \texttt{recursive}, the closure of the $\tau$-transitions is precomputed before the refinement loop. The \texttt{squaring} method uses iterative squaring. The \texttt{recursive} method uses an obscure recursive-descent algorithm. The \texttt{fixpoint} method simply performs reachability to append all states that are backwards reachable via $\tau$-transitions.
+
+\item[\texttt{-m}] \ \\
+   For \textsc{LTSmin} LTS models. If chosen, all transition relations are merged before the bisimulation minimisation. Currently, LTS bisimulation minimisation has rudimentary support for multiple transition relations.
+
+\item[\texttt{-q \option{quotient}}] \ \\
+   Currently not implemented. Quotient extraction is implemented, but it is not yet part of the final distribution as it requires some code cleanup. Quotient extraction is a fairly straight-forward algorithm that given a LTS/CTMC/IMC and a partition, computes the new LTS/CTMC/IMC, either in a symbolic format (not recommended due to blowup) or in explicit format.
+
+\end{description}
+

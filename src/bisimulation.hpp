@@ -20,14 +20,18 @@
 #ifndef BISIMULATION_H
 #define BISIMULATION_H
 
-VOID_TASK_DECL_1(min_lts_strong, sigref::LTS&);
+namespace sigref {
 
-VOID_TASK_DECL_1(min_lts_branching, sigref::LTS&);
+TASK_DECL_1(BDD, min_lts_strong, sigref::LTS&);
 
-VOID_TASK_DECL_1(min_ctmc, sigref::CTMC&);
+TASK_DECL_1(BDD, min_lts_branching, sigref::LTS&);
 
-VOID_TASK_DECL_1(min_imc_strong, sigref::IMC&);
+TASK_DECL_1(BDD, min_ctmc, sigref::CTMC&);
 
-VOID_TASK_DECL_1(min_imc_branching, sigref::IMC&);
+TASK_DECL_1(BDD, min_imc_strong, sigref::IMC&);
+
+TASK_DECL_1(BDD, min_imc_branching, sigref::IMC&);
+
+}
 
 #endif

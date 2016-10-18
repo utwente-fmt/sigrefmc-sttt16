@@ -23,61 +23,67 @@
 #include <sylvan.h>
 #include <sylvan_obj.hpp>
 
-using namespace sylvan;
-
 namespace sigref {
+
+class CTMC;
+class LTS;
+class IMC;
 
 class StateSystem {
     friend class SystemParser;
     friend class BddLtsParser;
+    friend class Minimizations;
 
-    Bdd states;
-    Bdd initialStates;
-    std::vector<Bdd> initialPartition;
+    sylvan::Bdd states;
+    sylvan::Bdd initialStates;
+    std::vector<sylvan::Bdd> initialPartition;
 
-    Bdd varS;
-    Bdd varT;
-    Bdd varA;
+    sylvan::Bdd varS;
+    sylvan::Bdd varT;
+    sylvan::Bdd varA;
 
 public:
-    Bdd getStates() const { return states; }
-    Bdd getInitialStates() const { return initialStates; }
-    std::vector<Bdd> getInitialPartition() const { return initialPartition; }
-    Bdd getVarS() const { return varS; }
-    Bdd getVarT() const { return varT; }
-    Bdd getVarA() const { return varA; }
+    sylvan::Bdd getStates() const { return states; }
+    sylvan::Bdd getInitialStates() const { return initialStates; }
+    std::vector<sylvan::Bdd> getInitialPartition() const { return initialPartition; }
+    sylvan::Bdd getVarS() const { return varS; }
+    sylvan::Bdd getVarT() const { return varT; }
+    sylvan::Bdd getVarA() const { return varA; }
 };
 
 class LTS: public StateSystem
 {
     friend class SystemParser;
     friend class BddLtsParser;
+    friend class Minimizations;
 
-    std::vector<std::pair<Bdd,Bdd>> transitions;
-    Bdd tau;
+    std::vector<std::pair<sylvan::Bdd,sylvan::Bdd>> transitions;
+    sylvan::Bdd tau;
 
 public:
-    std::vector<std::pair<Bdd,Bdd>> getTransitions() const { return transitions; }
-    Bdd getTau() const { return tau; }
+    std::vector<std::pair<sylvan::Bdd,sylvan::Bdd>> getTransitions() const { return transitions; }
+    sylvan::Bdd getTau() const { return tau; }
 };
 
 class CTMC: public StateSystem
 {
     friend class SystemParser;
+    friend class Minimizations;
 
-    Mtbdd markov_transitions;
+    sylvan::Mtbdd markov_transitions;
 
 public:
-    Mtbdd getMarkovTransitions() const { return markov_transitions; }
+    sylvan::Mtbdd getMarkovTransitions() const { return markov_transitions; }
 };
 
 class IMC: public LTS {
     friend class SystemParser;
+    friend class Minimizations;
 
-    Mtbdd markov_transitions;
+    sylvan::Mtbdd markov_transitions;
 
 public:
-    Mtbdd getMarkovTransitions() const { return markov_transitions; }
+    sylvan::Mtbdd getMarkovTransitions() const { return markov_transitions; }
 };
 
 } // end namespace sigref

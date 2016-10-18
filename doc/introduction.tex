@@ -1,0 +1,32 @@
+%!TEX root = main.tex
+
+This report is the documentation for the \textsc{SigrefMC} tool, developed by Tom van Dijk at the Formal Methods \& Tools research group of the University of Twente.
+%
+%
+\textsc{SigrefMC} implements multi-core signature-based partition refinement using the multi-core (MT)BDD package Sylvan~\cite{DBLP:conf/tacas/DijkP15}.
+
+
+\textsc{SigrefMC} performs bisimulation minimisation for labeled transition systems (LTSs), continuous-time Markov chains (CTMCs) and interactive Markov chains (IMCs), which combines the features of LTSs and CTMCs.
+These allow the analysis of quantitative properties, e.g. performance and dependability.
+%
+%
+\textsc{SigrefMC} implements strong bisimulation and branching bisimulation. Strong bisimulation preserves both internal behavior ($\tau$-transitions) and observable behavior, while branching bisimulation abstracts from internal behavior. The advantage of branching bisimulation compared to other variations of weak bisimulation is that it preserves the branching structure of the LTS, thus preserving certain interesting properties such as CTL* without next-state operator.
+
+
+
+
+The tool supports two input formats, the XML format used by the original \textsc{Sigref} tool~\cite{DBLP:conf/atva/WimmerHHSB06}, and the BDD format that the \textsc{LTSmin} toolset~\cite{DBLP:conf/tacas/KantLMPBD15} generates for various model checking languages.
+%
+%
+\textsc{SigrefMC} supports both the floating-point and the rational representation of rates in continuous-time transitions.
+
+
+
+
+One of the design goals of this tool is to encourage researchers to extend it for their own file formats and notions of bisimulation, and to integrate it in other toolsets.
+%
+%
+Therefore, \textsc{SigrefMC} is freely available online\footnote{\url{https://github.com/utwente-fmt/sigrefmc}} and licensed with the Apache 2.0 license.
+
+
+

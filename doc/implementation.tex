@@ -1,0 +1,246 @@
+%!TEX root = main.tex
+
+This chapter describes the technical details of the implementation of signature-based partition refinement.
+It contains a condensed version of several sections from~\cite{DBLP:conf/tacas/DijkP16}.
+
+
+\section{Decision diagram algorithms in Sylvan}
+
+
+In {symbolic model checking}, sets of states and transitions are represented by their characteristic function, rather than stored individually.
+With states described by $N$ Boolean variables,
+a set $S\subseteq \mathbb{B}^N$ can be represented by its characteristic function $f\colon \mathbb{B}^N\rightarrow \mathbb{B}$, where $S=\{s\mid f(s)\}$.
+%
+%
+%
+Binary decision diagrams (BDDs) are a concise and canonical representation of Boolean functions.
+
+An (ordered) BDD is a directed acyclic graph with leaves $0$ and $1$. Each internal node has a variable label $x_i$ and two outgoing edges labeled $0$ and $1$. Variables are encountered along each path according to a fixed variable ordering. Duplicate nodes and nodes with two identical outgoing edges are forbidden.
+%
+%\begin{definition}
+%An (ordered) BDD is a directed acyclic graph with the following properties:
+%\begin{compactenum}
+%\item There is a single root node and two terminal nodes 0 and 1.
+%\item Each non-terminal node $p$ has a variable label $x_i$ and two outgoing edges, labeled 0 and 1; we write $\text{lvl}(p)=i$ and use $p[0]$ and $p[1]$ for the children.
+%\item For each edge from node $p$ to non-terminal node $q$, $\text{lvl}(p)<\text{lvl}(q)$.
+%%\item There are no {duplicate} nodes, i.e.,\\$\forall p\forall q\cdot(\text{lvl}(p)=\text{lvl}(q)\wedge p[0]=q[0]\wedge p[1]=q[1])\rightarrow p=q$.
+%\item There are no duplicate nodes $\langle x_i,p[0],p[1]\rangle$ (i.e., maximum sharing)
+%\item There are no redundant nodes (nodes with $p[0]=p[1]$)
+%\end{compactenum}
+%\end{definition}
+%
+%
+%%
+It is well known that for a fixed variable ordering, every Boolean function is represented by a unique BDD.
+
+
+In addition to BDDs with leaves $0$ and $1$, multi-terminal binary decision diagrams have been proposed with leaves other than $0$ and $1$, representing functions from the Boolean space $\mathbb{B}^N$ onto any finite set. For example, MTBDDs can have leaves representing integers (encoding $\mathbb{B}^N\rightarrow\mathbb{N}$), floating-point numbers (encoding $\mathbb{B}^N\rightarrow\mathbb{R}$) and rational numbers (encoding $\mathbb{B}^N\rightarrow\mathbb{Q}$).
+Partial functions are supported using a terminal leaf $\bot$.% (in practice we use the Boolean leaf $0$ for non-Boolean codomains).
+
+
+
+Sylvan~\cite{DBLP:conf/tacas/DijkP15} implements parallelized operations on decision diagrams using parallel data structures and work-stealing.
+Work-stealing is a load balancing method for task-based parallelism.
+Recursive operations, such as most BDD operations, implicitly form a tree of tasks.
+Independent subtasks are stored in queues and idle processors steal tasks from the queues of busy processors.
+
+
+\begin{algorithm}[t!]
+\Def{\Apply{$x$, $y$, $\textsf{F}$}}{
+    \lIf{$(x,y,\textsf{F})\in\textsf{cache}$}{
+        \Return{$\textsf{cache}[(x,y,\textsf{F})]$}\tcc*[f]{get from cache}    
+    }
+    \lIf{$x$ and $y$ are terminals}{
+        \Return{$\textsf{F}(x,y)$}\tcc*[f]{apply operator \textsf{F}}
+    }
+    $v$ = topVar($x$,$y$) \;
+    low $\leftarrow$ \Apply{$x_{v=0}$, $y_{v=0}$, $\textsf{F}$} \tcc*[r]{execute in parallel}
+    high $\leftarrow$ \Apply{$x_{v=1}$, $y_{v=1}$, $\textsf{F}$} \;
+    result $\leftarrow$ \BDDnode{$v$, low, high} \tcc*[r]{compute result}
+    $\textsf{cache}[(x,y,\textsf{F})]$ $\leftarrow$ result \tcc*[r]{put in cache}
+    \Return{result}
+}
+\caption{Generic algorithm that applies a binary operator \textsf{F} to BDDs $x$ and $y$.}
+\label{alg:generic}
+\end{algorithm}
+
+
+
+Algorithm~\ref{alg:generic} describes the implementation of a generic binary operation $\textsf{F}$.
+%
+%
+%
+BDD operations mainly consist of consulting an operation cache, performing some recursive step, and creating new BDD nodes using a unique table.
+The operation cache is required to reduce the time complexity of BDD operations from exponential to polynomial in the size of the BDDs.
+Sylvan uses a single shared unique table for all BDD nodes and a single shared operation cache for all operations.
+To obtain high performance in a multi-core environment, the datastructures for the BDD nodes and the operation cache must be highly scalable.
+Sylvan implements several non-blocking datastructures to enable good speedups.
+
+
+
+To compute symbolic signature-based partition refinement, several basic operations must be supported by the BDD package (see also \cite{DBLP:conf/atva/WimmerHHSB06}).
+%
+%
+%
+Sylvan implements basic operations such as $\wedge$ and \texttt{if-then-else}, and existential quantification $\exists$.
+Negation $\neg$ is performed in constant time using complement edges.
+To compute relational products of transition systems, there are operations \texttt{relnext} (to compute successors) and \texttt{relprev} (to compute predecessors and to concatenate relations), which combine the relational product with variable renaming.
+The operation \texttt{and\_exists} computes the traditional relational product without variable renaming.
+Similar operations are also implemented for MTBDDs.
+%
+%
+%
+Sylvan is designed to support custom BDD algorithms.
+We present two custom algorithms below.
+%We also use custom extensions of traditional BDD algorithms to avoid variable renaming.
+
+
+
+\section{Encoding of signature refinement}
+
+We implement symbolic signature refinement similar to~\cite{DBLP:conf/atva/WimmerHHSB06}.
+%
+%
+Unlike~\cite{DBLP:conf/atva/WimmerHHSB06}, we do not refine the partition with respect to a single block, but with respect to all blocks simultaneously.
+% like in~\cite{DBLP:journals/entcs/BlomO03,DBLP:conf/qest/Derisavi07}.
+%
+%
+%
+We use a binary encoding with variables $s$ for the current state, $s'$ for the next state, $a$ for the action labels and $b$ for the blocks.
+We order BDD variables $a$ and $b$ after $s$ and $s'$, since this is required
+to efficiently replace signatures $(a,b)$ by new block numbers $b$ (see below).
+Variables $s$ and $s'$ are interleaved, which is common in the context of transition systems.
+
+
+
+\begin{figure}[tp]
+\begin{center}
+\scalebox{0.9}{
+\begin{tikzpicture}
+\coordinate (a) at (250:2);
+\coordinate (b) at (290:2);
+\coordinate (c) at (250:3);
+\coordinate (d) at (290:3);
+\draw (0,0) -- (c);
+\draw (0,0) -- (d);
+\draw (a) -- (b);
+\draw (c) -- (d);
+\draw (0,-1.5) node {$s,s'$};
+\draw (0,-2.35) node {$a$};
+\draw (0,-4.5) node {BDD $\mathcal{T}(s,s',a)$};
+
+\coordinate (a0) at (3,0);
+\coordinate (aa) at ($(a0) + (250:2)$);
+\coordinate (ab) at ($(a0) + (290:2)$);
+\coordinate (ac) at ($(a0) + (250:3)$);
+\coordinate (ad) at ($(a0) + (290:3)$);
+\coordinate (ae) at ($(a0) + (250:4)$);
+\coordinate (af) at ($(a0) + (290:4)$);
+\draw (a0) -- (ae);
+\draw (a0) -- (af);
+\draw (aa) -- (ab);
+%\draw (ac) -- (ae);
+\%draw (ad) -- (af);
+\draw (ac) -- (ad);
+\draw (ae) -- (af);
+\draw (3,-1.5) node {$s$};
+\draw (3,-2.35) node {$a$};
+\draw (3,-3.25) node {$b$};
+\draw (3,-4.5) node {BDD $\sigma_T(s,a,b)$};
+
+\coordinate (b0) at (6.5,0);
+\coordinate (ba) at ($(b0) + (250:2)$);
+\coordinate (bb) at ($(b0) + (290:2)$);
+\coordinate (bc) at ($(b0) + (250:3)$);
+\coordinate (bd) at ($(b0) + (290:3)$);
+\coordinate (be) at ($(b0) + (250:4)$);
+\coordinate (bf) at ($(b0) + (290:4)$);
+\draw (b0) -- (ba);
+\draw (b0) -- (bb);
+\draw (ba) -- (bb);
+\draw (bc) -- (be);
+\draw (bd) -- (bf);
+\draw (bc) -- (bd);
+\draw (be) -- (bf);
+\draw ($(b0) + (0,-1.5)$) node {$s$};
+\draw ($(b0) + (0,-3.25)$) node {$b$};
+\draw ($(b0) + (0,-4.5)$) node {MTBDD $\sigma_R(s,b)$};
+
+\coordinate (c0) at (-3,0);
+\coordinate (ca) at ($(c0) + (250:2)$);
+\coordinate (cb) at ($(c0) + (290:2)$);
+\coordinate (cc) at ($(c0) + (250:3)$);
+\coordinate (cd) at ($(c0) + (290:3)$);
+\coordinate (ce) at ($(c0) + (250:4)$);
+\coordinate (cf) at ($(c0) + (290:4)$);
+\draw (c0) -- (ca);
+\draw (c0) -- (cb);
+\draw (ca) -- (cb);
+\draw (cc) -- (ce);
+\draw (cd) -- (cf);
+\draw (cc) -- (cd);
+\draw (ce) -- (cf);
+\draw ($(c0) + (0,-1.5)$) node {$s$};
+\draw ($(c0) + (0,-3.25)$) node {$b$};
+\draw ($(c0) + (0,-4.5)$) node {BDD $\mathcal{P}(s,b)$};
+\end{tikzpicture}
+}
+\end{center}
+\caption{Schematic overview of the BDDs in signature refinement}
+\label{fig:bdds}
+\end{figure}
+
+
+
+To perform symbolic bisimulation we represent a number of sets by their characteristic functions. See also Figure~\ref{fig:bdds}.
+\begin{itemize}
+\item A set of states is represented by a BDD $\mathcal{S}(s)$;
+% with $\mathcal{S}(s)=1\Leftrightarrow s\in S$
+\item Transitions are represented by a BDD $\mathcal{T}(s,s',a)$;
+\item Markovian transitions are represented by an MTBDD $\mathcal{R}(s,s')$, with leaves containing rational numbers ($\mathbb{Q}$);
+\item Signatures $\textbf{T}$ and $\textbf{B}$ are represented by a BDD $\sigma_T(s,a,b)$;
+\item Signatures $\textbf{R}^s$ and $\textbf{R}^b$ are represented by an MTBDD $\sigma_R(s,b)$.
+\end{itemize}
+
+
+
+
+In the literature,
+%~\cite{DBLP:conf/cav/BoualiS92,DBLP:conf/tacas/Derisavi07,DBLP:conf/qest/Derisavi07,DBLP:conf/atva/WimmerHHSB06}, 
+three methods have been proposed to represent $\pi$.
+%
+%
+%
+\begin{enumerate}
+\item As an equivalence relation, using a BDD $\mathcal{E}(s,s')=1$ iff $s\equiv_{\pi} s'$.
+\item As a partition, by assigning each block a unique number, encoded with variables $b$, using a BDD $\mathcal{P}(s,b)=1$ iff $s\in C_b$.
+\item Using $k=\ceil{\log_2 n}$ BDDs $\mathcal{P}_{0},\dotsc,\mathcal{P}_{k-1}$ such that $\mathcal{P}_i(s)=1$ iff $s\in C_b$ and the $i^\text{th}$ bit of $b$ is 1. This requires significant time to restore blocks for the refinement procedure, but can require less memory.
+\end{enumerate}
+
+%We use variables $t$ and $b$ instead of $s$ and $b$ in $\mathcal{P}$ to avoid creating a custom BDD operation for computing $\exists t\colon \mathcal{T}(s,t,a) \wedge \mathcal{P}(t,b)$.
+%Also, \cite{DBLP:conf/atva/WimmerHHSB06} often requires renaming operations to get $\mathcal{P}(t,b)$ from $\mathcal{P}(s,b)$, which is unnecessary and expensive.
+
+%Furthermore, the encoding of block numbers is such that the the lowest significant bit comes first...
+
+%We represent the partition by the assignment to a block number.
+%An alternative method to represent the partition, used by \cite{DBLP:conf/cav/BoualiS92} and \cite{DBLP:journals/ijfcs/MummeC13}, stores the equivalence relation in a BDD $\mathcal{R}(s,t)$.
+We choose to use method 2, since in practice the BDD of $\mathcal{P}(s,b)$ is smaller than the BDD of $\mathcal{E}(s,s')$.
+Using $\mathcal{P}(s,b)$ also has the advantage of straight-forward signature computation.
+%In cases where only few blocks contain multiple states, $\mathcal{P}(s,b)$ blows up to a large tree, assigning each state to a different block.
+%In such cases, the BDD for $\mathcal{E}(s,t)$ would be much smaller, since less states are equivalent.
+%
+%
+The logarithmic representation is incompatible with our approach, since we refine all blocks simultaneously. Their approach involves restoring individual blocks to the $\mathcal{P}(s,b)$ representation, performing a refinement step, and compacting the result to the logarithmic representation. Restoring all blocks simply computes the full $\mathcal{P}(s,b)$.
+
+We represent Markovian transitions using rational numbers, since they offer better precision than floating-point numbers.
+The manipulation of floating-point numbers typically introduces tiny rounding errors, resulting in different results of similar computations.
+This significantly affects bisimulation reduction, often resulting in finer partitions than the maximal bisimulation~\cite{DBLP:conf/mmb/WimmerB10}.
+
+
+\section{The \texttt{refine} algorithm}
+\label{sec:refine}
+\input{refine}
+
+\section{Computing inert transitions}
+\label{sec:inert}
+\input{inert}

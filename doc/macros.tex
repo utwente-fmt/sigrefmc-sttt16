@@ -1,0 +1,31 @@
+%!TEX root = main.tex
+
+\newcommand{\td}[1]{\todo[color=orange!40,caption="TvD"]{\textbf{TvD:} #1}}
+
+\newcommand{\act}[0]{\ensuremath{\textsf{Act}}}
+\newcommand{\taustar}[0]{\stackrel{\tau*}{\rightarrow}}
+\newcommand{\taustarpi}[0]{\stackrel[\raisebox{1ex}{$\scriptstyle\!\!\pi$}]{\tau*}{\rightarrow}}
+\newcommand{\taupi}[0]{\stackrel[\raisebox{1ex}{$\scriptstyle\!\!\pi$}]{\tau\;}{\rightarrow}}
+\newcommand{\astar}[0]{\stackrel{a*}{\rightarrow}}
+\newcommand{\astarpi}[0]{\stackrel[\raisebox{1ex}{$\scriptstyle\!\!\pi$}]{a*}{\rightarrow}}
+\newcommand{\astarR}[0]{\stackrel[\raisebox{1ex}{$\scriptstyle\!\!\mathcal{R}$}]{a*}{\rightarrow}}
+\newcommand{\api}[0]{\stackrel[\raisebox{1ex}{$\scriptstyle\!\!\pi$}]{a\;}{\rightarrow}}
+\newcommand{\aR}[0]{\stackrel[\raisebox{1ex}{$\scriptstyle\!\!\mathcal{R}$}]{a\;}{\rightarrow}}
+
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+                     \raisebox{0.3ex}{$\m@th\cdot$}}%
+                     \raisebox{-0.3ex}{$\m@th\cdot$}}%
+                     =}
+\makeatother
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\DeclareMathOperator{\sigref}{sigref}
+\newcommand{\sig}{\sigma}
+
+\newcommand{\refines}[0]{\ensuremath{\sqsubseteq}}
+\newcommand{\refinedby}[0]{\ensuremath{\sqsupseteq}}
+
+\newcommand{\option}[1]{\ensuremath{\langle\mathit{#1}\rangle}}

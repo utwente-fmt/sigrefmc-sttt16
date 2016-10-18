@@ -1,5 +1,6 @@
 /*
- * Copyright 2011-2015 Formal Methods and Tools, University of Twente
+ * Copyright 2011-2016 Formal Methods and Tools, University of Twente
+ * Copyright 2016 Tom van Dijk, Johannes Kepler University Linz
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +18,22 @@
 #include <sylvan_config.h>
 
 #include <assert.h> // for assert
+#include <errno.h>  // for errno
 #include <stdio.h>  // for fprintf
 #include <stdint.h> // for uint32_t etc
 #include <stdlib.h> // for exit
+#include <string.h> // for strerror
 #include <sys/mman.h> // for mmap
 
-#include <atomics.h>
-#include <refs.h>
+#include <sylvan_refs.h>
+
+#ifndef compiler_barrier
+#define compiler_barrier() { asm volatile("" ::: "memory"); }
+#endif
+
+#ifndef cas
+#define cas(ptr, old, new) (__sync_bool_compare_and_swap((ptr),(old),(new)))
+#endif
 
 /**
  * Implementation of external references
@@ -127,9 +137,9 @@ refs_resize(refs_table_t *tbl)
     if (count*4 > tbl->refs_size) new_size *= 2;
 
     // allocate new table
-    uint64_t *new_table = (uint64_t*)mmap(0, new_size * sizeof(uint64_t), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, 0, 0);
+    uint64_t *new_table = (uint64_t*)mmap(0, new_size * sizeof(uint64_t), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
     if (new_table == (uint64_t*)-1) {
-        fprintf(stderr, "refs: Unable to allocate memory!\n");
+        fprintf(stderr, "refs: Unable to allocate memory: %s!\n", strerror(errno));
         exit(1);
     }
 
@@ -255,8 +265,12 @@ refs_up(refs_table_t *tbl, uint64_t a)
 void
 refs_down(refs_table_t *tbl, uint64_t a)
 {
+#ifdef NDEBUG
+    refs_modify(tbl, a, -1);
+#else
     int res = refs_modify(tbl, a, -1);
     assert(res != 0);
+#endif
 }
 
 uint64_t*
@@ -301,9 +315,9 @@ refs_create(refs_table_t *tbl, size_t _refs_size)
     }
 
     tbl->refs_size = _refs_size;
-    tbl->refs_table = (uint64_t*)mmap(0, tbl->refs_size * sizeof(uint64_t), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, 0, 0);
+    tbl->refs_table = (uint64_t*)mmap(0, tbl->refs_size * sizeof(uint64_t), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
     if (tbl->refs_table == (uint64_t*)-1) {
-        fprintf(stderr, "refs: Unable to allocate memory!\n");
+        fprintf(stderr, "refs: Unable to allocate memory: %s!\n", strerror(errno));
         exit(1);
     }
 }
@@ -402,9 +416,9 @@ protect_resize(refs_table_t *tbl)
     if (count*4 > tbl->refs_size) new_size *= 2;
 
     // allocate new table
-    uint64_t *new_table = (uint64_t*)mmap(0, new_size * sizeof(uint64_t), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, 0, 0);
+    uint64_t *new_table = (uint64_t*)mmap(0, new_size * sizeof(uint64_t), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
     if (new_table == (uint64_t*)-1) {
-        fprintf(stderr, "refs: Unable to allocate memory!\n");
+        fprintf(stderr, "refs: Unable to allocate memory: %s!\n", strerror(errno));
         exit(1);
     }
 
@@ -570,9 +584,9 @@ protect_create(refs_table_t *tbl, size_t _refs_size)
     }
 
     tbl->refs_size = _refs_size;
-    tbl->refs_table = (uint64_t*)mmap(0, tbl->refs_size * sizeof(uint64_t), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, 0, 0);
+    tbl->refs_table = (uint64_t*)mmap(0, tbl->refs_size * sizeof(uint64_t), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
     if (tbl->refs_table == (uint64_t*)-1) {
-        fprintf(stderr, "refs: Unable to allocate memory!\n");
+        fprintf(stderr, "refs: Unable to allocate memory: %s!\n", strerror(errno));
         exit(1);
     }
 }
@@ -581,4 +595,5 @@ void
 protect_free(refs_table_t *tbl)
 {
     munmap(tbl->refs_table, tbl->refs_size * sizeof(uint64_t));
+    tbl->refs_table = 0;
 }

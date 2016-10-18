@@ -1,0 +1,74 @@
+%!TEX root = main.tex
+
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}  % fix LaTeX Font Warning
+\usepackage{microtype}
+%\usepackage{xspace}
+\usepackage{tabu}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+\usepackage{url}
+\usepackage[colorlinks,citecolor=blue,linkcolor=red]{hyperref}
+
+\usepackage{todonotes}
+\usepackage{paralist}
+\usepackage{stackrel}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+%% Algorithm2e package and options
+\usepackage[noline,noend]{algorithm2e}
+\AlgoDontDisplayBlockMarkers
+\DontPrintSemicolon
+\LinesNumbered
+%% Fix caption style (small, 0.5 em below code, and in a properly placed parbox)
+\SetAlgoCaptionLayout{small}
+\SetAlCapSkip{.5em}
+\makeatletter
+\renewcommand{\algocf@makecaption}[2]{%
+  \addtolength{\hsize}{1.5\algomargin}%
+  \parbox[t]{\hsize}{\algocf@captiontext{#1}{#2}}%
+  \addtolength{\hsize}{-1.5\algomargin}%
+}
+\makeatother
+%% Language style
+\SetKwProg{Def}{def}{:}{}
+\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else:}{}
+\SetKwFor{For}{for}{:}{}
+\SetKwFor{While}{while}{:}{}
+\SetArgSty{textup}
+\SetKwComment{tcp}{\# }{}
+%% Keywords
+\SetKwFunction{Apply}{apply}
+\SetKwFunction{Exists}{exists}
+\SetKwFunction{AndExists}{and\_exists}
+\SetKwFunction{BDDnode}{BDDnode}
+\SetKwFunction{TopVar}{topVar}
+\SetKwFunction{Var}{var}
+\SetKwFunction{Next}{next}
+\SetKwFunction{Ite}{ite}
+\SetKwFunction{RelNext}{relnext}
+\SetKwFunction{RelPrev}{relprev}
+\SetKwFunction{And}{and}
+\SetKwFunction{Or}{or}
+\SetKwFunction{Bisimulation}{bisimulation}
+\SetKwFunction{Signature}{signature}
+\SetKwFunction{Refine}{refine}
+\SetKwFunction{AndExists}{and\_exists}
+\SetKwFunction{Inert}{inert}
+
+
+\newtheorem{thm}{Theorem}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
