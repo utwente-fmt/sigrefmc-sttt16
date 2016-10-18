@@ -1,0 +1,31 @@
+[   20.88] Finished reading system from models/franklin_5_3-b.bdd.
+[   29.78] Number of state variables: 173.
+[   29.78] Number of action variables: 1.
+[   29.78] Number of block variables: 25.
+[   29.78] Number of transition relations: 362.
+[   29.78] Number of transitions: 7,854,931,893,687,270,915,318,091,863,735,707,856,829,537,948,008,448 transitions.
+[   29.78] Initial partition: 55,355,191 states in 1 block(s).
+[   91.16] (GC) Starting garbage collection...
+[  100.72] (GC) Garbage collection done.
+[  242.57] (GC) Starting garbage collection...
+[  258.48] (GC) Garbage collection done.
+[  369.41] After iteration 1: 4 blocks.
+[  599.17] After iteration 2: 8 blocks.
+[  634.54] After iteration 3: 13 blocks.
+[  647.51] After iteration 4: 22 blocks.
+[  668.44] After iteration 5: 32 blocks.
+[  702.22] After iteration 6: 46 blocks.
+[  731.89] After iteration 7: 62 blocks.
+[  781.97] After iteration 8: 81 blocks.
+[  878.57] After iteration 9: 105 blocks.
+[  960.81] (GC) Starting garbage collection...
+[  980.00] (GC) Garbage collection done.
+[ 1172.44] After iteration 10: 141 blocks.
+[ 1445.21] After iteration 11: 194 blocks.
+[ 1591.79] After iteration 12: 277 blocks.
+[ 1802.74] After iteration 13: 411 blocks.
+[ 2137.41] After iteration 14: 631 blocks.
+[ 2569.26] After iteration 15: 963 blocks.
+[ 2926.41] (GC) Starting garbage collection...
+[ 2959.57] (GC) Garbage collection done.
+[ 3249.23] After iteration 16: 1,448 blocks.

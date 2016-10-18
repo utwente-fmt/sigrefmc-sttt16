@@ -1,0 +1,5 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[  203.64] (GC) Starting garbage collection...
+[  204.88] (GC) Garbage collection done.
+[  235.74] Finished reading system from models/franklin_5_5-b.bdd.

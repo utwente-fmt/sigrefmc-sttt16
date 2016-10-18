@@ -1,0 +1,33 @@
+[    0.41] Finished reading system from models/brp_4_3_4-b.bdd.
+[    0.55] Number of state variables: 46.
+[    0.55] Number of action variables: 7.
+[    0.55] Number of block variables: 25.
+[    0.55] Number of transition relations: 37.
+[    0.55] Number of transitions: 471,505,804,722,176 transitions.
+[    0.55] Initial partition: 27,118 states in 1 block(s).
+[    0.55] Precomputing tau transitions for branching bisimulation.
+[    0.65] After iteration 1: 36 blocks.
+[    0.75] After iteration 2: 78 blocks.
+[    0.86] After iteration 3: 122 blocks.
+[    1.00] After iteration 4: 170 blocks.
+[    1.07] After iteration 5: 218 blocks.
+[    1.16] After iteration 6: 218 blocks.
+[    1.16] 
+[    1.16] Time for computing the bisimulation relation: 0.61 sec.
+[    1.16] Time for signature computation: 0.57 s.
+[    1.16] Time for partition refinement: 0.02 s.
+[    1.16] 
+[    1.16] Number of iterations: 6.
+[    1.16] Number of states before bisimulation minimisation: 27,118.
+[    1.16] Number of blocks after bisimulation minimisation: 218.
+[    1.16] Number of transitions before bisimulation minimisation: 471,505,804,722,176.
+[    1.16] Number of transitions after bisimulation minimisation: 412.
+[    1.16] 
+[    1.16] Trimming unneeded block variables...
+[    1.16] 
+[    1.16] Computing new interactive transition relations (using custom operations)...
+[    1.20] Computing new states, initial states, initial partition...
+[    1.20] 
+[    1.20] Time for computing the quotient of the transition relation: 0.04 sec.
+[    1.20] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    1.20] New interactive transition relation: 433 transitions, 1,706 MTBDD nodes.

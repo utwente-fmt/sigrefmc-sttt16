@@ -1,0 +1,48 @@
+[    0.83] Finished reading system from models/ftwc03.ximc.
+[    0.84] Number of state variables: 19.
+[    0.84] Number of action variables: 6.
+[    0.84] Number of block variables: 20.
+[    0.84] Number of Markovian transitions: 44,879,564,798
+[    0.84] Number of interactive transitions: 26,964,119,784
+[    0.84] Initial partition: 524,286 states in 1 block(s).
+[    0.85] Computing maximal-progress cut.
+[    4.25] After iteration 1-a: 13,123 blocks.
+[   54.98] (GC) Starting garbage collection...
+[   58.69] (GC) Garbage collection done.
+[  102.23] After iteration 1-b: 223,012 blocks.
+[  149.02] (GC) Starting garbage collection...
+[  155.09] (GC) Garbage collection done.
+[  321.92] (GC) Starting garbage collection...
+[  340.23] (GC) Garbage collection done.
+[  692.62] (GC) Starting garbage collection...
+[  723.46] (GC) Garbage collection done.
+[ 1183.05] After iteration 2-a: 236,131 blocks.
+[ 1598.75] (GC) Starting garbage collection...
+[ 1651.36] (GC) Garbage collection done.
+[ 2041.33] After iteration 2-b: 256,333 blocks.
+[ 3219.43] After iteration 3-a: 256,333 blocks.
+[ 3660.31] (GC) Starting garbage collection...
+[ 3710.14] (GC) Garbage collection done.
+[ 4306.87] After iteration 3-b: 256,333 blocks.
+[ 4306.87] 
+[ 4306.87] Time for computing the bisimulation relation: 4,306.02 sec.
+[ 4306.87] Time for Markovian signature computation: 2,261.68 s.
+[ 4306.87] Time for Markovian partition refinement: 0.64 s.
+[ 4306.87] Time for interactive signature computation: 2,042.18 s.
+[ 4306.87] Time for interactive partition refinement: 1.51 s.
+[ 4306.87] 
+[ 4306.87] Number of iterations: 3.
+[ 4306.87] Number of states before bisimulation minimisation: 524,286.
+[ 4306.87] Number of blocks after bisimulation minimisation: 256,333.
+[ 4306.87] 
+[ 4306.87] Trimming unneeded block variables...
+[ 4307.34] 
+[ 4307.34] Computing new transition relations (using custom operations)...
+[ 4307.34] Picking a state for each block...
+[ 4308.40] Converting the partition...
+[ 4308.74] Computing the new transition relation...
+[ 4513.17] Computing the new interactive transition relations...
+[ 5285.16] (GC) Starting garbage collection...
+[ 5309.76] (GC) Garbage collection done.
+[ 6650.96] (GC) Starting garbage collection...
+[ 6675.55] (GC) Garbage collection done.

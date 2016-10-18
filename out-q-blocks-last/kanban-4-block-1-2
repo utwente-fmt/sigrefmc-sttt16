@@ -1,0 +1,36 @@
+[    0.66] Finished reading system from models/kanban-4.xctmc.
+[    0.67] Number of state variables: 48.
+[    0.67] Number of block variables: 25.
+[    0.67] Number of Markovian transitions: 3,979,850
+[    0.67] Initial partition: 454,475 states in 1 block(s).
+[    0.68] After iteration 1: 86 blocks.
+[    3.77] After iteration 2: 192,967 blocks.
+[   26.59] After iteration 3: 431,612 blocks.
+[   42.80] (GC) Starting garbage collection...
+[   45.96] (GC) Garbage collection done.
+[   62.87] After iteration 4: 453,323 blocks.
+[   84.81] After iteration 5: 454,055 blocks.
+[   86.29] After iteration 6: 454,459 blocks.
+[   87.70] After iteration 7: 454,475 blocks.
+[   89.06] After iteration 8: 454,475 blocks.
+[   90.23] 
+[   90.23] Time for computing the bisimulation relation: 88.40 sec.
+[   90.23] Time for signature computation: 78.63 sec.
+[   90.23] Time for partition refinement: 9.77 sec.
+[   90.23] 
+[   90.23] Number of iterations: 8.
+[   90.23] Number of states before bisimulation minimisation: 454,475.
+[   90.23] Number of blocks after bisimulation minimisation: 454,475.
+[   90.23] Number of transitions before bisimulation minimisation: 3,979,850.
+[   90.23] Number of transitions after bisimulation minimisation: 3,979,850.
+[   90.23] 
+[   90.23] Trimming unneeded block variables...
+[   91.89] 
+[   91.89] Computing new Markov transition relation (using custom operations)...
+[  134.52] (GC) Starting garbage collection...
+[  139.72] (GC) Garbage collection done.
+[  173.69] Computing new states, initial states, initial partition...
+[  173.69] 
+[  173.69] Time for computing the quotient of the transition relation: 81.80 sec.
+[  173.69] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[  175.00] New Markov transition relation: 3,979,850 transitions, 3,032,327 MTBDD nodes.

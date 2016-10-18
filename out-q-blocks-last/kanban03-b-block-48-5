@@ -1,0 +1,38 @@
+[    1.66] Finished reading system from models/kanban03.xlts.
+[    1.67] Number of state variables: 20.
+[    1.67] Number of action variables: 5.
+[    1.67] Number of block variables: 21.
+[    1.67] Number of transition relations: 1.
+[    1.67] Number of transitions: 4,651,520 transitions.
+[    1.67] Initial partition: 1,024,240 states in 1 block(s).
+[    1.67] Precomputing tau transitions for branching bisimulation.
+[    1.67] After iteration 1: 60 blocks.
+[    1.68] After iteration 2: 373 blocks.
+[    1.69] After iteration 3: 541 blocks.
+[    1.70] After iteration 4: 676 blocks.
+[    1.70] After iteration 5: 740 blocks.
+[    1.71] After iteration 6: 803 blocks.
+[    1.72] After iteration 7: 837 blocks.
+[    1.73] After iteration 8: 852 blocks.
+[    1.77] After iteration 9: 867 blocks.
+[    1.78] After iteration 10: 872 blocks.
+[    1.78] After iteration 11: 872 blocks.
+[    1.78] 
+[    1.78] Time for computing the bisimulation relation: 0.12 sec.
+[    1.78] Time for signature computation: 0.08 s.
+[    1.78] Time for partition refinement: 0.04 s.
+[    1.78] 
+[    1.78] Number of iterations: 11.
+[    1.78] Number of states before bisimulation minimisation: 1,024,240.
+[    1.78] Number of blocks after bisimulation minimisation: 872.
+[    1.78] Number of transitions before bisimulation minimisation: 4,651,520.
+[    1.78] Number of transitions after bisimulation minimisation: 2,968.
+[    1.78] 
+[    1.78] Trimming unneeded block variables...
+[    1.78] 
+[    1.78] Computing new interactive transition relations (using custom operations)...
+[    1.79] Computing new states, initial states, initial partition...
+[    1.79] 
+[    1.79] Time for computing the quotient of the transition relation: 0.01 sec.
+[    1.79] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    1.79] New interactive transition relation: 2,968 transitions, 6,263 MTBDD nodes.

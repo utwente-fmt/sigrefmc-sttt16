@@ -1,0 +1,31 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    0.28] Finished reading system from models/onebit_3-b.bdd.
+[    0.64] Number of state variables: 30.
+[    0.64] Number of action variables: 0.
+[    0.64] Number of block variables: 25.
+[    0.64] Number of transition relations: 16.
+[    0.64] Number of transitions: 7,851,737,088.
+[    0.64] Number of reachable transitions: 1,794,096.
+[    0.64] Initial partition: 289,296 states in 1 block(s).
+[    0.64] Precomputing tau transitions for branching bisimulation.
+[    0.75] After iteration 1: 1 blocks.
+[    0.75] 
+[    0.75] Time for computing the bisimulation relation: 0.11 sec.
+[    0.75] Time for signature computation: 0.11 s.
+[    0.75] Time for partition refinement: 0.00 s.
+[    0.75] 
+[    0.75] Number of iterations: 1.
+[    0.75] Number of states before bisimulation minimisation: 289,296.
+[    0.75] Number of blocks after bisimulation minimisation: 1.
+[    0.75] Number of transitions before bisimulation minimisation: 7,851,737,088.
+[    0.75] Number of reachable transitions before bisimulation minimisation: 1,794,096.
+[    0.75] Number of transitions after bisimulation minimisation: 0.
+[    0.75] 
+[    0.75] Trimming unneeded block variables...
+[    0.75] 
+[    0.75] Computing new interactive transition relations (using custom operations)...
+[    0.75] Picking a state for each block...
+[    0.75] Converting the partition...
+[    0.76] Computing new interactive transition relations...
+sigrefmc: /home/dijkt/sigrefmc-sttt16/tool/src/quotient.cpp:311: MTBDD sigref::compute_trans_quotient_WORK(WorkerP*, Task*, MTBDD, MTBDD, MTBDD, MTBDD, MTBDD): Assertion `mtbdd_getvar(dd) > 99999' failed.

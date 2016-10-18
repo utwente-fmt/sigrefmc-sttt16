@@ -1,0 +1,68 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    2.20] Finished reading system from models/swp_3_4-b.bdd.
+[    2.58] Number of state variables: 39.
+[    2.58] Number of action variables: 2.
+[    2.58] Number of block variables: 25.
+[    2.58] Number of transition relations: 11.
+[    2.58] Number of transitions: 1,614,370,832,384.
+[    2.58] Number of reachable transitions: 175,021,560.
+[    2.58] Initial partition: 38,550,168 states in 1 block(s).
+[    3.22] After iteration 1: 5 blocks.
+[    4.34] After iteration 2: 37 blocks.
+[    5.40] (GC) Starting garbage collection...
+[    5.66] (GC) Garbage collection done.
+[    6.51] After iteration 3: 293 blocks.
+[    8.76] After iteration 4: 1,887 blocks.
+[   10.70] (GC) Starting garbage collection...
+[   11.21] (GC) Garbage collection done.
+[   12.99] After iteration 5: 7,638 blocks.
+[   17.29] After iteration 6: 22,921 blocks.
+[   20.21] (GC) Starting garbage collection...
+[   21.07] (GC) Garbage collection done.
+[   24.24] After iteration 7: 49,464 blocks.
+[   30.25] After iteration 8: 78,903 blocks.
+[   36.98] (GC) Starting garbage collection...
+[   38.84] (GC) Garbage collection done.
+[   40.32] After iteration 9: 120,294 blocks.
+[   49.10] After iteration 10: 174,678 blocks.
+[   57.79] After iteration 11: 228,891 blocks.
+[   67.17] After iteration 12: 276,139 blocks.
+[   74.51] (GC) Starting garbage collection...
+[   77.63] (GC) Garbage collection done.
+[   82.12] After iteration 13: 334,285 blocks.
+[   93.35] After iteration 14: 416,379 blocks.
+[  101.78] After iteration 15: 493,494 blocks.
+[  109.92] After iteration 16: 541,293 blocks.
+[  117.51] After iteration 17: 599,235 blocks.
+[  125.04] After iteration 18: 689,226 blocks.
+[  131.91] After iteration 19: 755,565 blocks.
+[  137.49] After iteration 20: 777,435 blocks.
+[  141.90] After iteration 21: 803,679 blocks.
+[  144.74] After iteration 22: 803,679 blocks.
+[  144.84] 
+[  144.84] Time for computing the bisimulation relation: 142.16 sec.
+[  144.84] Time for signature computation: 125.41 s.
+[  144.84] Time for partition refinement: 16.76 s.
+[  144.84] 
+[  144.84] Number of iterations: 22.
+[  144.84] Number of states before bisimulation minimisation: 38,550,168.
+[  144.84] Number of blocks after bisimulation minimisation: 803,679.
+[  144.84] Number of transitions before bisimulation minimisation: 1,614,370,832,384.
+[  144.84] Number of reachable transitions before bisimulation minimisation: 175,021,560.
+[  144.84] Number of transitions after bisimulation minimisation: 3,857,798.
+[  144.84] 
+[  144.84] Trimming unneeded block variables...
+[  146.11] 
+[  146.11] Computing new interactive transition relations (using standard operations)...
+[  151.51] (GC) Starting garbage collection...
+[  154.22] (GC) Garbage collection done.
+[  257.97] (GC) Starting garbage collection...
+[  260.68] (GC) Garbage collection done.
+[  337.98] (GC) Starting garbage collection...
+[  340.80] (GC) Garbage collection done.
+[  369.17] Computing new states, initial states, inital partition...
+[  369.17] 
+[  369.17] Time for computing the quotient of the transition relation: 223.06 sec.
+[  369.17] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[  371.24] New interactive transition relation: 3,882,575 transitions, 6,670,006 MTBDD nodes.

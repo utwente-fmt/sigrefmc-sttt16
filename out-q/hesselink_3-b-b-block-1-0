@@ -1,0 +1,39 @@
+[    0.24] Finished reading system from models/hesselink_3-b.bdd.
+[    0.57] Number of state variables: 58.
+[    0.57] Number of action variables: 3.
+[    0.57] Number of block variables: 25.
+[    0.57] Number of transition relations: 42.
+[    0.57] Number of transitions: 758,856,537,211,928,576 transitions.
+[    0.57] Initial partition: 13,834,800 states in 1 block(s).
+[    0.57] Precomputing tau transitions for branching bisimulation.
+[    3.23] After iteration 1: 9 blocks.
+[    6.64] After iteration 2: 22 blocks.
+[   10.92] After iteration 3: 56 blocks.
+[   15.90] After iteration 4: 72 blocks.
+[   19.31] After iteration 5: 87 blocks.
+[   21.52] After iteration 6: 117 blocks.
+[   24.49] After iteration 7: 153 blocks.
+[   27.68] After iteration 8: 168 blocks.
+[   30.56] After iteration 9: 177 blocks.
+[   33.09] After iteration 10: 180 blocks.
+[   35.55] After iteration 11: 189 blocks.
+[   37.79] After iteration 12: 189 blocks.
+[   37.79] 
+[   37.79] Time for computing the bisimulation relation: 37.22 sec.
+[   37.79] Time for signature computation: 36.07 s.
+[   37.79] Time for partition refinement: 1.14 s.
+[   37.79] 
+[   37.79] Number of iterations: 12.
+[   37.79] Number of states before bisimulation minimisation: 13,834,800.
+[   37.79] Number of blocks after bisimulation minimisation: 189.
+[   37.79] Number of transitions before bisimulation minimisation: 758,856,537,211,928,576.
+[   37.79] Number of transitions after bisimulation minimisation: 438.
+[   37.79] 
+[   37.79] Trimming unneeded block variables...
+[   37.86] 
+[   37.86] Computing new interactive transition relations (using custom operations)...
+[   38.82] Computing new states, initial states, initial partition...
+[   38.82] 
+[   38.82] Time for computing the quotient of the transition relation: 0.95 sec.
+[   38.82] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[   38.82] New interactive transition relation: 516 transitions, 1,516 MTBDD nodes.

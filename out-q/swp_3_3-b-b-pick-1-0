@@ -1,0 +1,44 @@
+[    0.27] Finished reading system from models/swp_3_3-b.bdd.
+[    0.59] Number of state variables: 33.
+[    0.59] Number of action variables: 2.
+[    0.59] Number of block variables: 25.
+[    0.59] Number of transition relations: 11.
+[    0.59] Number of transitions: 28,549,578,752 transitions.
+[    0.59] Initial partition: 1,652,724 states in 1 block(s).
+[    0.59] Precomputing tau transitions for branching bisimulation.
+[    6.67] After iteration 1: 4 blocks.
+[   11.44] After iteration 2: 7 blocks.
+[   17.89] After iteration 3: 16 blocks.
+[   25.50] After iteration 4: 25 blocks.
+[   35.08] After iteration 5: 52 blocks.
+[   46.53] After iteration 6: 79 blocks.
+[   59.29] After iteration 7: 157 blocks.
+[   73.27] After iteration 8: 229 blocks.
+[   88.16] After iteration 9: 445 blocks.
+[  103.46] After iteration 10: 607 blocks.
+[  118.19] After iteration 11: 1,093 blocks.
+[  129.21] (GC) Starting garbage collection...
+[  131.34] (GC) Garbage collection done.
+[  135.91] After iteration 12: 1,093 blocks.
+[  135.92] 
+[  135.92] Time for computing the bisimulation relation: 135.33 sec.
+[  135.92] Time for signature computation: 132.71 s.
+[  135.92] Time for partition refinement: 2.62 s.
+[  135.92] 
+[  135.92] Number of iterations: 12.
+[  135.92] Number of states before bisimulation minimisation: 1,652,724.
+[  135.92] Number of blocks after bisimulation minimisation: 1,093.
+[  135.92] Number of transitions before bisimulation minimisation: 28,549,578,752.
+[  135.92] Number of transitions after bisimulation minimisation: 2,184.
+[  135.92] 
+[  135.92] Trimming unneeded block variables...
+[  136.02] 
+[  136.02] Computing new interactive transition relations (using custom operations)...
+[  136.02] Picking a state for each block...
+[  136.08] Converting the partition...
+[  136.19] Computing new interactive transition relations...
+[  138.77] Computing new states, initial states, initial partition...
+[  138.77] 
+[  138.77] Time for computing the quotient of the transition relation: 2.75 sec.
+[  138.77] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[  138.78] New interactive transition relation: 2,184 transitions, 10,461 MTBDD nodes.

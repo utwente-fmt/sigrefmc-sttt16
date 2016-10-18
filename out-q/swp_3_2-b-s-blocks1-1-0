@@ -1,0 +1,41 @@
+[    0.23] Finished reading system from models/swp_3_2-b.bdd.
+[    0.55] Number of state variables: 26.
+[    0.55] Number of action variables: 2.
+[    0.55] Number of block variables: 25.
+[    0.55] Number of transition relations: 11.
+[    0.55] Number of transitions: 183,500,800 transitions.
+[    0.55] Initial partition: 52,380 states in 1 block(s).
+[    0.64] After iteration 1: 5 blocks.
+[    0.78] After iteration 2: 37 blocks.
+[    0.97] After iteration 3: 139 blocks.
+[    1.21] After iteration 4: 379 blocks.
+[    1.53] After iteration 5: 804 blocks.
+[    1.91] After iteration 6: 1,261 blocks.
+[    2.33] After iteration 7: 1,854 blocks.
+[    2.76] After iteration 8: 2,586 blocks.
+[    3.21] After iteration 9: 3,393 blocks.
+[    3.66] After iteration 10: 4,075 blocks.
+[    4.07] After iteration 11: 4,576 blocks.
+[    4.36] After iteration 12: 4,662 blocks.
+[    4.50] After iteration 13: 4,701 blocks.
+[    4.60] After iteration 14: 4,710 blocks.
+[    4.67] After iteration 15: 4,710 blocks.
+[    4.68] 
+[    4.68] Time for computing the bisimulation relation: 4.12 sec.
+[    4.68] Time for signature computation: 3.54 s.
+[    4.68] Time for partition refinement: 0.57 s.
+[    4.68] 
+[    4.68] Number of iterations: 15.
+[    4.68] Number of states before bisimulation minimisation: 52,380.
+[    4.68] Number of blocks after bisimulation minimisation: 4,710.
+[    4.68] Number of transitions before bisimulation minimisation: 183,500,800.
+[    4.68] Number of transitions after bisimulation minimisation: 20,493.
+[    4.68] 
+[    4.68] Trimming unneeded block variables...
+[    4.73] 
+[    4.73] Computing new interactive transition relations (using standard operations)...
+[    9.71] Computing new states, initial states, inital partition...
+[    9.71] 
+[    9.71] Time for computing the quotient of the transition relation: 4.98 sec.
+[    9.71] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    9.72] New interactive transition relation: 20,667 transitions, 40,718 MTBDD nodes.

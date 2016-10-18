@@ -1,0 +1,37 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[   10.61] Finished reading system from models/dkr_4-b.bdd.
+[   15.06] Number of state variables: 125.
+[   15.06] Number of action variables: 1.
+[   15.06] Number of block variables: 25.
+[   15.06] Number of transition relations: 212.
+[   15.06] Number of transitions: 17,944,577,943,096,364,284,201,395,313,784,651,776.
+[   15.06] Number of reachable transitions: 2,508,596.
+[   15.06] Initial partition: 909,593 states in 1 block(s).
+[   15.06] Precomputing tau transitions for branching bisimulation.
+[   18.67] (GC) Starting garbage collection...
+[   19.15] (GC) Garbage collection done.
+[   22.78] After iteration 1: 2 blocks.
+[   27.33] (GC) Starting garbage collection...
+[   27.76] (GC) Garbage collection done.
+[   30.40] After iteration 2: 2 blocks.
+[   30.40] 
+[   30.40] Time for computing the bisimulation relation: 15.34 sec.
+[   30.40] Time for signature computation: 15.16 s.
+[   30.40] Time for partition refinement: 0.08 s.
+[   30.40] 
+[   30.40] Number of iterations: 2.
+[   30.40] Number of states before bisimulation minimisation: 909,593.
+[   30.40] Number of blocks after bisimulation minimisation: 2.
+[   30.40] Number of transitions before bisimulation minimisation: 17,944,577,943,096,364,284,201,395,313,784,651,776.
+[   30.40] Number of reachable transitions before bisimulation minimisation: 2,508,596.
+[   30.40] Number of transitions after bisimulation minimisation: 1.
+[   30.40] 
+[   30.40] Trimming unneeded block variables...
+[   30.42] 
+[   30.42] Computing new interactive transition relations (using custom operations)...
+[   31.84] Computing new states, initial states, initial partition...
+[   31.84] 
+[   31.84] Time for computing the quotient of the transition relation: 1.42 sec.
+[   31.84] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[   31.84] New interactive transition relation: 4 transitions, 5 MTBDD nodes.

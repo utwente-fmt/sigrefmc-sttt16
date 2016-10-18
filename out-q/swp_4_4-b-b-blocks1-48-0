@@ -1,0 +1,54 @@
+[    6.90] Finished reading system from models/swp_4_4-b.bdd.
+[    7.09] Number of state variables: 41.
+[    7.09] Number of action variables: 3.
+[    7.09] Number of block variables: 25.
+[    7.09] Number of transition relations: 11.
+[    7.09] Number of transitions: 9,509,057,593,344 transitions.
+[    7.09] Initial partition: 292,878,336 states in 1 block(s).
+[    7.09] Precomputing tau transitions for branching bisimulation.
+[   10.27] (GC) Starting garbage collection...
+[   10.75] (GC) Garbage collection done.
+[   21.83] (GC) Starting garbage collection...
+[   22.56] (GC) Garbage collection done.
+[   31.31] After iteration 1: 8 blocks.
+[   42.00] (GC) Starting garbage collection...
+[   43.43] (GC) Garbage collection done.
+[   68.13] After iteration 2: 49 blocks.
+[   83.58] (GC) Starting garbage collection...
+[   85.70] (GC) Garbage collection done.
+[  119.80] After iteration 3: 261 blocks.
+[  167.04] (GC) Starting garbage collection...
+[  170.67] (GC) Garbage collection done.
+[  193.59] After iteration 4: 1,301 blocks.
+[  264.36] After iteration 5: 4,437 blocks.
+[  322.70] (GC) Starting garbage collection...
+[  327.38] (GC) Garbage collection done.
+[  351.51] After iteration 6: 13,653 blocks.
+[  427.20] After iteration 7: 38,229 blocks.
+[  478.27] (GC) Starting garbage collection...
+[  483.27] (GC) Garbage collection done.
+[  513.94] After iteration 8: 87,381 blocks.
+[  588.11] After iteration 9: 87,381 blocks.
+[  588.11] 
+[  588.11] Time for computing the bisimulation relation: 581.02 sec.
+[  588.11] Time for signature computation: 569.49 s.
+[  588.11] Time for partition refinement: 11.51 s.
+[  588.11] 
+[  588.11] Number of iterations: 9.
+[  588.11] Number of states before bisimulation minimisation: 292,878,336.
+[  588.11] Number of blocks after bisimulation minimisation: 87,381.
+[  588.11] Number of transitions before bisimulation minimisation: 9,509,057,593,344.
+[  588.11] Number of transitions after bisimulation minimisation: 174,760.
+[  588.11] 
+[  588.11] Trimming unneeded block variables...
+[  588.64] 
+[  588.64] Computing new interactive transition relations (using standard operations)...
+[  621.04] (GC) Starting garbage collection...
+[  623.90] (GC) Garbage collection done.
+[  729.64] (GC) Starting garbage collection...
+[  732.73] (GC) Garbage collection done.
+[  787.56] Computing new states, initial states, inital partition...
+[  787.59] 
+[  787.59] Time for computing the quotient of the transition relation: 198.92 sec.
+[  787.59] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[  787.65] New interactive transition relation: inf transitions, 186,621 MTBDD nodes.

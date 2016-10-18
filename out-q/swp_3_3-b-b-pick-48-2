@@ -1,0 +1,48 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    0.85] Finished reading system from models/swp_3_3-b.bdd.
+[    1.03] Number of state variables: 33.
+[    1.03] Number of action variables: 2.
+[    1.03] Number of block variables: 25.
+[    1.03] Number of transition relations: 11.
+[    1.03] Number of transitions: 28,549,578,752.
+[    1.03] Number of reachable transitions: 7,269,426.
+[    1.03] Initial partition: 1,652,724 states in 1 block(s).
+[    1.03] Precomputing tau transitions for branching bisimulation.
+[    1.34] After iteration 1: 4 blocks.
+[    1.62] After iteration 2: 7 blocks.
+[    1.97] After iteration 3: 16 blocks.
+[    2.34] After iteration 4: 25 blocks.
+[    2.81] After iteration 5: 52 blocks.
+[    3.33] After iteration 6: 79 blocks.
+[    3.91] After iteration 7: 157 blocks.
+[    4.52] After iteration 8: 229 blocks.
+[    5.15] After iteration 9: 445 blocks.
+[    5.79] After iteration 10: 607 blocks.
+[    6.41] After iteration 11: 1,093 blocks.
+[    6.68] (GC) Starting garbage collection...
+[    6.86] (GC) Garbage collection done.
+[    7.24] After iteration 12: 1,093 blocks.
+[    7.24] 
+[    7.24] Time for computing the bisimulation relation: 6.21 sec.
+[    7.24] Time for signature computation: 6.04 s.
+[    7.24] Time for partition refinement: 0.17 s.
+[    7.24] 
+[    7.24] Number of iterations: 12.
+[    7.24] Number of states before bisimulation minimisation: 1,652,724.
+[    7.24] Number of blocks after bisimulation minimisation: 1,093.
+[    7.24] Number of transitions before bisimulation minimisation: 28,549,578,752.
+[    7.24] Number of reachable transitions before bisimulation minimisation: 7,269,426.
+[    7.24] Number of transitions after bisimulation minimisation: 2,184.
+[    7.24] 
+[    7.24] Trimming unneeded block variables...
+[    7.25] 
+[    7.25] Computing new interactive transition relations (using custom operations)...
+[    7.25] Picking a state for each block...
+[    7.25] Converting the partition...
+[    7.26] Computing new interactive transition relations...
+[    7.38] Computing new states, initial states, initial partition...
+[    7.39] 
+[    7.39] Time for computing the quotient of the transition relation: 0.13 sec.
+[    7.39] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    7.39] New interactive transition relation: 2,184 transitions, 20,993 MTBDD nodes.

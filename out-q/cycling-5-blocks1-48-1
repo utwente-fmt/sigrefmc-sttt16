@@ -1,0 +1,40 @@
+[    9.42] Finished reading system from models/cycling-5.xctmc.
+[    9.43] Number of state variables: 45.
+[    9.43] Number of block variables: 25.
+[    9.43] Number of Markovian transitions: 16,778,785
+[    9.43] Initial partition: 2,326,666 states in 1 block(s).
+[    9.66] After iteration 1: 15,025 blocks.
+[   13.16] After iteration 2: 1,361,002 blocks.
+[   13.65] (GC) Starting garbage collection...
+[   13.90] (GC) Garbage collection done.
+[   17.12] (GC) Starting garbage collection...
+[   17.84] (GC) Garbage collection done.
+[   18.78] After iteration 3: 1,422,198 blocks.
+[   22.30] After iteration 4: 1,424,830 blocks.
+[   23.00] After iteration 5: 1,424,914 blocks.
+[   23.54] After iteration 6: 1,424,914 blocks.
+[   23.95] 
+[   23.95] Time for computing the bisimulation relation: 14.11 sec.
+[   23.95] Time for signature computation: 10.90 sec.
+[   23.95] Time for partition refinement: 3.20 sec.
+[   23.95] 
+[   23.95] Number of iterations: 6.
+[   23.95] Number of states before bisimulation minimisation: 2,326,666.
+[   23.95] Number of blocks after bisimulation minimisation: 1,424,914.
+[   23.95] Number of transitions before bisimulation minimisation: 16,778,785.
+[   23.95] Number of transitions after bisimulation minimisation: 10,739,110.
+[   23.95] 
+[   23.95] Trimming unneeded block variables...
+[   24.11] 
+[   24.11] Computing new Markov transition relation (using standard operations)...
+[   27.22] (GC) Starting garbage collection...
+[   28.14] (GC) Garbage collection done.
+[   38.80] (GC) Starting garbage collection...
+[   40.33] (GC) Garbage collection done.
+[   68.40] (GC) Starting garbage collection...
+[   71.24] (GC) Garbage collection done.
+[   79.27] Computing new states, initial states, initial partition...
+[   79.34] 
+[   79.34] Time for computing the quotient of the transition relation: 55.16 sec.
+[   79.34] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[   87.04] New Markov transition relation: 10,739,110 transitions, 18,119,644 MTBDD nodes.

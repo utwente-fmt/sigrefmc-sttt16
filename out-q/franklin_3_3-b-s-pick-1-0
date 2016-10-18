@@ -1,0 +1,62 @@
+[    0.35] Finished reading system from models/franklin_3_3-b.bdd.
+[    0.78] Number of state variables: 87.
+[    0.78] Number of action variables: 1.
+[    0.78] Number of block variables: 25.
+[    0.78] Number of transition relations: 122.
+[    0.78] Number of transitions: 81,227,064,688,599,332,498,178,048 transitions.
+[    0.78] Initial partition: 41,401 states in 1 block(s).
+[    2.02] After iteration 1: 4 blocks.
+[    2.11] After iteration 2: 8 blocks.
+[    2.26] After iteration 3: 13 blocks.
+[    2.42] After iteration 4: 20 blocks.
+[    2.64] After iteration 5: 26 blocks.
+[    2.97] After iteration 6: 32 blocks.
+[    3.43] After iteration 7: 38 blocks.
+[    3.98] After iteration 8: 46 blocks.
+[    4.59] After iteration 9: 58 blocks.
+[    5.27] After iteration 10: 75 blocks.
+[    6.02] After iteration 11: 94 blocks.
+[    6.77] After iteration 12: 115 blocks.
+[    7.46] After iteration 13: 140 blocks.
+[    8.06] After iteration 14: 174 blocks.
+[    8.63] After iteration 15: 213 blocks.
+[    9.28] After iteration 16: 265 blocks.
+[   10.08] After iteration 17: 325 blocks.
+[   11.73] After iteration 18: 387 blocks.
+[   12.77] After iteration 19: 453 blocks.
+[   14.01] After iteration 20: 525 blocks.
+[   15.37] After iteration 21: 601 blocks.
+[   16.68] After iteration 22: 668 blocks.
+[   17.82] After iteration 23: 717 blocks.
+[   19.10] After iteration 24: 746 blocks.
+[   20.17] After iteration 25: 767 blocks.
+[   20.78] After iteration 26: 790 blocks.
+[   21.35] After iteration 27: 813 blocks.
+[   22.13] After iteration 28: 836 blocks.
+[   22.86] After iteration 29: 857 blocks.
+[   23.51] After iteration 30: 872 blocks.
+[   24.05] After iteration 31: 881 blocks.
+[   24.44] After iteration 32: 883 blocks.
+[   24.71] After iteration 33: 883 blocks.
+[   24.71] 
+[   24.71] Time for computing the bisimulation relation: 23.93 sec.
+[   24.71] Time for signature computation: 19.41 s.
+[   24.71] Time for partition refinement: 4.52 s.
+[   24.71] 
+[   24.71] Number of iterations: 33.
+[   24.71] Number of states before bisimulation minimisation: 41,401.
+[   24.71] Number of blocks after bisimulation minimisation: 883.
+[   24.71] Number of transitions before bisimulation minimisation: 81,227,064,688,599,332,498,178,048.
+[   24.71] Number of transitions after bisimulation minimisation: 2,269.
+[   24.71] 
+[   24.71] Trimming unneeded block variables...
+[   24.92] 
+[   24.92] Computing new interactive transition relations (using custom operations)...
+[   24.92] Picking a state for each block...
+[   25.05] Converting the partition...
+[   25.28] Computing new interactive transition relations...
+[   28.74] Computing new states, initial states, initial partition...
+[   28.74] 
+[   28.74] Time for computing the quotient of the transition relation: 3.82 sec.
+[   28.74] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[   28.77] New interactive transition relation: 9,882 transitions, 101,813 MTBDD nodes.

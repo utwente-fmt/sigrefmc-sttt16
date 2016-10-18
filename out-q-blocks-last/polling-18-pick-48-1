@@ -1,0 +1,70 @@
+[    0.95] Finished reading system from models/polling-18.xctmc.
+[    0.95] Number of state variables: 24.
+[    0.95] Number of block variables: 25.
+[    0.95] Number of Markovian transitions: 69,599,232
+[    0.95] Initial partition: 7,077,888 states in 1 block(s).
+[    0.96] After iteration 1: 37 blocks.
+[    0.96] After iteration 2: 54 blocks.
+[    0.97] After iteration 3: 86 blocks.
+[    0.98] After iteration 4: 132 blocks.
+[    0.99] After iteration 5: 205 blocks.
+[    1.00] After iteration 6: 316 blocks.
+[    1.02] After iteration 7: 487 blocks.
+[    1.05] After iteration 8: 748 blocks.
+[    1.13] After iteration 9: 1,146 blocks.
+[    1.18] After iteration 10: 1,750 blocks.
+[    1.28] After iteration 11: 2,663 blocks.
+[    1.37] After iteration 12: 4,036 blocks.
+[    1.52] After iteration 13: 6,089 blocks.
+[    1.67] After iteration 14: 9,138 blocks.
+[    1.89] After iteration 15: 13,630 blocks.
+[    2.19] After iteration 16: 20,184 blocks.
+[    2.65] After iteration 17: 29,633 blocks.
+[    3.28] After iteration 18: 43,052 blocks.
+[    4.16] After iteration 19: 61,739 blocks.
+[    4.60] (GC) Starting garbage collection...
+[    4.83] (GC) Garbage collection done.
+[    5.71] After iteration 20: 87,082 blocks.
+[    6.96] After iteration 21: 120,203 blocks.
+[    8.69] After iteration 22: 161,284 blocks.
+[    9.75] (GC) Starting garbage collection...
+[   10.19] (GC) Garbage collection done.
+[   11.69] After iteration 23: 208,690 blocks.
+[   14.39] After iteration 24: 258,438 blocks.
+[   16.79] After iteration 25: 304,813 blocks.
+[   19.36] After iteration 26: 342,358 blocks.
+[   20.38] (GC) Starting garbage collection...
+[   21.21] (GC) Garbage collection done.
+[   23.88] After iteration 27: 368,193 blocks.
+[   26.94] After iteration 28: 382,978 blocks.
+[   28.12] After iteration 29: 389,848 blocks.
+[   28.86] After iteration 30: 392,364 blocks.
+[   29.37] After iteration 31: 393,061 blocks.
+[   29.76] After iteration 32: 393,198 blocks.
+[   30.05] After iteration 33: 393,215 blocks.
+[   30.35] After iteration 34: 393,216 blocks.
+[   30.63] After iteration 35: 393,216 blocks.
+[   30.72] 
+[   30.72] Time for computing the bisimulation relation: 29.68 sec.
+[   30.72] Time for signature computation: 25.40 sec.
+[   30.72] Time for partition refinement: 4.28 sec.
+[   30.72] 
+[   30.72] Number of iterations: 35.
+[   30.72] Number of states before bisimulation minimisation: 7,077,888.
+[   30.72] Number of blocks after bisimulation minimisation: 393,216.
+[   30.72] Number of transitions before bisimulation minimisation: 69,599,232.
+[   30.72] Number of transitions after bisimulation minimisation: 3,866,624.
+[   30.72] 
+[   30.72] Trimming unneeded block variables...
+[   30.93] 
+[   30.93] Computing new Markov transition relation (using pick-random encoding)...
+[   30.93] Picking a state for each block...
+[   31.16] Converting the partition...
+[   31.47] Computing the new transition relation...
+[   40.02] (GC) Starting garbage collection...
+[   41.25] (GC) Garbage collection done.
+[   53.38] Computing new states, initial states, initial partition...
+[   53.38] 
+[   53.38] Time for computing the quotient of the transition relation: 22.45 sec.
+[   53.38] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[   54.20] New Markov transition relation: 3,866,624 transitions, 2,707,925 MTBDD nodes.

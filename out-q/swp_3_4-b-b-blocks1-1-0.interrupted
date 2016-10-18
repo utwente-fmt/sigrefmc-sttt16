@@ -1,0 +1,21 @@
+[    0.57] Finished reading system from models/swp_3_4-b.bdd.
+[    1.10] Number of state variables: 39.
+[    1.10] Number of action variables: 2.
+[    1.10] Number of block variables: 25.
+[    1.10] Number of transition relations: 11.
+[    1.10] Number of transitions: 1,614,370,832,384 transitions.
+[    1.10] Initial partition: 38,550,168 states in 1 block(s).
+[    1.10] Precomputing tau transitions for branching bisimulation.
+[   68.58] After iteration 1: 4 blocks.
+[  132.17] After iteration 2: 7 blocks.
+[  154.12] (GC) Starting garbage collection...
+[  159.29] (GC) Garbage collection done.
+[  213.00] After iteration 3: 16 blocks.
+[  298.24] After iteration 4: 25 blocks.
+[  397.37] After iteration 5: 52 blocks.
+[  438.09] (GC) Starting garbage collection...
+[  445.40] (GC) Garbage collection done.
+[  526.96] After iteration 6: 79 blocks.
+[  667.30] After iteration 7: 160 blocks.
+[  833.56] After iteration 8: 241 blocks.
+[ 1021.53] (GC) Starting garbage collection...

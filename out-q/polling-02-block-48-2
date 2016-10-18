@@ -1,0 +1,27 @@
+[    0.18] Finished reading system from models/polling-02.xctmc.
+[    0.22] Number of state variables: 4.
+[    0.22] Number of block variables: 5.
+[    0.22] Number of Markovian transitions: 22
+[    0.22] Initial partition: 12 states in 1 block(s).
+[    0.27] After iteration 1: 5 blocks.
+[    0.30] After iteration 2: 6 blocks.
+[    0.32] After iteration 3: 6 blocks.
+[    0.33] 
+[    0.33] Time for computing the bisimulation relation: 0.10 sec.
+[    0.33] Time for signature computation: 0.08 sec.
+[    0.33] Time for partition refinement: 0.02 sec.
+[    0.33] 
+[    0.33] Number of iterations: 3.
+[    0.33] Number of states before bisimulation minimisation: 12.
+[    0.33] Number of blocks after bisimulation minimisation: 6.
+[    0.33] Number of transitions before bisimulation minimisation: 22.
+[    0.33] Number of transitions after bisimulation minimisation: 11.
+[    0.33] 
+[    0.33] Trimming unneeded block variables...
+[    0.33] 
+[    0.33] Computing new Markov transition relation (using custom operations)...
+[    0.36] Computing new states, initial states, initial partition...
+[    0.37] 
+[    0.37] Time for computing the quotient of the transition relation: 0.03 sec.
+[    0.37] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    0.37] New Markov transition relation: 11 transitions, 28 MTBDD nodes.

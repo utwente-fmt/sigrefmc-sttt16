@@ -1,0 +1,32 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    3.39] Finished reading system from models/franklin_4_4-b.bdd.
+[   64.06] Number of state variables: 133.
+[   64.06] Number of action variables: 1.
+[   64.06] Number of block variables: 25.
+[   64.06] Number of transition relations: 225.
+[   64.06] Number of transitions: 6,482,644,935,443,034,712,151,867,032,987,240,497,152.
+[   64.06] Number of reachable transitions: 19,812,224.
+[   64.06] Initial partition: 5,269,441 states in 1 block(s).
+[  114.96] After iteration 1: 4 blocks.
+[  119.32] After iteration 2: 8 blocks.
+[  123.31] After iteration 3: 13 blocks.
+[  125.99] After iteration 4: 22 blocks.
+[  130.49] After iteration 5: 31 blocks.
+[  139.72] After iteration 6: 40 blocks.
+[  152.52] After iteration 7: 50 blocks.
+[  182.59] After iteration 8: 61 blocks.
+[  186.51] (GC) Starting garbage collection...
+[  189.00] (GC) Garbage collection done.
+[  256.21] After iteration 9: 78 blocks.
+[  297.60] After iteration 10: 108 blocks.
+[  344.38] After iteration 11: 154 blocks.
+[  408.24] After iteration 12: 221 blocks.
+[  486.12] After iteration 13: 310 blocks.
+[  576.95] After iteration 14: 422 blocks.
+[  688.47] After iteration 15: 554 blocks.
+[  828.35] After iteration 16: 721 blocks.
+[  940.94] (GC) Starting garbage collection...
+[  948.36] (GC) Garbage collection done.
+[ 1010.92] After iteration 17: 936 blocks.
+[ 1185.27] After iteration 18: 1,217 blocks.

@@ -1,0 +1,42 @@
+[    0.63] Finished reading system from models/ftwc02.ximc.
+[    0.64] Number of state variables: 15.
+[    0.64] Number of action variables: 6.
+[    0.64] Number of block variables: 16.
+[    0.64] Number of Markovian transitions: 169,618,430
+[    0.64] Number of interactive transitions: 101,158,440
+[    0.64] Initial partition: 32,766 states in 1 block(s).
+[    0.64] Computing maximal-progress cut.
+[    0.94] After iteration 1-a: 1,459 blocks.
+[    2.93] After iteration 1-b: 14,292 blocks.
+[   15.65] After iteration 2-a: 15,747 blocks.
+[   23.05] After iteration 2-b: 16,797 blocks.
+[   35.16] After iteration 3-a: 16,797 blocks.
+[   43.62] After iteration 3-b: 16,797 blocks.
+[   43.62] 
+[   43.62] Time for computing the bisimulation relation: 42.99 sec.
+[   43.62] Time for Markovian signature computation: 25.10 s.
+[   43.62] Time for Markovian partition refinement: 0.04 s.
+[   43.62] Time for interactive signature computation: 17.78 s.
+[   43.62] Time for interactive partition refinement: 0.07 s.
+[   43.62] 
+[   43.62] Number of iterations: 3.
+[   43.62] Number of states before bisimulation minimisation: 32,766.
+[   43.62] Number of blocks after bisimulation minimisation: 16,797.
+[   43.62] 
+[   43.62] Trimming unneeded block variables...
+[   43.66] 
+[   43.66] Computing new transition relations (using custom operations)...
+[   43.66] Picking a state for each block...
+[   43.73] Converting the partition...
+[   43.75] Computing the new transition relation...
+[   45.55] (GC) Starting garbage collection...
+[   46.84] (GC) Garbage collection done.
+[   53.33] Computing the new interactive transition relations...
+[  138.58] (GC) Starting garbage collection...
+[  141.09] (GC) Garbage collection done.
+[  344.49] Computing new states, initial states, initial partition...
+[  344.49] 
+[  344.49] Time for computing the quotient of the transition relation: 300.83 sec.
+[  344.49] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[  344.52] New Markov transition relation: 45,269,740 transitions, 57,807 MTBDD nodes.
+[  344.52] New interactive transition relation: 26,161,640 transitions, 1,208 MTBDD nodes.

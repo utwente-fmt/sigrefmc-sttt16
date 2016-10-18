@@ -1,0 +1,38 @@
+[    0.83] Finished reading system from models/ftwc03.ximc.
+[    0.84] Number of state variables: 19.
+[    0.84] Number of action variables: 6.
+[    0.84] Number of block variables: 20.
+[    0.84] Number of Markovian transitions: 44,879,564,798
+[    0.84] Number of interactive transitions: 26,964,119,784
+[    0.84] Initial partition: 524,286 states in 1 block(s).
+[    0.84] Computing maximal-progress cut.
+[    4.46] After iteration 1-a: 13,123 blocks.
+[  101.36] (GC) Starting garbage collection...
+[  107.02] (GC) Garbage collection done.
+[  276.45] (GC) Starting garbage collection...
+[  284.24] (GC) Garbage collection done.
+[  477.50] After iteration 1-b: 21,871 blocks.
+[  593.00] (GC) Starting garbage collection...
+[  605.29] (GC) Garbage collection done.
+[  732.13] After iteration 2-a: 34,990 blocks.
+[ 1574.44] (GC) Starting garbage collection...
+[ 1609.30] (GC) Garbage collection done.
+[ 1884.68] After iteration 2-b: 34,990 blocks.
+[ 2110.46] After iteration 3-a: 34,990 blocks.
+[ 2110.46] 
+[ 2110.46] Time for computing the bisimulation relation: 2,109.63 sec.
+[ 2110.46] Time for Markovian signature computation: 258.11 s.
+[ 2110.46] Time for Markovian partition refinement: 0.11 s.
+[ 2110.46] Time for interactive signature computation: 1,625.50 s.
+[ 2110.46] Time for interactive partition refinement: 0.10 s.
+[ 2110.46] 
+[ 2110.46] Number of iterations: 2.
+[ 2110.46] Number of states before bisimulation minimisation: 524,286.
+[ 2110.46] Number of blocks after bisimulation minimisation: 34,990.
+[ 2110.46] 
+[ 2110.46] Trimming unneeded block variables...
+[ 2110.53] 
+[ 2110.53] Computing new Markov transition relation (using custom operations)...
+[ 2689.13] (GC) Starting garbage collection...
+[ 2740.37] (GC) Garbage collection done.
+[ 3505.21] Computing new interactive transition relations (using custom operations)...

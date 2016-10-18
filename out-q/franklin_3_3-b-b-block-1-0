@@ -1,0 +1,33 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    0.40] Finished reading system from models/franklin_3_3-b.bdd.
+[    2.70] Number of state variables: 87.
+[    2.70] Number of action variables: 1.
+[    2.70] Number of block variables: 25.
+[    2.70] Number of transition relations: 122.
+[    2.70] Number of transitions: 81,227,064,688,599,332,498,178,048.
+[    2.70] Number of reachable transitions: 118,008.
+[    2.70] Initial partition: 41,401 states in 1 block(s).
+[    2.70] Precomputing tau transitions for branching bisimulation.
+[   10.41] After iteration 1: 2 blocks.
+[   14.63] After iteration 2: 2 blocks.
+[   14.63] 
+[   14.63] Time for computing the bisimulation relation: 11.92 sec.
+[   14.63] Time for signature computation: 11.82 s.
+[   14.63] Time for partition refinement: 0.09 s.
+[   14.63] 
+[   14.63] Number of iterations: 2.
+[   14.63] Number of states before bisimulation minimisation: 41,401.
+[   14.63] Number of blocks after bisimulation minimisation: 2.
+[   14.63] Number of transitions before bisimulation minimisation: 81,227,064,688,599,332,498,178,048.
+[   14.63] Number of reachable transitions before bisimulation minimisation: 118,008.
+[   14.63] Number of transitions after bisimulation minimisation: 1.
+[   14.63] 
+[   14.63] Trimming unneeded block variables...
+[   14.66] 
+[   14.66] Computing new interactive transition relations (using custom operations)...
+[   15.61] Computing new states, initial states, initial partition...
+[   15.61] 
+[   15.61] Time for computing the quotient of the transition relation: 0.95 sec.
+[   15.61] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[   15.61] New interactive transition relation: 3 transitions, 5 MTBDD nodes.

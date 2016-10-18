@@ -1,0 +1,20 @@
+[   73.50] Finished reading system from models/franklin_5_4-b.bdd.
+[   95.02] (GC) Starting garbage collection...
+[  110.20] (GC) Garbage collection done.
+[  122.90] Number of state variables: 173.
+[  122.90] Number of action variables: 1.
+[  122.90] Number of block variables: 25.
+[  122.90] Number of transition relations: 362.
+[  122.90] Number of transitions: 11,263,427,743,499,936,064,866,248,084,536,214,161,733,358,125,580,288 transitions.
+[  122.90] Initial partition: 276,673,081 states in 1 block(s).
+[  122.90] Precomputing tau transitions for branching bisimulation.
+[  210.92] (GC) Starting garbage collection...
+[  235.24] (GC) Garbage collection done.
+[  486.96] (GC) Starting garbage collection...
+[  546.14] (GC) Garbage collection done.
+[  917.71] (GC) Starting garbage collection...
+[ 1038.62] (GC) Garbage collection done.
+[ 1500.50] (GC) Starting garbage collection...
+[ 1750.46] (GC) Garbage collection done.
+[ 2317.70] (GC) Starting garbage collection...
+[ 2671.68] (GC) Garbage collection done.

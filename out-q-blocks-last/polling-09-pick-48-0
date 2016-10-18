@@ -1,0 +1,44 @@
+[    0.78] Finished reading system from models/polling-09.xctmc.
+[    0.78] Number of state variables: 14.
+[    0.78] Number of block variables: 15.
+[    0.78] Number of Markovian transitions: 36,864
+[    0.78] Initial partition: 6,912 states in 1 block(s).
+[    0.79] After iteration 1: 19 blocks.
+[    0.79] After iteration 2: 27 blocks.
+[    0.79] After iteration 3: 41 blocks.
+[    0.80] After iteration 4: 60 blocks.
+[    0.80] After iteration 5: 88 blocks.
+[    0.80] After iteration 6: 127 blocks.
+[    0.80] After iteration 7: 181 blocks.
+[    0.80] After iteration 8: 253 blocks.
+[    0.80] After iteration 9: 345 blocks.
+[    0.81] After iteration 10: 454 blocks.
+[    0.81] After iteration 11: 568 blocks.
+[    0.81] After iteration 12: 666 blocks.
+[    0.82] After iteration 13: 730 blocks.
+[    0.82] After iteration 14: 759 blocks.
+[    0.83] After iteration 15: 767 blocks.
+[    0.83] After iteration 16: 768 blocks.
+[    0.83] After iteration 17: 768 blocks.
+[    0.83] 
+[    0.83] Time for computing the bisimulation relation: 0.05 sec.
+[    0.83] Time for signature computation: 0.02 sec.
+[    0.83] Time for partition refinement: 0.03 sec.
+[    0.83] 
+[    0.83] Number of iterations: 17.
+[    0.83] Number of states before bisimulation minimisation: 6,912.
+[    0.83] Number of blocks after bisimulation minimisation: 768.
+[    0.83] Number of transitions before bisimulation minimisation: 36,864.
+[    0.83] Number of transitions after bisimulation minimisation: 4,096.
+[    0.83] 
+[    0.83] Trimming unneeded block variables...
+[    0.83] 
+[    0.83] Computing new Markov transition relation (using pick-random encoding)...
+[    0.83] Picking a state for each block...
+[    0.83] Converting the partition...
+[    0.84] Computing the new transition relation...
+[    0.85] Computing new states, initial states, initial partition...
+[    0.85] 
+[    0.85] Time for computing the quotient of the transition relation: 0.02 sec.
+[    0.85] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    0.85] New Markov transition relation: 4,096 transitions, 10,137 MTBDD nodes.

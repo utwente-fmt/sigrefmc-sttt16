@@ -1,0 +1,22 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    1.77] Finished reading system from models/swp_4_4-b.bdd.
+[   21.08] Number of state variables: 41.
+[   21.08] Number of action variables: 3.
+[   21.08] Number of block variables: 25.
+[   21.08] Number of transition relations: 11.
+[   21.08] Number of transitions: 9,509,057,593,344.
+[   21.08] Number of reachable transitions: 1,340,055,552.
+[   21.08] Initial partition: 292,878,336 states in 1 block(s).
+[   74.58] (GC) Starting garbage collection...
+[   83.09] (GC) Garbage collection done.
+[  100.63] After iteration 1: 9 blocks.
+[  211.80] (GC) Starting garbage collection...
+[  227.02] (GC) Garbage collection done.
+[  259.11] After iteration 2: 89 blocks.
+[  461.61] (GC) Starting garbage collection...
+[  485.97] (GC) Garbage collection done.
+[  493.60] After iteration 3: 877 blocks.
+[  761.78] After iteration 4: 7,059 blocks.
+[ 1053.24] (GC) Starting garbage collection...
+[ 1103.57] (GC) Garbage collection done.

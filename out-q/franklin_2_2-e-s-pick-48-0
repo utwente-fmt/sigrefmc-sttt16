@@ -1,0 +1,31 @@
+[    0.02] Finished reading system from models/franklin_2_2-e.bdd.
+[    0.06] Number of state variables: 2.
+[    0.06] Number of action variables: 1.
+[    0.06] Number of block variables: 3.
+[    0.06] Number of transition relations: 1.
+[    0.06] Number of transitions: 1 transitions.
+[    0.06] Initial partition: 2 states in 1 block(s).
+[    0.08] After iteration 1: 2 blocks.
+[    0.09] After iteration 2: 2 blocks.
+[    0.10] 
+[    0.10] Time for computing the bisimulation relation: 0.03 sec.
+[    0.10] Time for signature computation: 0.02 s.
+[    0.10] Time for partition refinement: 0.01 s.
+[    0.10] 
+[    0.10] Number of iterations: 2.
+[    0.10] Number of states before bisimulation minimisation: 2.
+[    0.10] Number of blocks after bisimulation minimisation: 2.
+[    0.10] Number of transitions before bisimulation minimisation: 1.
+[    0.10] Number of transitions after bisimulation minimisation: 1.
+[    0.10] 
+[    0.10] Trimming unneeded block variables...
+[    0.11] 
+[    0.11] Computing new interactive transition relations (using custom operations)...
+[    0.11] Picking a state for each block...
+[    0.12] Converting the partition...
+[    0.12] Computing new interactive transition relations...
+[    0.13] Computing new states, initial states, initial partition...
+[    0.14] 
+[    0.14] Time for computing the quotient of the transition relation: 0.02 sec.
+[    0.14] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    0.14] New interactive transition relation: 1 transitions, 5 MTBDD nodes.

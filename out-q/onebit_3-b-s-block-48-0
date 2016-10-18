@@ -1,0 +1,32 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    0.53] Finished reading system from models/onebit_3-b.bdd.
+[    0.76] Number of state variables: 30.
+[    0.76] Number of action variables: 0.
+[    0.76] Number of block variables: 25.
+[    0.76] Number of transition relations: 16.
+[    0.76] Number of transitions: 7,851,737,088.
+[    0.76] Number of reachable transitions: 1,794,096.
+[    0.76] Initial partition: 289,296 states in 1 block(s).
+[    0.76] After iteration 1: 1 blocks.
+[    0.76] 
+[    0.76] Time for computing the bisimulation relation: 0.01 sec.
+[    0.76] Time for signature computation: 0.00 s.
+[    0.76] Time for partition refinement: 0.00 s.
+[    0.76] 
+[    0.76] Number of iterations: 1.
+[    0.76] Number of states before bisimulation minimisation: 289,296.
+[    0.76] Number of blocks after bisimulation minimisation: 1.
+[    0.76] Number of transitions before bisimulation minimisation: 7,851,737,088.
+[    0.76] Number of reachable transitions before bisimulation minimisation: 1,794,096.
+[    0.76] Number of transitions after bisimulation minimisation: 1.
+[    0.76] 
+[    0.76] Trimming unneeded block variables...
+[    0.76] 
+[    0.76] Computing new interactive transition relations (using custom operations)...
+sigrefmc: /home/dijkt/sigrefmc-sttt16/tool/src/quotient.cpp:311: MTBDD sigref::compute_trans_quotient_WORK(WorkerP*, Task*, MTBDD, MTBDD, MTBDD, MTBDD, MTBDD): Assertion `mtbdd_getvar(dd) > 99999' failed.
+sigrefmc: /home/dijkt/sigrefmc-sttt16/tool/src/quotient.cpp:311: MTBDD sigref::compute_trans_quotient_WORK(WorkerP*, Task*, MTBDD, MTBDD, MTBDD, MTBDD, MTBDD): Assertion `mtbdd_getvar(dd) > 99999' failed.
+sigrefmc: /home/dijkt/sigrefmc-sttt16/tool/src/quotient.cpp:311: MTBDD sigref::compute_trans_quotient_WORK(WorkerP*, Task*, MTBDD, MTBDD, MTBDD, MTBDD, MTBDD): Assertion `mtbdd_getvar(dd) > 99999' failed.
+sigrefmc: /home/dijkt/sigrefmc-sttt16/tool/src/quotient.cpp:311: MTBDD sigref::compute_trans_quotient_WORK(WorkerP*, Task*, MTBDD, MTBDD, MTBDD, MTBDD, MTBDD): Assertion `mtbdd_getvar(dd) > 99999' failed.
+sigrefmc: /home/dijkt/sigrefmc-sttt16/tool/src/quotient.cpp:311: MTBDD sigref::compute_trans_quotient_WORK(WorkerP*, Task*, MTBDD, MTBDD, MTBDD, MTBDD, MTBDD): Assertion `mtbdd_getvar(dd) > 99999' failed.
+sigrefmc: /home/dijkt/sigrefmc-sttt16/tool/src/quotient.cpp:311: MTBDD sigref::compute_trans_quotient_WORK(WorkerP*, Task*, MTBDD, MTBDD, MTBDD, MTBDD, MTBDD): Assertion `mtbdd_getvar(dd) > 99999' failed.

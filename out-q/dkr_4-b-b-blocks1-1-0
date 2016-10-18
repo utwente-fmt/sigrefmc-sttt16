@@ -1,0 +1,33 @@
+[    2.96] Finished reading system from models/dkr_4-b.bdd.
+[    4.72] Number of state variables: 125.
+[    4.72] Number of action variables: 1.
+[    4.72] Number of block variables: 25.
+[    4.72] Number of transition relations: 212.
+[    4.72] Number of transitions: 17,944,577,943,096,364,284,201,395,313,784,651,776 transitions.
+[    4.72] Initial partition: 909,593 states in 1 block(s).
+[    4.72] Precomputing tau transitions for branching bisimulation.
+[   66.76] (GC) Starting garbage collection...
+[   76.74] (GC) Garbage collection done.
+[  180.80] After iteration 1: 2 blocks.
+[  275.27] (GC) Starting garbage collection...
+[  282.87] (GC) Garbage collection done.
+[  352.35] After iteration 2: 2 blocks.
+[  352.35] 
+[  352.35] Time for computing the bisimulation relation: 347.63 sec.
+[  352.35] Time for signature computation: 345.91 s.
+[  352.35] Time for partition refinement: 1.67 s.
+[  352.35] 
+[  352.35] Number of iterations: 2.
+[  352.35] Number of states before bisimulation minimisation: 909,593.
+[  352.35] Number of blocks after bisimulation minimisation: 2.
+[  352.35] Number of transitions before bisimulation minimisation: 17,944,577,943,096,364,284,201,395,313,784,651,776.
+[  352.35] Number of transitions after bisimulation minimisation: 1.
+[  352.35] 
+[  352.35] Trimming unneeded block variables...
+[  352.89] 
+[  352.89] Computing new interactive transition relations (using standard operations)...
+[  398.65] Computing new states, initial states, inital partition...
+[  398.65] 
+[  398.65] Time for computing the quotient of the transition relation: 45.77 sec.
+[  398.65] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[  398.65] New interactive transition relation: 4 transitions, 5 MTBDD nodes.

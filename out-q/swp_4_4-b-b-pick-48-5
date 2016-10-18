@@ -1,0 +1,57 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    7.06] Finished reading system from models/swp_4_4-b.bdd.
+[    8.07] Number of state variables: 41.
+[    8.07] Number of action variables: 3.
+[    8.07] Number of block variables: 25.
+[    8.07] Number of transition relations: 11.
+[    8.07] Number of transitions: 9,509,057,593,344.
+[    8.07] Number of reachable transitions: 1,340,055,552.
+[    8.07] Initial partition: 292,878,336 states in 1 block(s).
+[    8.07] Precomputing tau transitions for branching bisimulation.
+[   11.08] (GC) Starting garbage collection...
+[   11.55] (GC) Garbage collection done.
+[   22.61] (GC) Starting garbage collection...
+[   23.29] (GC) Garbage collection done.
+[   32.11] After iteration 1: 8 blocks.
+[   42.61] (GC) Starting garbage collection...
+[   44.00] (GC) Garbage collection done.
+[   68.72] After iteration 2: 49 blocks.
+[   83.81] (GC) Starting garbage collection...
+[   85.92] (GC) Garbage collection done.
+[  119.77] After iteration 3: 261 blocks.
+[  166.09] (GC) Starting garbage collection...
+[  169.51] (GC) Garbage collection done.
+[  192.82] After iteration 4: 1,301 blocks.
+[  263.35] After iteration 5: 4,437 blocks.
+[  322.95] (GC) Starting garbage collection...
+[  327.33] (GC) Garbage collection done.
+[  351.11] After iteration 6: 13,653 blocks.
+[  425.70] After iteration 7: 38,229 blocks.
+[  482.51] (GC) Starting garbage collection...
+[  487.42] (GC) Garbage collection done.
+[  513.21] After iteration 8: 87,381 blocks.
+[  588.06] After iteration 9: 87,381 blocks.
+[  588.07] 
+[  588.07] Time for computing the bisimulation relation: 580.00 sec.
+[  588.07] Time for signature computation: 568.31 s.
+[  588.07] Time for partition refinement: 11.67 s.
+[  588.07] 
+[  588.07] Number of iterations: 9.
+[  588.07] Number of states before bisimulation minimisation: 292,878,336.
+[  588.07] Number of blocks after bisimulation minimisation: 87,381.
+[  588.07] Number of transitions before bisimulation minimisation: 9,509,057,593,344.
+[  588.07] Number of reachable transitions before bisimulation minimisation: 1,340,055,552.
+[  588.07] Number of transitions after bisimulation minimisation: 174,760.
+[  588.07] 
+[  588.07] Trimming unneeded block variables...
+[  588.58] 
+[  588.58] Computing new interactive transition relations (using custom operations)...
+[  588.58] Picking a state for each block...
+[  588.90] Converting the partition...
+[  589.41] Computing new interactive transition relations...
+[  604.00] Computing new states, initial states, initial partition...
+[  604.01] 
+[  604.01] Time for computing the quotient of the transition relation: 15.42 sec.
+[  604.01] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[  604.06] New interactive transition relation: 174,760 transitions, 251,331 MTBDD nodes.

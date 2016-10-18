@@ -1,0 +1,37 @@
+[    1.26] Finished reading system from models/ftwc01.ximc.
+[    1.27] Number of state variables: 11.
+[    1.27] Number of action variables: 6.
+[    1.27] Number of block variables: 12.
+[    1.27] Number of Markovian transitions: 605,438
+[    1.27] Number of interactive transitions: 355,176
+[    1.27] Initial partition: 2,046 states in 1 block(s).
+[    1.27] Computing maximal-progress cut.
+[    1.28] After iteration 1-a: 163 blocks.
+[    1.29] After iteration 1-b: 271 blocks.
+[    1.31] After iteration 2-a: 430 blocks.
+[    1.33] After iteration 2-b: 430 blocks.
+[    1.33] After iteration 3-a: 430 blocks.
+[    1.33] 
+[    1.33] Time for computing the bisimulation relation: 0.06 sec.
+[    1.33] Time for Markovian signature computation: 0.02 s.
+[    1.33] Time for Markovian partition refinement: 0.00 s.
+[    1.33] Time for interactive signature computation: 0.03 s.
+[    1.33] Time for interactive partition refinement: 0.00 s.
+[    1.33] 
+[    1.33] Number of iterations: 2.
+[    1.33] Number of states before bisimulation minimisation: 2,046.
+[    1.33] Number of blocks after bisimulation minimisation: 430.
+[    1.33] 
+[    1.33] Trimming unneeded block variables...
+[    1.33] 
+[    1.33] Computing new transition relations (using custom operations)...
+[    1.33] Picking a state for each block...
+[    1.34] Converting the partition...
+[    1.34] Computing the new transition relation...
+[    1.35] Computing the new interactive transition relations...
+[    1.35] Computing new states, initial states, initial partition...
+[    1.35] 
+[    1.35] Time for computing the quotient of the transition relation: 0.02 sec.
+[    1.35] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    1.36] New Markov transition relation: 27,688 transitions, 3,606 MTBDD nodes.
+[    1.36] New interactive transition relation: 2,930 transitions, 286 MTBDD nodes.

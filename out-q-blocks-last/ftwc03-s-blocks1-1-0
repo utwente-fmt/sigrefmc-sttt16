@@ -1,0 +1,42 @@
+[    0.90] Finished reading system from models/ftwc03.ximc.
+[    0.91] Number of state variables: 19.
+[    0.91] Number of action variables: 6.
+[    0.91] Number of block variables: 20.
+[    0.91] Number of Markovian transitions: 44,879,564,798
+[    0.91] Number of interactive transitions: 26,964,119,784
+[    0.91] Initial partition: 524,286 states in 1 block(s).
+[    0.92] Computing maximal-progress cut.
+[    4.32] After iteration 1-a: 13,123 blocks.
+[   55.05] (GC) Starting garbage collection...
+[   58.75] (GC) Garbage collection done.
+[  102.39] After iteration 1-b: 223,012 blocks.
+[  149.18] (GC) Starting garbage collection...
+[  155.24] (GC) Garbage collection done.
+[  322.01] (GC) Starting garbage collection...
+[  340.32] (GC) Garbage collection done.
+[  694.18] (GC) Starting garbage collection...
+[  724.92] (GC) Garbage collection done.
+[ 1182.54] After iteration 2-a: 236,131 blocks.
+[ 1596.61] (GC) Starting garbage collection...
+[ 1649.07] (GC) Garbage collection done.
+[ 2038.83] After iteration 2-b: 256,333 blocks.
+[ 3217.54] After iteration 3-a: 256,333 blocks.
+[ 3659.69] (GC) Starting garbage collection...
+[ 3709.55] (GC) Garbage collection done.
+[ 4305.46] After iteration 3-b: 256,333 blocks.
+[ 4305.46] 
+[ 4305.46] Time for computing the bisimulation relation: 4,304.55 sec.
+[ 4305.46] Time for Markovian signature computation: 2,261.62 s.
+[ 4305.46] Time for Markovian partition refinement: 0.63 s.
+[ 4305.46] Time for interactive signature computation: 2,040.77 s.
+[ 4305.46] Time for interactive partition refinement: 1.51 s.
+[ 4305.46] 
+[ 4305.46] Number of iterations: 3.
+[ 4305.46] Number of states before bisimulation minimisation: 524,286.
+[ 4305.46] Number of blocks after bisimulation minimisation: 256,333.
+[ 4305.46] 
+[ 4305.46] Trimming unneeded block variables...
+[ 4305.93] 
+[ 4305.93] Computing new Markov transition relation (using standard operations)...
+[ 5586.23] (GC) Starting garbage collection...
+[ 5728.16] (GC) Garbage collection done.

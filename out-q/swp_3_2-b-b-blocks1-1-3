@@ -1,0 +1,39 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    0.29] Finished reading system from models/swp_3_2-b.bdd.
+[    0.64] Number of state variables: 26.
+[    0.64] Number of action variables: 2.
+[    0.64] Number of block variables: 25.
+[    0.64] Number of transition relations: 11.
+[    0.64] Number of transitions: 183,500,800.
+[    0.64] Number of reachable transitions: 216,900.
+[    0.64] Initial partition: 52,380 states in 1 block(s).
+[    0.64] Precomputing tau transitions for branching bisimulation.
+[    1.07] After iteration 1: 4 blocks.
+[    1.43] After iteration 2: 7 blocks.
+[    1.91] After iteration 3: 16 blocks.
+[    2.53] After iteration 4: 25 blocks.
+[    3.20] After iteration 5: 49 blocks.
+[    3.88] After iteration 6: 67 blocks.
+[    4.50] After iteration 7: 121 blocks.
+[    5.02] After iteration 8: 121 blocks.
+[    5.02] 
+[    5.02] Time for computing the bisimulation relation: 4.39 sec.
+[    5.02] Time for signature computation: 4.29 s.
+[    5.02] Time for partition refinement: 0.09 s.
+[    5.02] 
+[    5.02] Number of iterations: 8.
+[    5.02] Number of states before bisimulation minimisation: 52,380.
+[    5.02] Number of blocks after bisimulation minimisation: 121.
+[    5.02] Number of transitions before bisimulation minimisation: 183,500,800.
+[    5.02] Number of reachable transitions before bisimulation minimisation: 216,900.
+[    5.02] Number of transitions after bisimulation minimisation: 240.
+[    5.02] 
+[    5.02] Trimming unneeded block variables...
+[    5.03] 
+[    5.03] Computing new interactive transition relations (using standard operations)...
+[    5.69] Computing new states, initial states, inital partition...
+[    5.69] 
+[    5.69] Time for computing the quotient of the transition relation: 0.66 sec.
+[    5.69] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    5.69] New interactive transition relation: 240 transitions, 555 MTBDD nodes.

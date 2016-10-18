@@ -1,0 +1,72 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    0.28] Finished reading system from models/brp_2_4_4-b.bdd.
+[    0.64] Number of state variables: 42.
+[    0.64] Number of action variables: 6.
+[    0.64] Number of block variables: 25.
+[    0.64] Number of transition relations: 37.
+[    0.64] Number of transitions: 14,705,968,021,504.
+[    0.64] Number of reachable transitions: 12,872.
+[    0.64] Initial partition: 11,182 states in 1 block(s).
+[    0.67] After iteration 1: 13 blocks.
+[    0.69] After iteration 2: 25 blocks.
+[    0.72] After iteration 3: 42 blocks.
+[    0.76] After iteration 4: 75 blocks.
+[    0.78] After iteration 5: 108 blocks.
+[    0.83] After iteration 6: 141 blocks.
+[    0.88] After iteration 7: 178 blocks.
+[    0.93] After iteration 8: 210 blocks.
+[    1.01] After iteration 9: 247 blocks.
+[    1.07] After iteration 10: 276 blocks.
+[    1.14] After iteration 11: 305 blocks.
+[    1.23] After iteration 12: 374 blocks.
+[    1.32] After iteration 13: 443 blocks.
+[    1.42] After iteration 14: 544 blocks.
+[    1.52] After iteration 15: 650 blocks.
+[    1.63] After iteration 16: 755 blocks.
+[    1.76] After iteration 17: 865 blocks.
+[    1.88] After iteration 18: 975 blocks.
+[    2.00] After iteration 19: 1,079 blocks.
+[    2.12] After iteration 20: 1,146 blocks.
+[    2.23] After iteration 21: 1,213 blocks.
+[    2.37] After iteration 22: 1,274 blocks.
+[    2.50] After iteration 23: 1,409 blocks.
+[    2.64] After iteration 24: 1,534 blocks.
+[    2.79] After iteration 25: 1,700 blocks.
+[    2.92] After iteration 26: 1,866 blocks.
+[    3.06] After iteration 27: 2,032 blocks.
+[    3.23] After iteration 28: 2,162 blocks.
+[    3.36] After iteration 29: 2,280 blocks.
+[    3.48] After iteration 30: 2,348 blocks.
+[    3.59] After iteration 31: 2,368 blocks.
+[    3.66] After iteration 32: 2,388 blocks.
+[    3.74] After iteration 33: 2,408 blocks.
+[    3.83] After iteration 34: 2,464 blocks.
+[    3.91] After iteration 35: 2,520 blocks.
+[    4.02] After iteration 36: 2,616 blocks.
+[    4.11] After iteration 37: 2,712 blocks.
+[    4.21] After iteration 38: 2,808 blocks.
+[    4.33] After iteration 39: 2,880 blocks.
+[    4.43] After iteration 40: 2,944 blocks.
+[    4.51] After iteration 41: 2,976 blocks.
+[    4.58] After iteration 42: 2,976 blocks.
+[    4.58] 
+[    4.58] Time for computing the bisimulation relation: 3.94 sec.
+[    4.58] Time for signature computation: 2.72 s.
+[    4.58] Time for partition refinement: 1.22 s.
+[    4.58] 
+[    4.58] Number of iterations: 42.
+[    4.58] Number of states before bisimulation minimisation: 11,182.
+[    4.58] Number of blocks after bisimulation minimisation: 2,976.
+[    4.58] Number of transitions before bisimulation minimisation: 14,705,968,021,504.
+[    4.58] Number of reachable transitions before bisimulation minimisation: 12,872.
+[    4.58] Number of transitions after bisimulation minimisation: 3,551.
+[    4.58] 
+[    4.58] Trimming unneeded block variables...
+[    4.63] 
+[    4.63] Computing new interactive transition relations (using standard operations)...
+[    5.97] Computing new states, initial states, inital partition...
+[    5.97] 
+[    5.97] Time for computing the quotient of the transition relation: 1.33 sec.
+[    5.97] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    5.97] New interactive transition relation: 4,042 transitions, 9,383 MTBDD nodes.

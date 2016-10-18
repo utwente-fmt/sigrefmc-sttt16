@@ -1,0 +1,34 @@
+[    0.10] Finished reading system from models/swp_2_2-e.bdd.
+[    0.20] Number of state variables: 6.
+[    0.20] Number of action variables: 2.
+[    0.20] Number of block variables: 7.
+[    0.20] Number of transition relations: 2.
+[    0.20] Number of transitions: 104 transitions.
+[    0.20] Initial partition: 45 states in 1 block(s).
+[    0.29] After iteration 1: 5 blocks.
+[    0.37] After iteration 2: 15 blocks.
+[    0.42] After iteration 3: 23 blocks.
+[    0.46] After iteration 4: 31 blocks.
+[    0.48] After iteration 5: 31 blocks.
+[    0.48] 
+[    0.48] Time for computing the bisimulation relation: 0.28 sec.
+[    0.48] Time for signature computation: 0.23 s.
+[    0.48] Time for partition refinement: 0.06 s.
+[    0.48] 
+[    0.48] Number of iterations: 5.
+[    0.48] Number of states before bisimulation minimisation: 45.
+[    0.48] Number of blocks after bisimulation minimisation: 31.
+[    0.48] Number of transitions before bisimulation minimisation: 104.
+[    0.48] Number of transitions after bisimulation minimisation: 60.
+[    0.48] 
+[    0.48] Trimming unneeded block variables...
+[    0.49] 
+[    0.49] Computing new interactive transition relations (using custom operations)...
+[    0.49] Picking a state for each block...
+[    0.49] Converting the partition...
+[    0.49] Computing new interactive transition relations...
+[    0.50] Computing new states, initial states, initial partition...
+[    0.50] 
+[    0.50] Time for computing the quotient of the transition relation: 0.02 sec.
+[    0.50] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    0.51] New interactive transition relation: 60 transitions, 128 MTBDD nodes.

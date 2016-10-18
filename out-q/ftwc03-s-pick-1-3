@@ -1,0 +1,22 @@
+[    0.84] Finished reading system from models/ftwc03.ximc.
+[    0.85] Number of state variables: 19.
+[    0.85] Number of action variables: 6.
+[    0.85] Number of block variables: 20.
+[    0.85] Number of Markovian transitions: 44,879,564,798
+[    0.85] Number of interactive transitions: 26,964,119,784
+[    0.85] Initial partition: 524,286 states in 1 block(s).
+[    0.86] Computing maximal-progress cut.
+[    4.27] After iteration 1-a: 13,123 blocks.
+[   56.90] (GC) Starting garbage collection...
+[   62.14] (GC) Garbage collection done.
+[  150.68] After iteration 1-b: 223,012 blocks.
+[  167.30] (GC) Starting garbage collection...
+[  171.03] (GC) Garbage collection done.
+[  336.17] (GC) Starting garbage collection...
+[  360.85] (GC) Garbage collection done.
+[  711.79] (GC) Starting garbage collection...
+[  741.64] (GC) Garbage collection done.
+[ 1195.23] After iteration 2-a: 236,131 blocks.
+[ 1578.53] (GC) Starting garbage collection...
+[ 1640.08] (GC) Garbage collection done.
+[ 2390.05] After iteration 2-b: 256,333 blocks.

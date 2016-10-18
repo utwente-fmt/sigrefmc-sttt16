@@ -1,0 +1,27 @@
+[    1.82] Finished reading system from models/p2p-7-5.xctmc.
+[    1.83] Number of state variables: 35.
+[    1.83] Number of block variables: 25.
+[    1.83] Number of Markovian transitions: 601,295,421,441
+[    1.83] Initial partition: 34,359,738,368 states in 1 block(s).
+[    4.58] After iteration 1: 72 blocks.
+[   12.97] After iteration 2: 336 blocks.
+[   21.34] After iteration 3: 336 blocks.
+[   21.34] 
+[   21.34] Time for computing the bisimulation relation: 19.51 sec.
+[   21.34] Time for signature computation: 19.41 sec.
+[   21.34] Time for partition refinement: 0.10 sec.
+[   21.34] 
+[   21.34] Number of iterations: 3.
+[   21.34] Number of states before bisimulation minimisation: 34,359,738,368.
+[   21.34] Number of blocks after bisimulation minimisation: 336.
+[   21.34] Number of transitions before bisimulation minimisation: 601,295,421,441.
+[   21.34] Number of transitions after bisimulation minimisation: 806.
+[   21.34] 
+[   21.34] Trimming unneeded block variables...
+[   21.38] 
+[   21.38] Computing new Markov transition relation (using custom operations)...
+[   30.25] Computing new states, initial states, initial partition...
+[   30.25] 
+[   30.25] Time for computing the quotient of the transition relation: 8.87 sec.
+[   30.25] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[   30.25] New Markov transition relation: 806 transitions, 1,428 MTBDD nodes.

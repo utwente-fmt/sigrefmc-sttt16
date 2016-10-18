@@ -1,0 +1,69 @@
+[    1.74] Finished reading system from models/kanban05.xlts.
+[    1.74] Number of state variables: 24.
+[    1.74] Number of action variables: 5.
+[    1.74] Number of block variables: 25.
+[    1.74] Number of transition relations: 1.
+[    1.74] Number of transitions: 133,938,560 transitions.
+[    1.74] Initial partition: 16,772,032 states in 1 block(s).
+[    1.74] After iteration 1: 128 blocks.
+[    1.76] After iteration 2: 3,212 blocks.
+[    1.86] After iteration 3: 28,164 blocks.
+[    2.11] After iteration 4: 115,565 blocks.
+[    2.81] After iteration 5: 344,666 blocks.
+[    4.43] After iteration 6: 807,110 blocks.
+[    5.16] (GC) Starting garbage collection...
+[    5.42] (GC) Garbage collection done.
+[    8.34] After iteration 7: 1,422,196 blocks.
+[   10.50] (GC) Starting garbage collection...
+[   11.01] (GC) Garbage collection done.
+[   13.85] After iteration 8: 2,139,054 blocks.
+[   20.15] After iteration 9: 2,886,750 blocks.
+[   21.69] (GC) Starting garbage collection...
+[   22.48] (GC) Garbage collection done.
+[   29.53] After iteration 10: 3,558,735 blocks.
+[   36.37] After iteration 11: 4,097,841 blocks.
+[   41.71] After iteration 12: 4,469,965 blocks.
+[   46.63] After iteration 13: 4,695,524 blocks.
+[   47.72] (GC) Starting garbage collection...
+[   49.27] (GC) Garbage collection done.
+[   57.57] After iteration 14: 4,826,233 blocks.
+[   64.53] After iteration 15: 4,901,228 blocks.
+[   67.20] After iteration 16: 4,947,370 blocks.
+[   69.56] After iteration 17: 4,976,793 blocks.
+[   71.79] After iteration 18: 4,997,427 blocks.
+[   73.92] After iteration 19: 5,011,596 blocks.
+[   75.98] After iteration 20: 5,021,078 blocks.
+[   77.98] After iteration 21: 5,026,821 blocks.
+[   79.94] After iteration 22: 5,030,022 blocks.
+[   81.88] After iteration 23: 5,032,016 blocks.
+[   83.81] After iteration 24: 5,032,992 blocks.
+[   85.73] After iteration 25: 5,033,488 blocks.
+[   87.63] After iteration 26: 5,033,607 blocks.
+[   89.54] After iteration 27: 5,033,624 blocks.
+[   91.43] After iteration 28: 5,033,628 blocks.
+[   93.32] After iteration 29: 5,033,630 blocks.
+[   95.20] After iteration 30: 5,033,631 blocks.
+[   97.09] After iteration 31: 5,033,631 blocks.
+[   98.23] 
+[   98.23] Time for computing the bisimulation relation: 95.35 sec.
+[   98.23] Time for signature computation: 51.59 s.
+[   98.23] Time for partition refinement: 43.76 s.
+[   98.23] 
+[   98.23] Number of iterations: 31.
+[   98.23] Number of states before bisimulation minimisation: 16,772,032.
+[   98.23] Number of blocks after bisimulation minimisation: 5,033,631.
+[   98.23] Number of transitions before bisimulation minimisation: 133,938,560.
+[   98.23] Number of transitions after bisimulation minimisation: 46,071,311.
+[   98.23] 
+[   98.23] Trimming unneeded block variables...
+[   98.60] 
+[   98.60] Computing new interactive transition relations (using standard operations)...
+[  117.82] (GC) Starting garbage collection...
+[  120.80] (GC) Garbage collection done.
+[  215.13] (GC) Starting garbage collection...
+[  219.90] (GC) Garbage collection done.
+[  273.77] Computing new states, initial states, inital partition...
+[  273.86] 
+[  273.86] Time for computing the quotient of the transition relation: 175.17 sec.
+[  273.86] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[  308.74] New interactive transition relation: 46,071,311 transitions, 69,955,224 MTBDD nodes.

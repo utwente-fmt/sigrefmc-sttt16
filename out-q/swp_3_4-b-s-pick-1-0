@@ -1,0 +1,35 @@
+[    0.56] Finished reading system from models/swp_3_4-b.bdd.
+[    1.13] Number of state variables: 39.
+[    1.13] Number of action variables: 2.
+[    1.13] Number of block variables: 25.
+[    1.13] Number of transition relations: 11.
+[    1.13] Number of transitions: 1,614,370,832,384 transitions.
+[    1.13] Initial partition: 38,550,168 states in 1 block(s).
+[   15.91] After iteration 1: 5 blocks.
+[   41.83] After iteration 2: 37 blocks.
+[   69.65] (GC) Starting garbage collection...
+[   74.16] (GC) Garbage collection done.
+[   89.18] After iteration 3: 293 blocks.
+[  145.41] After iteration 4: 1,887 blocks.
+[  195.15] (GC) Starting garbage collection...
+[  204.80] (GC) Garbage collection done.
+[  245.77] After iteration 5: 7,638 blocks.
+[  358.47] After iteration 6: 22,921 blocks.
+[  431.60] (GC) Starting garbage collection...
+[  448.62] (GC) Garbage collection done.
+[  527.02] After iteration 7: 49,464 blocks.
+[  692.16] After iteration 8: 78,903 blocks.
+[  887.91] (GC) Starting garbage collection...
+[  929.23] (GC) Garbage collection done.
+[  963.89] After iteration 9: 120,294 blocks.
+[ 1202.20] After iteration 10: 174,678 blocks.
+[ 1447.01] After iteration 11: 228,891 blocks.
+[ 1720.71] After iteration 12: 276,139 blocks.
+[ 1928.23] (GC) Starting garbage collection...
+[ 1986.08] (GC) Garbage collection done.
+[ 2121.02] After iteration 13: 334,285 blocks.
+[ 2452.59] After iteration 14: 416,379 blocks.
+[ 2705.00] After iteration 15: 493,494 blocks.
+[ 2949.22] After iteration 16: 541,293 blocks.
+[ 3184.68] After iteration 17: 599,235 blocks.
+[ 3404.94] After iteration 18: 689,226 blocks.

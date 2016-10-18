@@ -1,0 +1,29 @@
+[    0.06] Finished reading system from models/onebit_2-e.bdd.
+[    0.22] Number of state variables: 6.
+[    0.22] Number of action variables: 3.
+[    0.22] Number of block variables: 7.
+[    0.22] Number of transition relations: 4.
+[    0.22] Number of transitions: 192 transitions.
+[    0.22] Initial partition: 49 states in 1 block(s).
+[    0.39] After iteration 1: 25 blocks.
+[    0.50] After iteration 2: 49 blocks.
+[    0.53] After iteration 3: 49 blocks.
+[    0.53] 
+[    0.53] Time for computing the bisimulation relation: 0.31 sec.
+[    0.53] Time for signature computation: 0.27 s.
+[    0.53] Time for partition refinement: 0.03 s.
+[    0.53] 
+[    0.53] Number of iterations: 3.
+[    0.53] Number of states before bisimulation minimisation: 49.
+[    0.53] Number of blocks after bisimulation minimisation: 49.
+[    0.53] Number of transitions before bisimulation minimisation: 192.
+[    0.53] Number of transitions after bisimulation minimisation: 168.
+[    0.53] 
+[    0.53] Trimming unneeded block variables...
+[    0.53] 
+[    0.53] Computing new interactive transition relations (using custom operations)...
+[    0.54] Computing new states, initial states, initial partition...
+[    0.54] 
+[    0.54] Time for computing the quotient of the transition relation: 0.01 sec.
+[    0.54] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    0.54] New interactive transition relation: 168 transitions, 516 MTBDD nodes.

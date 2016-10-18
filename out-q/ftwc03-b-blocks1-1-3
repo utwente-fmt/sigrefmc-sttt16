@@ -1,0 +1,44 @@
+[    0.80] Finished reading system from models/ftwc03.ximc.
+[    0.82] Number of state variables: 19.
+[    0.82] Number of action variables: 6.
+[    0.82] Number of block variables: 20.
+[    0.82] Number of Markovian transitions: 44,879,564,798
+[    0.82] Number of interactive transitions: 26,964,119,784
+[    0.82] Initial partition: 524,286 states in 1 block(s).
+[    0.82] Computing maximal-progress cut.
+[    4.41] After iteration 1-a: 13,123 blocks.
+[  100.46] (GC) Starting garbage collection...
+[  106.11] (GC) Garbage collection done.
+[  275.82] (GC) Starting garbage collection...
+[  283.62] (GC) Garbage collection done.
+[  477.62] After iteration 1-b: 21,871 blocks.
+[  593.67] (GC) Starting garbage collection...
+[  605.99] (GC) Garbage collection done.
+[  732.92] After iteration 2-a: 34,990 blocks.
+[ 1575.28] (GC) Starting garbage collection...
+[ 1610.23] (GC) Garbage collection done.
+[ 1884.74] After iteration 2-b: 34,990 blocks.
+[ 2109.69] After iteration 3-a: 34,990 blocks.
+[ 2109.69] 
+[ 2109.69] Time for computing the bisimulation relation: 2,108.87 sec.
+[ 2109.69] Time for Markovian signature computation: 258.77 s.
+[ 2109.69] Time for Markovian partition refinement: 0.11 s.
+[ 2109.69] Time for interactive signature computation: 1,624.93 s.
+[ 2109.69] Time for interactive partition refinement: 0.10 s.
+[ 2109.69] 
+[ 2109.69] Number of iterations: 2.
+[ 2109.69] Number of states before bisimulation minimisation: 524,286.
+[ 2109.69] Number of blocks after bisimulation minimisation: 34,990.
+[ 2109.69] 
+[ 2109.69] Trimming unneeded block variables...
+[ 2109.75] 
+[ 2109.75] Computing new Markov transition relation (using standard operations)...
+[ 2677.16] (GC) Starting garbage collection...
+[ 2727.57] (GC) Garbage collection done.
+[ 3220.11] Computing new interactive transition relations (using standard operations)...
+[ 3495.19] Computing new states, initial states, initial partition...
+[ 3495.19] 
+[ 3495.19] Time for computing the quotient of the transition relation: 1,385.44 sec.
+[ 3495.19] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[ 3528.75] New Markov transition relation: 198,899,856 transitions, 44,616,644 MTBDD nodes.
+[ 3529.54] New interactive transition relation: 3,130,250 transitions, 1,236,052 MTBDD nodes.

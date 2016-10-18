@@ -1,0 +1,44 @@
+[    2.98] Finished reading system from models/dkr_4-b.bdd.
+[    4.77] Number of state variables: 125.
+[    4.77] Number of action variables: 1.
+[    4.77] Number of block variables: 25.
+[    4.77] Number of transition relations: 212.
+[    4.77] Number of transitions: 17,944,577,943,096,364,284,201,395,313,784,651,776 transitions.
+[    4.77] Initial partition: 909,593 states in 1 block(s).
+[   41.53] After iteration 1: 3 blocks.
+[   42.91] After iteration 2: 4 blocks.
+[   44.16] After iteration 3: 5 blocks.
+[   45.19] After iteration 4: 6 blocks.
+[   46.49] After iteration 5: 7 blocks.
+[   48.65] After iteration 6: 8 blocks.
+[   51.86] After iteration 7: 9 blocks.
+[   56.59] After iteration 8: 10 blocks.
+[   64.42] After iteration 9: 11 blocks.
+[   75.52] After iteration 10: 12 blocks.
+[   90.94] After iteration 11: 13 blocks.
+[  112.05] After iteration 12: 14 blocks.
+[  138.40] After iteration 13: 15 blocks.
+[  168.20] After iteration 14: 16 blocks.
+[  199.07] After iteration 15: 17 blocks.
+[  230.24] After iteration 16: 19 blocks.
+[  262.05] After iteration 17: 23 blocks.
+[  296.69] After iteration 18: 28 blocks.
+[  334.40] After iteration 19: 35 blocks.
+[  378.86] After iteration 20: 44 blocks.
+[  434.79] After iteration 21: 58 blocks.
+[  506.92] After iteration 22: 82 blocks.
+[  510.05] (GC) Starting garbage collection...
+[  512.42] (GC) Garbage collection done.
+[  603.79] After iteration 23: 123 blocks.
+[  645.64] After iteration 24: 191 blocks.
+[  685.74] After iteration 25: 288 blocks.
+[  741.13] After iteration 26: 405 blocks.
+[  816.67] After iteration 27: 552 blocks.
+[  923.51] After iteration 28: 719 blocks.
+[ 1067.35] After iteration 29: 913 blocks.
+[ 1249.93] After iteration 30: 1,105 blocks.
+[ 1456.28] After iteration 31: 1,303 blocks.
+[ 1678.29] After iteration 32: 1,505 blocks.
+[ 1911.10] After iteration 33: 1,704 blocks.
+[ 2153.26] After iteration 34: 1,877 blocks.
+[ 2402.43] After iteration 35: 2,068 blocks.

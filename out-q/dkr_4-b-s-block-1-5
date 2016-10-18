@@ -1,0 +1,41 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    2.98] Finished reading system from models/dkr_4-b.bdd.
+[   85.81] Number of state variables: 125.
+[   85.81] Number of action variables: 1.
+[   85.81] Number of block variables: 25.
+[   85.81] Number of transition relations: 212.
+[   85.81] Number of transitions: 17,944,577,943,096,364,284,201,395,313,784,651,776.
+[   85.81] Number of reachable transitions: 2,508,596.
+[   85.81] Initial partition: 909,593 states in 1 block(s).
+[  122.79] After iteration 1: 3 blocks.
+[  124.17] After iteration 2: 4 blocks.
+[  125.44] After iteration 3: 5 blocks.
+[  126.49] After iteration 4: 6 blocks.
+[  127.80] After iteration 5: 7 blocks.
+[  129.99] After iteration 6: 8 blocks.
+[  133.21] After iteration 7: 9 blocks.
+[  137.98] After iteration 8: 10 blocks.
+[  145.88] After iteration 9: 11 blocks.
+[  157.05] After iteration 10: 12 blocks.
+[  172.43] After iteration 11: 13 blocks.
+[  193.08] After iteration 12: 14 blocks.
+[  219.40] After iteration 13: 15 blocks.
+[  249.53] After iteration 14: 16 blocks.
+[  280.90] After iteration 15: 17 blocks.
+[  313.23] After iteration 16: 19 blocks.
+[  347.04] After iteration 17: 23 blocks.
+[  376.23] (GC) Starting garbage collection...
+[  379.45] (GC) Garbage collection done.
+[  392.62] After iteration 18: 28 blocks.
+[  457.86] After iteration 19: 35 blocks.
+[  474.06] After iteration 20: 44 blocks.
+[  489.19] After iteration 21: 58 blocks.
+[  508.76] After iteration 22: 82 blocks.
+[  576.85] After iteration 23: 123 blocks.
+[  614.72] After iteration 24: 191 blocks.
+[  658.77] After iteration 25: 288 blocks.
+[  716.28] After iteration 26: 405 blocks.
+[  793.21] After iteration 27: 552 blocks.
+[  902.13] After iteration 28: 719 blocks.
+[ 1052.64] After iteration 29: 913 blocks.

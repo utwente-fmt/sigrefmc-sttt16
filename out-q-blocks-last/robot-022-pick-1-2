@@ -1,0 +1,70 @@
+[    0.60] Finished reading system from models/robot-022.xctmc.
+[    0.61] Number of state variables: 21.
+[    0.61] Number of block variables: 22.
+[    0.61] Number of Markovian transitions: 220,413
+[    0.61] Initial partition: 41,580 states in 1 block(s).
+[    0.61] After iteration 1: 10 blocks.
+[    0.62] After iteration 2: 53 blocks.
+[    0.63] After iteration 3: 146 blocks.
+[    0.64] After iteration 4: 306 blocks.
+[    0.66] After iteration 5: 551 blocks.
+[    0.69] After iteration 6: 898 blocks.
+[    0.72] After iteration 7: 1,363 blocks.
+[    0.76] After iteration 8: 1,958 blocks.
+[    0.81] After iteration 9: 2,703 blocks.
+[    0.87] After iteration 10: 3,610 blocks.
+[    0.94] After iteration 11: 4,699 blocks.
+[    1.02] After iteration 12: 5,968 blocks.
+[    1.11] After iteration 13: 7,391 blocks.
+[    1.21] After iteration 14: 8,942 blocks.
+[    1.32] After iteration 15: 10,616 blocks.
+[    1.44] After iteration 16: 12,392 blocks.
+[    1.56] After iteration 17: 14,256 blocks.
+[    1.69] After iteration 18: 16,188 blocks.
+[    1.83] After iteration 19: 18,176 blocks.
+[    1.98] After iteration 20: 20,200 blocks.
+[    2.12] After iteration 21: 22,162 blocks.
+[    2.27] After iteration 22: 24,018 blocks.
+[    2.42] After iteration 23: 25,818 blocks.
+[    2.56] After iteration 24: 27,576 blocks.
+[    2.70] After iteration 25: 29,279 blocks.
+[    2.84] After iteration 26: 30,918 blocks.
+[    2.98] After iteration 27: 32,471 blocks.
+[    3.11] After iteration 28: 33,928 blocks.
+[    3.24] After iteration 29: 35,267 blocks.
+[    3.36] After iteration 30: 36,478 blocks.
+[    3.47] After iteration 31: 37,539 blocks.
+[    3.57] After iteration 32: 38,436 blocks.
+[    3.67] After iteration 33: 39,164 blocks.
+[    3.76] After iteration 34: 39,749 blocks.
+[    3.84] After iteration 35: 40,202 blocks.
+[    3.91] After iteration 36: 40,545 blocks.
+[    3.97] After iteration 37: 40,788 blocks.
+[    4.03] After iteration 38: 40,953 blocks.
+[    4.09] After iteration 39: 41,050 blocks.
+[    4.14] After iteration 40: 41,101 blocks.
+[    4.19] After iteration 41: 41,116 blocks.
+[    4.24] After iteration 42: 41,118 blocks.
+[    4.29] After iteration 43: 41,118 blocks.
+[    4.34] 
+[    4.34] Time for computing the bisimulation relation: 3.68 sec.
+[    4.34] Time for signature computation: 2.47 sec.
+[    4.34] Time for partition refinement: 1.21 sec.
+[    4.34] 
+[    4.34] Number of iterations: 43.
+[    4.34] Number of states before bisimulation minimisation: 41,580.
+[    4.34] Number of blocks after bisimulation minimisation: 41,118.
+[    4.34] Number of transitions before bisimulation minimisation: 220,413.
+[    4.34] Number of transitions after bisimulation minimisation: 218,105.
+[    4.34] 
+[    4.34] Trimming unneeded block variables...
+[    4.41] 
+[    4.41] Computing new Markov transition relation (using pick-random encoding)...
+[    4.41] Picking a state for each block...
+[    4.54] Converting the partition...
+[    4.59] Computing the new transition relation...
+[    6.44] Computing new states, initial states, initial partition...
+[    6.44] 
+[    6.44] Time for computing the quotient of the transition relation: 2.03 sec.
+[    6.44] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    6.44] New Markov transition relation: 218,105 transitions, 4,157 MTBDD nodes.

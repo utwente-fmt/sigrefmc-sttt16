@@ -1,0 +1,49 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    0.84] Finished reading system from models/swp_3_3-b.bdd.
+[    1.05] Number of state variables: 33.
+[    1.05] Number of action variables: 2.
+[    1.05] Number of block variables: 25.
+[    1.05] Number of transition relations: 11.
+[    1.05] Number of transitions: 28,549,578,752.
+[    1.05] Number of reachable transitions: 7,269,426.
+[    1.05] Initial partition: 1,652,724 states in 1 block(s).
+[    1.11] After iteration 1: 5 blocks.
+[    1.22] After iteration 2: 37 blocks.
+[    1.37] After iteration 3: 284 blocks.
+[    1.58] After iteration 4: 1,058 blocks.
+[    1.86] After iteration 5: 3,162 blocks.
+[    2.21] After iteration 6: 7,174 blocks.
+[    2.63] After iteration 7: 11,466 blocks.
+[    3.11] After iteration 8: 17,193 blocks.
+[    3.44] (GC) Starting garbage collection...
+[    3.66] (GC) Garbage collection done.
+[    3.97] After iteration 9: 25,371 blocks.
+[    4.55] After iteration 10: 33,207 blocks.
+[    5.05] After iteration 11: 38,947 blocks.
+[    5.55] After iteration 12: 45,235 blocks.
+[    6.01] After iteration 13: 53,538 blocks.
+[    6.44] After iteration 14: 59,562 blocks.
+[    6.75] After iteration 15: 62,082 blocks.
+[    7.00] After iteration 16: 65,025 blocks.
+[    7.17] After iteration 17: 65,025 blocks.
+[    7.17] 
+[    7.17] Time for computing the bisimulation relation: 6.12 sec.
+[    7.17] Time for signature computation: 5.37 s.
+[    7.17] Time for partition refinement: 0.75 s.
+[    7.17] 
+[    7.17] Number of iterations: 17.
+[    7.17] Number of states before bisimulation minimisation: 1,652,724.
+[    7.17] Number of blocks after bisimulation minimisation: 65,025.
+[    7.17] Number of transitions before bisimulation minimisation: 28,549,578,752.
+[    7.17] Number of reachable transitions before bisimulation minimisation: 7,269,426.
+[    7.17] Number of transitions after bisimulation minimisation: 300,993.
+[    7.17] 
+[    7.17] Trimming unneeded block variables...
+[    7.23] 
+[    7.23] Computing new interactive transition relations (using custom operations)...
+[    7.23] Picking a state for each block...
+[    7.29] Converting the partition...
+[    7.35] Computing new interactive transition relations...
+[    8.02] (GC) Starting garbage collection...
+[    8.31] (GC) Garbage collection done.

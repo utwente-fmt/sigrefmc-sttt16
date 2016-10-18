@@ -1,0 +1,69 @@
+[   70.37] Finished reading system from models/franklin_5_3-b.bdd.
+[   72.08] Number of state variables: 173.
+[   72.08] Number of action variables: 1.
+[   72.08] Number of block variables: 25.
+[   72.08] Number of transition relations: 362.
+[   72.08] Number of transitions: 7,854,931,893,687,270,915,318,091,863,735,707,856,829,537,948,008,448 transitions.
+[   72.08] Initial partition: 55,355,191 states in 1 block(s).
+[   76.26] (GC) Starting garbage collection...
+[   77.21] (GC) Garbage collection done.
+[   87.08] (GC) Starting garbage collection...
+[   88.27] (GC) Garbage collection done.
+[   90.69] After iteration 1: 4 blocks.
+[  103.03] After iteration 2: 8 blocks.
+[  106.11] After iteration 3: 13 blocks.
+[  106.97] After iteration 4: 22 blocks.
+[  108.29] After iteration 5: 32 blocks.
+[  109.97] After iteration 6: 46 blocks.
+[  111.49] After iteration 7: 62 blocks.
+[  114.06] After iteration 8: 81 blocks.
+[  118.55] After iteration 9: 105 blocks.
+[  125.77] (GC) Starting garbage collection...
+[  127.22] (GC) Garbage collection done.
+[  129.28] After iteration 10: 141 blocks.
+[  143.89] After iteration 11: 194 blocks.
+[  149.87] After iteration 12: 277 blocks.
+[  157.59] After iteration 13: 411 blocks.
+[  170.04] After iteration 14: 631 blocks.
+[  188.07] After iteration 15: 963 blocks.
+[  209.31] (GC) Starting garbage collection...
+[  211.01] (GC) Garbage collection done.
+[  212.89] After iteration 16: 1,448 blocks.
+[  242.82] After iteration 17: 2,106 blocks.
+[  260.40] After iteration 18: 2,952 blocks.
+[  278.80] After iteration 19: 3,997 blocks.
+[  302.42] After iteration 20: 5,294 blocks.
+[  334.10] After iteration 21: 6,912 blocks.
+[  376.14] After iteration 22: 8,957 blocks.
+[  428.30] (GC) Starting garbage collection...
+[  431.30] (GC) Garbage collection done.
+[  435.47] After iteration 23: 11,519 blocks.
+[  508.01] After iteration 24: 14,698 blocks.
+[  555.90] After iteration 25: 18,607 blocks.
+[  617.81] After iteration 26: 23,331 blocks.
+[  710.46] After iteration 27: 28,958 blocks.
+[  840.21] After iteration 28: 35,601 blocks.
+[  857.23] (GC) Starting garbage collection...
+[  861.11] (GC) Garbage collection done.
+[ 1017.78] After iteration 29: 43,317 blocks.
+[ 1209.26] After iteration 30: 52,114 blocks.
+[ 1429.15] (GC) Starting garbage collection...
+[ 1436.18] (GC) Garbage collection done.
+[ 1443.13] After iteration 31: 61,864 blocks.
+[ 1711.86] After iteration 32: 72,374 blocks.
+[ 1993.63] (GC) Starting garbage collection...
+[ 2001.46] (GC) Garbage collection done.
+[ 2023.88] After iteration 33: 83,487 blocks.
+[ 2347.54] (GC) Starting garbage collection...
+[ 2356.37] (GC) Garbage collection done.
+[ 2377.13] After iteration 34: 95,238 blocks.
+[ 2490.61] (GC) Starting garbage collection...
+[ 2498.40] (GC) Garbage collection done.
+[ 2778.15] After iteration 35: 107,753 blocks.
+[ 2781.96] (GC) Starting garbage collection...
+[ 2786.02] (GC) Garbage collection done.
+[ 3197.89] (GC) Starting garbage collection...
+[ 3207.80] (GC) Garbage collection done.
+[ 3220.18] After iteration 36: 120,965 blocks.
+[ 3552.38] (GC) Starting garbage collection...
+[ 3562.23] (GC) Garbage collection done.

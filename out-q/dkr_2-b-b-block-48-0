@@ -1,0 +1,29 @@
+[    0.36] Finished reading system from models/dkr_2-b.bdd.
+[    0.63] Number of state variables: 37.
+[    0.63] Number of action variables: 1.
+[    0.63] Number of block variables: 25.
+[    0.63] Number of transition relations: 50.
+[    0.63] Number of transitions: 28,252,831,744 transitions.
+[    0.63] Initial partition: 201 states in 1 block(s).
+[    0.63] Precomputing tau transitions for branching bisimulation.
+[    0.65] After iteration 1: 2 blocks.
+[    0.66] After iteration 2: 2 blocks.
+[    0.66] 
+[    0.66] Time for computing the bisimulation relation: 0.03 sec.
+[    0.66] Time for signature computation: 0.02 s.
+[    0.66] Time for partition refinement: 0.01 s.
+[    0.66] 
+[    0.66] Number of iterations: 2.
+[    0.66] Number of states before bisimulation minimisation: 201.
+[    0.66] Number of blocks after bisimulation minimisation: 2.
+[    0.66] Number of transitions before bisimulation minimisation: 28,252,831,744.
+[    0.66] Number of transitions after bisimulation minimisation: 1.
+[    0.66] 
+[    0.66] Trimming unneeded block variables...
+[    0.66] 
+[    0.66] Computing new interactive transition relations (using custom operations)...
+[    0.67] Computing new states, initial states, initial partition...
+[    0.67] 
+[    0.67] Time for computing the quotient of the transition relation: 0.00 sec.
+[    0.67] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[    0.67] New interactive transition relation: 2 transitions, 5 MTBDD nodes.

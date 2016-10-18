@@ -1,0 +1,40 @@
+[    0.00] Sylvan allocates 84.000 GB virtual memory for nodes table and operation cache.
+[    0.00] Initial nodes table and operation cache requires 2.625 GB.
+[    0.32] Finished reading system from models/swp_2_4-b.bdd.
+[    1.10] Number of state variables: 32.
+[    1.10] Number of action variables: 2.
+[    1.10] Number of block variables: 25.
+[    1.10] Number of transition relations: 11.
+[    1.10] Number of transitions: 14,344,519,680.
+[    1.10] Number of reachable transitions: 11,565,568.
+[    1.10] Initial partition: 2,589,056 states in 1 block(s).
+[    1.10] Precomputing tau transitions for branching bisimulation.
+[    9.29] After iteration 1: 4 blocks.
+[   21.09] After iteration 2: 13 blocks.
+[   34.92] After iteration 3: 35 blocks.
+[   50.03] After iteration 4: 87 blocks.
+[   65.90] After iteration 5: 159 blocks.
+[   81.98] After iteration 6: 255 blocks.
+[   95.97] After iteration 7: 383 blocks.
+[  108.02] After iteration 8: 511 blocks.
+[  116.61] After iteration 9: 511 blocks.
+[  116.61] 
+[  116.61] Time for computing the bisimulation relation: 115.51 sec.
+[  116.61] Time for signature computation: 112.79 s.
+[  116.61] Time for partition refinement: 2.72 s.
+[  116.61] 
+[  116.61] Number of iterations: 9.
+[  116.61] Number of states before bisimulation minimisation: 2,589,056.
+[  116.61] Number of blocks after bisimulation minimisation: 511.
+[  116.61] Number of transitions before bisimulation minimisation: 14,344,519,680.
+[  116.61] Number of reachable transitions before bisimulation minimisation: 11,565,568.
+[  116.61] Number of transitions after bisimulation minimisation: 1,020.
+[  116.61] 
+[  116.61] Trimming unneeded block variables...
+[  116.74] 
+[  116.74] Computing new interactive transition relations (using custom operations)...
+[  119.02] Computing new states, initial states, initial partition...
+[  119.02] 
+[  119.02] Time for computing the quotient of the transition relation: 2.28 sec.
+[  119.02] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[  119.02] New interactive transition relation: 1,020 transitions, 1,821 MTBDD nodes.

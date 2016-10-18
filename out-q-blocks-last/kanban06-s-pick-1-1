@@ -1,0 +1,36 @@
+[    0.59] Finished reading system from models/kanban06.xlts.
+[    0.59] Number of state variables: 28.
+[    0.59] Number of action variables: 5.
+[    0.59] Number of block variables: 25.
+[    0.59] Number of transition relations: 1.
+[    0.59] Number of transitions: 1,689,124,864 transitions.
+[    0.59] Initial partition: 264,515,056 states in 1 block(s).
+[    0.59] After iteration 1: 128 blocks.
+[    0.66] After iteration 2: 3,679 blocks.
+[    1.41] After iteration 3: 42,520 blocks.
+[    6.46] After iteration 4: 222,402 blocks.
+[   31.30] After iteration 5: 773,583 blocks.
+[   45.70] (GC) Starting garbage collection...
+[   48.61] (GC) Garbage collection done.
+[  129.46] After iteration 6: 2,107,575 blocks.
+[  132.65] (GC) Starting garbage collection...
+[  137.13] (GC) Garbage collection done.
+[  288.28] (GC) Starting garbage collection...
+[  307.54] (GC) Garbage collection done.
+[  409.31] After iteration 7: 4,280,385 blocks.
+[  646.39] (GC) Starting garbage collection...
+[  683.01] (GC) Garbage collection done.
+[  910.05] After iteration 8: 7,091,884 blocks.
+[ 1389.29] (GC) Starting garbage collection...
+[ 1456.86] (GC) Garbage collection done.
+[ 1731.75] After iteration 9: 10,339,717 blocks.
+[ 2551.43] After iteration 10: 13,669,113 blocks.
+[ 3048.00] (GC) Starting garbage collection...
+[ 3144.29] (GC) Garbage collection done.
+[ 3686.05] After iteration 11: 16,819,373 blocks.
+[ 4618.28] (GC) Starting garbage collection...
+[ 4733.52] (GC) Garbage collection done.
+[ 5198.48] After iteration 12: 19,488,191 blocks.
+[ 6041.28] (GC) Starting garbage collection...
+[ 6155.37] (GC) Garbage collection done.
+[ 6822.22] After iteration 13: 21,520,779 blocks.

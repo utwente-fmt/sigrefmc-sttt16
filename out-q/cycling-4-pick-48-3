@@ -1,0 +1,35 @@
+[    4.71] Finished reading system from models/cycling-4.xctmc.
+[    4.72] Number of state variables: 45.
+[    4.72] Number of block variables: 25.
+[    4.72] Number of Markovian transitions: 2,742,012
+[    4.72] Initial partition: 431,101 states in 1 block(s).
+[    4.80] After iteration 1: 7,869 blocks.
+[    5.40] After iteration 2: 264,617 blocks.
+[    6.70] After iteration 3: 281,935 blocks.
+[    6.90] After iteration 4: 282,908 blocks.
+[    7.01] After iteration 5: 282,943 blocks.
+[    7.11] After iteration 6: 282,943 blocks.
+[    7.31] 
+[    7.31] Time for computing the bisimulation relation: 2.39 sec.
+[    7.31] Time for signature computation: 1.84 sec.
+[    7.31] Time for partition refinement: 0.55 sec.
+[    7.31] 
+[    7.31] Number of iterations: 6.
+[    7.31] Number of states before bisimulation minimisation: 431,101.
+[    7.31] Number of blocks after bisimulation minimisation: 282,943.
+[    7.31] Number of transitions before bisimulation minimisation: 2,742,012.
+[    7.31] Number of transitions after bisimulation minimisation: 1,878,339.
+[    7.31] 
+[    7.31] Trimming unneeded block variables...
+[    7.36] 
+[    7.36] Computing new Markov transition relation (using pick-random encoding)...
+[    7.36] Picking a state for each block...
+[    7.59] Converting the partition...
+[    7.70] Computing the new transition relation...
+[    8.73] (GC) Starting garbage collection...
+[    8.97] (GC) Garbage collection done.
+[   10.63] Computing new states, initial states, initial partition...
+[   10.64] 
+[   10.64] Time for computing the quotient of the transition relation: 3.28 sec.
+[   10.64] Number of MTBDD nodes created: 0. (0 new, 0 reused)
+[   10.69] New Markov transition relation: 1,878,339 transitions, 254,971 MTBDD nodes.
