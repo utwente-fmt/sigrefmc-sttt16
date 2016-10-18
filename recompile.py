@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 from contextlib import contextmanager
 import os
-from sh import git, cmake, make, mv
+from sh import cmake, make, mv
 import sys
+
 
 @contextmanager
 def cd(newdir):
@@ -12,6 +13,7 @@ def cd(newdir):
         yield
     finally:
         os.chdir(prevdir)
+
 
 if __name__ == "__main__":
     # git clone
