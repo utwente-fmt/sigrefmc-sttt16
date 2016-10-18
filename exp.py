@@ -4,15 +4,11 @@ from contextlib import contextmanager
 import os
 import sys
 import re
-from subprocess32 import call,TimeoutExpired
-import math
-import time
-import random
 import itertools
 from tabulate import tabulate
 
 # import framework
-from expfw import *
+from expfw import Experiment, ExperimentEngine, fixnan, online_variance
 
 @contextmanager
 def cd(newdir):
@@ -77,26 +73,30 @@ def float_str(f):
 
 
 class ExperimentCTMC1ht(ExperimentMC):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-ht-{}".format(name, workers)
         self.call  = ["./sigrefmc_ht", "-w", str(workers), "-l", "fl"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentCTMC1ht_fr(ExperimentMC):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-ht-fr-{}".format(name, workers)
         self.call  = ["./sigrefmc_ht", "-w", str(workers), "-l", "fr"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 class ExperimentCTMC1(ExperimentMC):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-{}".format(name, workers)
         self.call  = ["./sigrefmc", "-w", str(workers), "-l", "fl"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentCTMC1_fr(ExperimentMC):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-fr-{}".format(name, workers)
         self.call  = ["./sigrefmc", "-w", str(workers), "-l", "fr"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentCTMC2(Experiment):
@@ -113,7 +113,7 @@ class ExperimentCTMC2(Experiment):
 
 
 class CTMCExperiments():
-    def __init__(self):
+    def __init__(self, blocks_first=True):
         self.mc_1 = {}
         self.mc_48 = {}
         self.mcht_1 = {}
@@ -125,14 +125,14 @@ class CTMCExperiments():
         self.rw = {}
 
         for m,a in self.models:
-            self.mc_1[m] = ExperimentCTMC1(name=m, workers=1, model=a)
-            self.mc_48[m] = ExperimentCTMC1(name=m, workers=48, model=a)
-            self.mcht_1[m] = ExperimentCTMC1ht(name=m, workers=1, model=a)
-            self.mcht_48[m] = ExperimentCTMC1ht(name=m, workers=48, model=a)
-            self.mc_fr_1[m] = ExperimentCTMC1_fr(name=m, workers=1, model=a)
-            self.mc_fr_48[m] = ExperimentCTMC1_fr(name=m, workers=48, model=a)
-            self.mcht_fr_1[m] = ExperimentCTMC1ht_fr(name=m, workers=1, model=a)
-            self.mcht_fr_48[m] = ExperimentCTMC1ht_fr(name=m, workers=48, model=a)
+            self.mc_1[m] = ExperimentCTMC1(name=m, workers=1, model=a, blocks_first=blocks_first)
+            self.mc_48[m] = ExperimentCTMC1(name=m, workers=48, model=a, blocks_first=blocks_first)
+            self.mcht_1[m] = ExperimentCTMC1ht(name=m, workers=1, model=a, blocks_first=blocks_first)
+            self.mcht_48[m] = ExperimentCTMC1ht(name=m, workers=48, model=a, blocks_first=blocks_first)
+            self.mc_fr_1[m] = ExperimentCTMC1_fr(name=m, workers=1, model=a, blocks_first=blocks_first)
+            self.mc_fr_48[m] = ExperimentCTMC1_fr(name=m, workers=48, model=a, blocks_first=blocks_first)
+            self.mcht_fr_1[m] = ExperimentCTMC1ht_fr(name=m, workers=1, model=a, blocks_first=blocks_first)
+            self.mcht_fr_48[m] = ExperimentCTMC1ht_fr(name=m, workers=48, model=a, blocks_first=blocks_first)
             self.rw[m] = ExperimentCTMC2(name=m, model=a)
 
     def __iter__(self):
@@ -245,11 +245,11 @@ class CTMCExperiments():
         ("kanban-3", ["models/kanban-3.xctmc"]),
         ("kanban-4", ["models/kanban-4.xctmc"]),
         ("fgf", ["models/fgf.xctmc"]),
-        #("multiproc-2-2", ["models/multiproc-2-2.xctmc"]),
-        #("multiproc-2-3", ["models/multiproc-2-3.xctmc"]),
-        #("multiproc-2-4", ["models/multiproc-2-4.xctmc"]),
-        #("multiproc-3-1", ["models/multiproc-3-1.xctmc"]),
-        #("multiproc-3-2", ["models/multiproc-3-2.xctmc"]),
+        # ("multiproc-2-2", ["models/multiproc-2-2.xctmc"]),
+        # ("multiproc-2-3", ["models/multiproc-2-3.xctmc"]),
+        # ("multiproc-2-4", ["models/multiproc-2-4.xctmc"]),
+        # ("multiproc-3-1", ["models/multiproc-3-1.xctmc"]),
+        # ("multiproc-3-2", ["models/multiproc-3-2.xctmc"]),
         ("p2p-3-5", ["models/p2p-3-5.xctmc"]),
         ("p2p-4-4", ["models/p2p-4-4.xctmc"]),
         ("p2p-4-5", ["models/p2p-4-5.xctmc"]),
@@ -320,25 +320,28 @@ class CTMCExperiments():
 
 
 class ExperimentCTMC_blocks1(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-w", str(workers), "-q", "block-s1"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentCTMC_block(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-w", str(workers), "-q", "block"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentCTMC_pick(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-w", str(workers), "-q", "pick"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class CTMCQExperiments(CTMCExperiments):
-    def __init__(self):
+    def __init__(self, blocks_first=True):
         # block standard 1,48
         self.bs1 = {}
         self.bs48 = {}
@@ -350,12 +353,12 @@ class CTMCQExperiments(CTMCExperiments):
         self.p48 = {}
 
         for m,a in self.models:
-            self.bs1[m]  = ExperimentCTMC_blocks1(m, 1, a)
-            self.bs48[m] = ExperimentCTMC_blocks1(m, 48, a)
-            self.b1[m]   = ExperimentCTMC_block(m, 1, a)
-            self.b48[m]  = ExperimentCTMC_block(m, 48, a)
-            self.p1[m]   = ExperimentCTMC_pick(m, 1, a)
-            self.p48[m]  = ExperimentCTMC_pick(m, 48, a)
+            self.bs1[m]  = ExperimentCTMC_blocks1(m, 1, a, blocks_first=blocks_first)
+            self.bs48[m] = ExperimentCTMC_blocks1(m, 48, a, blocks_first=blocks_first)
+            self.b1[m]   = ExperimentCTMC_block(m, 1, a, blocks_first=blocks_first)
+            self.b48[m]  = ExperimentCTMC_block(m, 48, a, blocks_first=blocks_first)
+            self.p1[m]   = ExperimentCTMC_pick(m, 1, a, blocks_first=blocks_first)
+            self.p48[m]  = ExperimentCTMC_pick(m, 48, a, blocks_first=blocks_first)
 
     def __iter__(self):
         dicts = ["bs1", "bs48", "b1", "b48", "p1", "p48"]
@@ -440,15 +443,17 @@ class CTMCQExperiments(CTMCExperiments):
 
 
 class ExperimentLTS_s(ExperimentMC):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-s-{}".format(name, workers)
         self.call = ["./sigrefmc", "-b", "2", "-w", str(workers)] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentLTS_b(ExperimentMC):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-b-{}".format(name, workers)
         self.call = ["./sigrefmc", "-b", "1", "-w", str(workers)] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentLTS2_s(ExperimentRW):
@@ -463,8 +468,8 @@ class ExperimentLTS2_b(ExperimentRW):
         self.call = ["./sigref", "--bisi=1", "--infile={}".format(*model), "--verbosity=1"]
 
 
-class LTSExperiments:
-    def __init__(self):
+class LTSExperiments(object):
+    def __init__(self, blocks_first=True):
         self.mcb_1 = {}
         self.mcb_48 = {}
         self.mcs_1 = {}
@@ -473,11 +478,11 @@ class LTSExperiments:
         self.rwb = {}
 
         for m,a in self.models:
-            self.mcs_1[m] = ExperimentLTS_s(name=m, workers=1, model=a)
-            self.mcs_48[m] = ExperimentLTS_s(name=m, workers=48, model=a)
+            self.mcs_1[m] = ExperimentLTS_s(name=m, workers=1, model=a, blocks_first=blocks_first)
+            self.mcs_48[m] = ExperimentLTS_s(name=m, workers=48, model=a, blocks_first=blocks_first)
             self.rws[m] = ExperimentLTS2_s(name=m, model=a)
-            self.mcb_1[m] = ExperimentLTS_b(name=m, workers=1, model=a)
-            self.mcb_48[m] = ExperimentLTS_b(name=m, workers=48, model=a)
+            self.mcb_1[m] = ExperimentLTS_b(name=m, workers=1, model=a, blocks_first=blocks_first)
+            self.mcb_48[m] = ExperimentLTS_b(name=m, workers=48, model=a, blocks_first=blocks_first)
             self.rwb[m] = ExperimentLTS2_b(name=m, model=a)
 
     def __iter__(self):
@@ -617,43 +622,49 @@ class LTSExperiments:
 
 
 class ExperimentLTS_s_blocks1(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-s-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "block-s1"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentLTS_s_block(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-s-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "block"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentLTS_s_pick(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-s-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "pick"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentLTS_b_blocks1(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-b-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "block-s1"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentLTS_b_block(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-b-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "block"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentLTS_b_pick(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-b-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "pick"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class LTSQExperiments(LTSExperiments):
-    def __init__(self):
+    def __init__(self, blocks_first=True):
         # block standard 1,48
         self.s_bs1 = {}
         self.s_bs48 = {}
@@ -671,18 +682,18 @@ class LTSQExperiments(LTSExperiments):
         self.b_p48 = {}
 
         for m,a in self.models:
-            self.s_bs1[m]  = ExperimentLTS_s_blocks1(m, 1, a)
-            self.s_bs48[m] = ExperimentLTS_s_blocks1(m, 48, a)
-            self.s_b1[m]   = ExperimentLTS_s_block(m, 1, a)
-            self.s_b48[m]  = ExperimentLTS_s_block(m, 48, a)
-            self.s_p1[m]   = ExperimentLTS_s_pick(m, 1, a)
-            self.s_p48[m]  = ExperimentLTS_s_pick(m, 48, a)
-            self.b_bs1[m]  = ExperimentLTS_b_blocks1(m, 1, a)
-            self.b_bs48[m] = ExperimentLTS_b_blocks1(m, 48, a)
-            self.b_b1[m]   = ExperimentLTS_b_block(m, 1, a)
-            self.b_b48[m]  = ExperimentLTS_b_block(m, 48, a)
-            self.b_p1[m]   = ExperimentLTS_b_pick(m, 1, a)
-            self.b_p48[m]  = ExperimentLTS_b_pick(m, 48, a)
+            self.s_bs1[m]  = ExperimentLTS_s_blocks1(m, 1, a, blocks_first=blocks_first)
+            self.s_bs48[m] = ExperimentLTS_s_blocks1(m, 48, a, blocks_first=blocks_first)
+            self.s_b1[m]   = ExperimentLTS_s_block(m, 1, a, blocks_first=blocks_first)
+            self.s_b48[m]  = ExperimentLTS_s_block(m, 48, a, blocks_first=blocks_first)
+            self.s_p1[m]   = ExperimentLTS_s_pick(m, 1, a, blocks_first=blocks_first)
+            self.s_p48[m]  = ExperimentLTS_s_pick(m, 48, a, blocks_first=blocks_first)
+            self.b_bs1[m]  = ExperimentLTS_b_blocks1(m, 1, a, blocks_first=blocks_first)
+            self.b_bs48[m] = ExperimentLTS_b_blocks1(m, 48, a, blocks_first=blocks_first)
+            self.b_b1[m]   = ExperimentLTS_b_block(m, 1, a, blocks_first=blocks_first)
+            self.b_b48[m]  = ExperimentLTS_b_block(m, 48, a, blocks_first=blocks_first)
+            self.b_p1[m]   = ExperimentLTS_b_pick(m, 1, a, blocks_first=blocks_first)
+            self.b_p48[m]  = ExperimentLTS_b_pick(m, 48, a, blocks_first=blocks_first)
 
     def __iter__(self):
         # these models are too big for our tool (well, unless I change the maximum number allowed blocks)
@@ -858,43 +869,49 @@ class LTSQExperiments(LTSExperiments):
         print(tabulate(table, headers))
 
 class ExperimentBDD_s_blocks1(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-s-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "block-s1"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentBDD_s_block(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-s-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "block"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentBDD_s_pick(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-s-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "pick"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentBDD_b_blocks1(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-b-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "block-s1"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentBDD_b_block(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-b-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "block"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentBDD_b_pick(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-b-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "pick"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class BDDQExperiments(object):
-    def __init__(self):
+    def __init__(self, blocks_first=True):
         # block standard 1,48
         self.s_bs1 = {}
         self.s_bs48 = {}
@@ -915,22 +932,22 @@ class BDDQExperiments(object):
         with cd("models"):
             files = list(filter(os.path.isfile, os.listdir(os.curdir)))
         files = [f[:-len(".bdd")] for f in filter(lambda f: f.endswith(".bdd"), files)]
- 
+
         self.models = tuple([m, ["models/{}.bdd".format(m)]] for m in files)
 
         for m,a in self.models:
-            self.s_bs1[m]  = ExperimentBDD_s_blocks1(m, 1, a)
-            self.s_bs48[m] = ExperimentBDD_s_blocks1(m, 48, a)
-            self.s_b1[m]   = ExperimentBDD_s_block(m, 1, a)
-            self.s_b48[m]  = ExperimentBDD_s_block(m, 48, a)
-            self.s_p1[m]   = ExperimentBDD_s_pick(m, 1, a)
-            self.s_p48[m]  = ExperimentBDD_s_pick(m, 48, a)
-            self.b_bs1[m]  = ExperimentBDD_b_blocks1(m, 1, a)
-            self.b_bs48[m] = ExperimentBDD_b_blocks1(m, 48, a)
-            self.b_b1[m]   = ExperimentBDD_b_block(m, 1, a)
-            self.b_b48[m]  = ExperimentBDD_b_block(m, 48, a)
-            self.b_p1[m]   = ExperimentBDD_b_pick(m, 1, a)
-            self.b_p48[m]  = ExperimentBDD_b_pick(m, 48, a)
+            self.s_bs1[m]  = ExperimentBDD_s_blocks1(m, 1, a, blocks_first=blocks_first)
+            self.s_bs48[m] = ExperimentBDD_s_blocks1(m, 48, a, blocks_first=blocks_first)
+            self.s_b1[m]   = ExperimentBDD_s_block(m, 1, a, blocks_first=blocks_first)
+            self.s_b48[m]  = ExperimentBDD_s_block(m, 48, a, blocks_first=blocks_first)
+            self.s_p1[m]   = ExperimentBDD_s_pick(m, 1, a, blocks_first=blocks_first)
+            self.s_p48[m]  = ExperimentBDD_s_pick(m, 48, a, blocks_first=blocks_first)
+            self.b_bs1[m]  = ExperimentBDD_b_blocks1(m, 1, a, blocks_first=blocks_first)
+            self.b_bs48[m] = ExperimentBDD_b_blocks1(m, 48, a, blocks_first=blocks_first)
+            self.b_b1[m]   = ExperimentBDD_b_block(m, 1, a, blocks_first=blocks_first)
+            self.b_b48[m]  = ExperimentBDD_b_block(m, 48, a, blocks_first=blocks_first)
+            self.b_p1[m]   = ExperimentBDD_b_pick(m, 1, a, blocks_first=blocks_first)
+            self.b_p48[m]  = ExperimentBDD_b_pick(m, 48, a, blocks_first=blocks_first)
 
     def __iter__(self):
         dicts = ["s_bs1", "s_bs48", "s_b1", "s_b48", "s_p1", "s_p48", "b_bs1", "b_bs48", "b_b1", "b_b48", "b_p1", "b_p48"]
@@ -944,7 +961,6 @@ class BDDQExperiments(object):
             results_for_d = [v for n, v in results if n == getattr(self, d)[name].name]
             r['n_'+d], r[d] = online_variance([v['tquot'] for v in results_for_d])[0:2]
         # get new Markov size from single-worker instances AND CHECK THEY ARE SAME.
-        print(name)
         results_for_s_b1 = [v for n, v in results if n == self.s_b1[name].name or n == self.s_bs1[name].name]
         count, r['s_bnodes'], check = online_variance([v['newtrans'] for v in results_for_s_b1])
         if count > 1: assert check == 0
@@ -1088,39 +1104,43 @@ class BDDQExperiments(object):
 
 
 class ExperimentIMC_s(ExperimentMC):
-    def __init__(self, **kwargs):
+    def __init__(self, blocks_first=True, **kwargs):
         self.name = "{}-s-{}".format(kwargs['name'], kwargs['workers'])
         self.call  = ["./sigrefmc"] + kwargs['model']
         self.call += ["-b", "2"]
         self.call += ["-w", str(kwargs['workers'])]
         self.call += ["-l", "fr"]
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentIMC_b(ExperimentMC):
-    def __init__(self, **kwargs):
+    def __init__(self, blocks_first=True, **kwargs):
         self.name = "{}-b-{}".format(kwargs['name'], kwargs['workers'])
         self.call  = ["./sigrefmc"] + kwargs['model']
         self.call += ["-b", "1"]
         self.call += ["-w", str(kwargs['workers'])]
         self.call += ["-l", "fr"]
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentIMC_s_fl(ExperimentMC):
-    def __init__(self, **kwargs):
+    def __init__(self, blocks_first=True, **kwargs):
         self.name = "{}-s-fl-{}".format(kwargs['name'], kwargs['workers'])
         self.call  = ["./sigrefmc"] + kwargs['model']
         self.call += ["-b", "2"]
         self.call += ["-w", str(kwargs['workers'])]
         self.call += ["-l", "fl"]
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentIMC_b_fl(ExperimentMC):
-    def __init__(self, **kwargs):
+    def __init__(self, blocks_first=True, **kwargs):
         self.name = "{}-b-fl-{}".format(kwargs['name'], kwargs['workers'])
         self.call  = ["./sigrefmc"] + kwargs['model']
         self.call += ["-b", "1"]
         self.call += ["-w", str(kwargs['workers'])]
         self.call += ["-l", "fl"]
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentIMC2_s(ExperimentRW):
@@ -1140,7 +1160,7 @@ class ExperimentIMC2_b(ExperimentRW):
 
 
 class IMCExperiments:
-    def __init__(self):
+    def __init__(self, blocks_first=True):
         self.mcb_1 = {}
         self.mcb_48 = {}
         self.mcs_1 = {}
@@ -1149,10 +1169,10 @@ class IMCExperiments:
         self.rwb = {}
 
         for m,a in self.models:
-            self.mcs_1[m] = ExperimentIMC_s_fl(name=m, workers=1, model=a)
-            self.mcs_48[m] = ExperimentIMC_s_fl(name=m, workers=48, model=a)
-            self.mcb_1[m] = ExperimentIMC_b_fl(name=m, workers=1, model=a)
-            self.mcb_48[m] = ExperimentIMC_b_fl(name=m, workers=48, model=a)
+            self.mcs_1[m] = ExperimentIMC_s_fl(name=m, workers=1, model=a, blocks_first=blocks_first)
+            self.mcs_48[m] = ExperimentIMC_s_fl(name=m, workers=48, model=a, blocks_first=blocks_first)
+            self.mcb_1[m] = ExperimentIMC_b_fl(name=m, workers=1, model=a, blocks_first=blocks_first)
+            self.mcb_48[m] = ExperimentIMC_b_fl(name=m, workers=48, model=a, blocks_first=blocks_first)
             self.rws[m] = ExperimentIMC2_s(name=m, model=a)
             self.rwb[m] = ExperimentIMC2_b(name=m, model=a)
 
@@ -1241,43 +1261,49 @@ class IMCExperiments:
 
 
 class ExperimentIMC_s_blocks1(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-s-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "block-s1"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentIMC_s_block(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-s-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "block"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentIMC_s_pick(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-s-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "2", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-b", "2", "-w", str(workers), "-q", "pick"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentIMC_b_blocks1(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-b-blocks1-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block-s1"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "block-s1"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentIMC_b_block(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-b-block-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "block"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "block"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class ExperimentIMC_b_pick(ExperimentMCQ):
-    def __init__(self, name, workers, model):
+    def __init__(self, name, workers, model, blocks_first=True):
         self.name = "{}-b-pick-{}".format(name, workers)
-        self.call = ["./sigrefmc", "-b", "1", "--blocks-first", "-w", str(workers), "-q", "pick"] + model
+        self.call = ["./sigrefmc", "-b", "1", "-w", str(workers), "-q", "pick"] + model
+        if blocks_first: self.call += ["--blocks-first"]
 
 
 class IMCQExperiments(IMCExperiments):
-    def __init__(self):
+    def __init__(self, blocks_first=True):
         # block standard 1,48
         self.s_bs1 = {}
         self.s_bs48 = {}
@@ -1295,18 +1321,18 @@ class IMCQExperiments(IMCExperiments):
         self.b_p48 = {}
 
         for m,a in self.models:
-            self.s_bs1[m]  = ExperimentIMC_s_blocks1(m, 1, a)
-            self.s_bs48[m] = ExperimentIMC_s_blocks1(m, 48, a)
-            self.s_b1[m]   = ExperimentIMC_s_block(m, 1, a)
-            self.s_b48[m]  = ExperimentIMC_s_block(m, 48, a)
-            self.s_p1[m]   = ExperimentIMC_s_pick(m, 1, a)
-            self.s_p48[m]  = ExperimentIMC_s_pick(m, 48, a)
-            self.b_bs1[m]  = ExperimentIMC_b_blocks1(m, 1, a)
-            self.b_bs48[m] = ExperimentIMC_b_blocks1(m, 48, a)
-            self.b_b1[m]   = ExperimentIMC_b_block(m, 1, a)
-            self.b_b48[m]  = ExperimentIMC_b_block(m, 48, a)
-            self.b_p1[m]   = ExperimentIMC_b_pick(m, 1, a)
-            self.b_p48[m]  = ExperimentIMC_b_pick(m, 48, a)
+            self.s_bs1[m]  = ExperimentIMC_s_blocks1(m, 1, a, blocks_first=blocks_first)
+            self.s_bs48[m] = ExperimentIMC_s_blocks1(m, 48, a, blocks_first=blocks_first)
+            self.s_b1[m]   = ExperimentIMC_s_block(m, 1, a, blocks_first=blocks_first)
+            self.s_b48[m]  = ExperimentIMC_s_block(m, 48, a, blocks_first=blocks_first)
+            self.s_p1[m]   = ExperimentIMC_s_pick(m, 1, a, blocks_first=blocks_first)
+            self.s_p48[m]  = ExperimentIMC_s_pick(m, 48, a, blocks_first=blocks_first)
+            self.b_bs1[m]  = ExperimentIMC_b_blocks1(m, 1, a, blocks_first=blocks_first)
+            self.b_bs48[m] = ExperimentIMC_b_blocks1(m, 48, a, blocks_first=blocks_first)
+            self.b_b1[m]   = ExperimentIMC_b_block(m, 1, a, blocks_first=blocks_first)
+            self.b_b48[m]  = ExperimentIMC_b_block(m, 48, a, blocks_first=blocks_first)
+            self.b_p1[m]   = ExperimentIMC_b_pick(m, 1, a, blocks_first=blocks_first)
+            self.b_p48[m]  = ExperimentIMC_b_pick(m, 48, a, blocks_first=blocks_first)
 
     def __iter__(self):
         dicts = ["s_bs1", "s_bs48", "s_b1", "s_b48", "s_p1", "s_p48", "b_bs1", "b_bs48", "b_b1", "b_b48", "b_p1", "b_p48"]
@@ -1336,7 +1362,7 @@ class IMCQExperiments(IMCExperiments):
         count, r['b_mpnodes'], check = online_variance([v['newmarkov'] for v in results_for_b_p1])
         if count > 1 and check > 0:
             print("Warning: variance in pick encoding for {}!".format(name))
-         # get new interactive relation size from single-worker instances AND CHECK THEY ARE SAME.
+        # get new interactive relation size from single-worker instances AND CHECK THEY ARE SAME.
         results_for_s_b1 = [v for n, v in results if n == self.s_b1[name].name or n == self.s_bs1[name].name]
         count, r['s_bnodes'], check = online_variance([v['newtrans'] for v in results_for_s_b1])
         if count > 1: assert check == 0
@@ -1470,6 +1496,16 @@ q += ltsq
 q += imcq
 q += bddq
 
+# quotient computation experiments
+ctmcq2 = CTMCQExperiments(False)
+ltsq2 = LTSQExperiments(False)
+imcq2 = IMCQExperiments(False)
+
+q2 = ExperimentEngine(outdir='out-q-blocks-last', timeout=3600)
+q2 += ctmcq2
+q2 += ltsq2
+q2 += imcq2
+
 if __name__ == "__main__":
     # select engine
     engine = sr
@@ -1479,6 +1515,8 @@ if __name__ == "__main__":
             sr.run_experiments()
         elif sys.argv[1] == 'qrun':
             q.run_experiments()
+        elif sys.argv[1] == 'q2run':
+            q2.run_experiments()
         elif sys.argv[1] == 'report':
             n, no, results, timeouts = sr.get_results()
             ctmc.analyse(results, timeouts)
@@ -1495,7 +1533,7 @@ if __name__ == "__main__":
                 ctmc.report_latex(f)
 
             with open('results_lts.tex', 'w') as f:
-                lts.report_latex( f)
+                lts.report_latex(f)
 
             with open('results_imc.tex', 'w') as f:
                 imc.report_latex(f)
@@ -1513,3 +1551,14 @@ if __name__ == "__main__":
             imcq.report()
             print()
             bddq.report()
+        elif sys.argv[1] == 'q2report':
+            n, no, results, timeouts = q2.get_results()
+            ctmcq2.analyse(results, timeouts)
+            ltsq2.analyse(results, timeouts)
+            imcq2.analyse(results, timeouts)
+
+            ctmcq2.report()
+            print()
+            ltsq2.report()
+            print()
+            imcq2.report()
